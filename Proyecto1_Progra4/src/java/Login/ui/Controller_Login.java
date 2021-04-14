@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Control;
+package Login.ui;
 
+import Service.logic.Service;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Porras
  */
 @WebServlet(name = "loggin", urlPatterns = {"/loggin"})
-public class Servlet_Loggin extends javax.servlet.http.HttpServlet {
+public class Controller_Login extends javax.servlet.http.HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,10 +31,31 @@ public class Servlet_Loggin extends javax.servlet.http.HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
+    private Service service;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-        request.getRequestDispatcher("loggin.jsp").forward(request, response);
+        //String contrasenna = request.getParameter("contrasenna");
+
+        //Usuarios u = Service.theInstance.login(new Usuarios("", "", contrasenna, "", "", 0, ""));
+        //request.setAttribute("usuario", u);
+        //request.getRequestDispatcher("login.jsp").forward(request, response);
+        //try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+ /*
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ServletFactorial</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1> Resultados</h1>");
+            out.println("<h1>Se ha recibido un request en el servlet</h1>");
+            out.println("</body>");
+            out.println("</html>");
+             */
+            
+        //}
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,7 +73,7 @@ public class Servlet_Loggin extends javax.servlet.http.HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(Servlet_Loggin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Controller_Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -68,7 +91,7 @@ public class Servlet_Loggin extends javax.servlet.http.HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(Servlet_Loggin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Controller_Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
