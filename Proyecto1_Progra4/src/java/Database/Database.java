@@ -39,6 +39,7 @@ public class Database {
     }
     
     public Database(){
+         System.out.println("Prueba 1");
         cnx=this.getConnection();            
     }
     public Connection getConnection(){
@@ -68,6 +69,7 @@ public class Database {
     }
     
     public PreparedStatement prepareStatement(String statement) throws SQLException {
+       
         return cnx.prepareStatement(statement);
     }
     public int executeUpdate(PreparedStatement statement) {

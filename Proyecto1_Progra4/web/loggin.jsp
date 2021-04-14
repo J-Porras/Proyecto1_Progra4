@@ -28,7 +28,7 @@
                                 <div class="icon d-flex align-items-center justify-content-center">
                                     <span class="fa fa-user-o"></span>
                                 </div>
-                                <form action="?" class="login-form">
+                                <form action="IniciarSesion" method="POST" class="login-form">
                                     <div class="form-group">
                                         <input type="text" class="form-control rounded-right" placeholder="Nombre de usuario" name="id" />
                                     </div>
@@ -38,7 +38,7 @@
                                     </div>
                                     <div/>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary rounded submit w-100" href="InciarSesion">Iniciar sesión</button>
+                                        <button type="submit" class="btn btn-primary rounded submit w-100" >Iniciar sesión</button>
                                     </div>
                                     <div class="form-group d-md-flex ">
                                         <div class="w-100 text-md-center">

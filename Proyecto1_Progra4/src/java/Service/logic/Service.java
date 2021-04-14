@@ -31,7 +31,7 @@ public class Service {
         Usuarios result = null;
         
         result = usuarioDao.read(u.getId());
-        
+        System.out.println("Service tiene la culpa");
         if(result == null)
             throw new Exception("Usuario no encontrado");
         

@@ -42,11 +42,17 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception  {
+        System.out.println("Trying login to perfil");
+        this.service = Service.instance();
+        this.model = new Model_Login();
         String contrasenna = request.getParameter("contrasenna");
         String id_usuario = request.getParameter("id");
-        Usuarios u = Service.theInstance.login(new Usuarios("id", "", contrasenna, "", "", 0, ""));
-        //request.setAttribute("usuario", u);
-        //request.getRequestDispatcher("login.jsp").forward(request, response);
+        System.out.println("Trying login to perfil");
+        Usuarios u = Service.instance().login(new Usuarios("id", "", contrasenna, "", "", 0, ""));
+        model.setCurrent_user(u);
+        request.setAttribute("UsuarioS", u);
+        System.out.println("lOGIN sUCCESFULL");
+        request.getRequestDispatcher("perfil.jsp").forward(request, response);
         //try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
  /*
@@ -63,7 +69,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
              */
             
         //}
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        //request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -37,10 +37,12 @@ public class UsuariosDAO {
     }
     
     public Usuarios read(String id) throws Exception{
-        System.out.println("Buscando cliente en DB");
+      
         
         String sqlcommand = "select * from usuarios where id = ?";
-        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+        System.out.println("Entransdo en DB");
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
+          System.out.println("Buscando Usuario en DB");
         stm.setString(1, id);
         ResultSet rs =  Database.instance().executeQuery(stm);           
         if (rs.next()) {
