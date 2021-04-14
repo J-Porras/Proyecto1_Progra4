@@ -30,15 +30,15 @@
                                 </div>
                                 <form action="?" class="login-form">
                                     <div class="form-group">
-                                        <input type="text" class="form-control rounded-right" placeholder="Nombre de usuario"/>
+                                        <input type="text" class="form-control rounded-right" placeholder="Nombre de usuario" name="id" />
                                     </div>
                                     <div/>
                                     <div class="form-group">    
-                                        <input type="password" class="form-control rounded-left" placeholder="Contraseña"/>
+                                        <input type="password" class="form-control rounded-left" placeholder="Contraseña" name ="contrasenna"/>
                                     </div>
                                     <div/>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary rounded submit w-100">Iniciar sesión</button>
+                                        <button type="submit" class="btn btn-primary rounded submit w-100" href="InciarSesion">Iniciar sesión</button>
                                     </div>
                                     <div class="form-group d-md-flex ">
                                         <div class="w-100 text-md-center">

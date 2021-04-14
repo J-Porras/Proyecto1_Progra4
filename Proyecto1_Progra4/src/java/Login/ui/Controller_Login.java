@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Porras
  */
-@WebServlet(name = "loggin", urlPatterns = {"/loggin"})
+@WebServlet(name = "IniciarSesion", urlPatterns = {"/loggin"})
 public class Controller_Login extends javax.servlet.http.HttpServlet {
 
     /**
@@ -31,10 +31,10 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private Service service;
+   private Service service;
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-        //String contrasenna = request.getParameter("contrasenna");
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception  {
+        String contrasenna = request.getParameter("contrasenna");
 
         //Usuarios u = Service.theInstance.login(new Usuarios("", "", contrasenna, "", "", 0, ""));
         //request.setAttribute("usuario", u);
