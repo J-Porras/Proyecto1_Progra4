@@ -5,7 +5,9 @@
  */
 package Login.ui;
 
+import Login.Model_Login;
 import Service.logic.Service;
+import Usuarios.logica.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Porras
  */
-@WebServlet(name = "IniciarSesion", urlPatterns = {"/loggin"})
+@WebServlet(name = "IniciarSesion", urlPatterns = {"/IniciarSesion"})
 public class Controller_Login extends javax.servlet.http.HttpServlet {
 
     /**
@@ -31,12 +33,18 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   private Service service;
+    private Service service;
+    private Model_Login model;
 
+    public Controller_Login() {
+        this.service =  new Service();
+        this.model = new Model_Login();
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception  {
         String contrasenna = request.getParameter("contrasenna");
-
-        //Usuarios u = Service.theInstance.login(new Usuarios("", "", contrasenna, "", "", 0, ""));
+        String id_usuario = request.getParameter("id");
+        Usuarios u = Service.theInstance.login(new Usuarios("id", "", contrasenna, "", "", 0, ""));
         //request.setAttribute("usuario", u);
         //request.getRequestDispatcher("login.jsp").forward(request, response);
         //try (PrintWriter out = response.getWriter()) {

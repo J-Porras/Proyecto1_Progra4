@@ -9,7 +9,7 @@ import Usuarios.logica.Usuarios;
 
 /**
  *
- * @author pg300
+ * @author pgat3000
  */
 public class Model_Login {
     Usuarios current_user ;
