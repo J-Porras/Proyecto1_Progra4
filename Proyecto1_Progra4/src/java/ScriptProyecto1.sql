@@ -59,5 +59,6 @@ CREATE TABLE `matriculas` (
   CONSTRAINT `grupo_fk` FOREIGN KEY (`id_grupo`) REFERENCES `grupos` (`num_grupo`)
 );
 
-
-
+insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) values('1234', 'Pedro Prueba','1234','232323','1234?@mail.com',3,null);
+insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) values('4321', 'Jose Prueba','1234','3233','1234@mail.com',2,'Artes');
+select * from Usuarios;
