@@ -16,12 +16,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Porras
  */
-@WebServlet(name = "IniciarSesion", urlPatterns = {"/IniciarSesion"})
+@WebServlet(name = "Controller_Login", urlPatterns = {"/login/ui/IniciarSesion"})
 public class Controller_Login extends javax.servlet.http.HttpServlet {
 
     /**
@@ -48,11 +49,13 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
         String contrasenna = request.getParameter("contrasenna");
         String id_usuario = request.getParameter("id");
         System.out.println("Trying login to perfil");
-        Usuarios u = Service.instance().login(new Usuarios("id", "", contrasenna, "", "", 0, ""));
+        Usuarios u = Service.instance().login(new Usuarios(id_usuario, "", contrasenna, "", "", 0, ""));
         model.setCurrent_user(u);
-        request.setAttribute("UsuarioS", u);
+        HttpSession session = request.getSession(true);
+        request.setAttribute("Model_Login", model);
+      
         System.out.println("lOGIN sUCCESFULL");
-        request.getRequestDispatcher("perfil.jsp").forward(request, response);
+        request.getRequestDispatcher("/Presentation/perfil/perfil.jsp").forward(request, response);
         //try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
  /*

@@ -34,9 +34,13 @@ public class Service {
         System.out.println("Service tiene la culpa");
         if(result == null)
             throw new Exception("Usuario no encontrado");
-        
-        if(result.getContrasenna() != u.getContrasenna()){
-            throw new Exception("Usuario no encontrado");
+               System.out.println("Contrassena de base de datos: "+result.getContrasenna());
+        System.out.println("Contrassena de usuario: "+u.getContrasenna());
+            if((result.getContrasenna()).equals(u.getContrasenna())){
+               System.out.println("Correcto");  
+            }
+        if(!(result.getContrasenna()).equals(u.getContrasenna())){
+            throw new Exception("Usuario con mala contrasenna");
         }
         
         return result;

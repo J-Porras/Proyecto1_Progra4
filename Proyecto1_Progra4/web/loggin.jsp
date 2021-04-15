@@ -28,7 +28,7 @@
                                 <div class="icon d-flex align-items-center justify-content-center">
                                     <span class="fa fa-user-o"></span>
                                 </div>
-                                <form action="IniciarSesion" method="POST" class="login-form">
+                                <form action="/Proyecto1_Progra4/login/ui/IniciarSesion" method="POST" class="login-form">
                                     <div class="form-group">
                                         <input type="text" class="form-control rounded-right" placeholder="Nombre de usuario" name="id" />
                                     </div>

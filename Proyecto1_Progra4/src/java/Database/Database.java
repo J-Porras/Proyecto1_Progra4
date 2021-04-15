@@ -6,6 +6,7 @@
 
 package Database;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,7 +26,7 @@ import java.util.Properties;
 //**************************
 //NO TOCAR
 //**************************
-public class Database {
+public class Database extends MysqlDataSource{
     private static Database theInstance;
     public static final String PROPERTIES_FILE_NAME="/db.properties";        
     private Connection cnx;
@@ -42,7 +43,7 @@ public class Database {
          System.out.println("Prueba 1");
         cnx=this.getConnection();            
     }
-    public Connection getConnection(){
+    public Connection getConnection() {
         try {
             Properties prop = new Properties();
             URL resourceUrl = getClass().getResource(PROPERTIES_FILE_NAME);
@@ -54,9 +55,9 @@ public class Database {
             String user = prop.getProperty("database_user");
             String password = prop.getProperty("database_password");
             String database = prop.getProperty("database_name");
-            
+            String ssl= prop.getProperty("ssl");
             String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
-                    database+"?user="+user+"&password="+password+"&serverTimezone=UTC";            
+                    database+"&user="+user+"&password="+password+"&serverTimezone=UTC";            
             Class.forName(driver).newInstance();
             
             System.out.println("Database: Database inicializada");

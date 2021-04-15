@@ -46,7 +46,8 @@ public class UsuariosDAO {
         stm.setString(1, id);
         ResultSet rs =  Database.instance().executeQuery(stm);           
         if (rs.next()) {
-            System.out.println("Usuario encontrado");
+            System.out.println("Usuario encontrado base de datos");
+            
             return from(rs);
         }
         else{
@@ -67,7 +68,8 @@ public class UsuariosDAO {
             r.setEmail(rs.getString("email"));
             r.setRol(rs.getInt("rol"));
             r.setEspecialidad(rs.getString("especialidad"));
-           
+                    System.out.println("Database:  Usuario creado");
+                    //System.out.println(r.getContrasenna());
             return r;
         } catch (SQLException ex) {
             System.out.println("Database: Error creando Usuario");
