@@ -9,7 +9,6 @@ import Login.Model_Login;
 import Service.logic.Service;
 import Usuarios.logica.Usuarios;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.annotation.WebServlet;
@@ -43,36 +42,16 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception  {
-        System.out.println("Trying login to perfil");
         this.service = Service.instance();
         this.model = new Model_Login();
         String contrasenna = request.getParameter("contrasenna");
         String id_usuario = request.getParameter("id");
-        System.out.println("Trying login to perfil");
         Usuarios u = Service.instance().login(new Usuarios(id_usuario, "", contrasenna, "", "", 0, ""));
         model.setCurrent_user(u);
         HttpSession session = request.getSession(true);
         request.setAttribute("Model_Login", model);
-      
-        System.out.println("lOGIN sUCCESFULL");
         request.getRequestDispatcher("/Presentation/perfil/perfil.jsp").forward(request, response);
-        //try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
- /*
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletFactorial</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1> Resultados</h1>");
-            out.println("<h1>Se ha recibido un request en el servlet</h1>");
-            out.println("</body>");
-            out.println("</html>");
-             */
-            
-        //}
-        //request.getRequestDispatcher("login.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
