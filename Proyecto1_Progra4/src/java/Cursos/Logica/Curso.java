@@ -10,11 +10,11 @@ package Cursos.Logica;
  * @author pgat3000
  */
 public class Curso {
-    int id;
-    String tematica;
-    String Descripcion;
-    Boolean estado;
-    Double precio;
+    private int id;
+    private String tematica;
+    private String Descripcion;
+    private Boolean estado;
+    private Double precio;
 
     public Curso() {
     }
