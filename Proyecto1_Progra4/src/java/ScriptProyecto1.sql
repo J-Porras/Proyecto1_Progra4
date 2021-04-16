@@ -24,9 +24,10 @@ CREATE TABLE `usuarios` (
 ) ;
 
 
-DROP TABLE IF EXISTS `clases`;
+DROP TABLE IF EXISTS `cursos`;
 
-CREATE TABLE `clases` (
+
+CREATE TABLE `cursos` (
   `id` int NOT NULL,
   `tematica` varchar(50) NOT NULL ,
   `descripcion` varchar(1000),
@@ -39,12 +40,12 @@ DROP TABLE IF EXISTS `grupos`;
 
 CREATE TABLE `grupos` (
   `num_grupo` int NOT NULL,
-  `id_clase` int DEFAULT NULL,
+  `id_curso` int DEFAULT NULL,
   `prof_titular` varchar(9) DEFAULT NULL,
   `dias` varchar(9) COLLATE utf8_bin NOT NULL,
   `horario` varchar(20) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`num_grupo`),
-  CONSTRAINT `clase_fk` FOREIGN KEY (`id_clase`) REFERENCES `clases` (`id`),
+  CONSTRAINT `clase_fk` FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id`),
   CONSTRAINT `profe_fk` FOREIGN KEY (`prof_titular`) REFERENCES `usuarios` (`id`)
 );
 
