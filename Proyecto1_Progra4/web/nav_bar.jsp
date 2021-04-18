@@ -3,6 +3,7 @@
     Created on : 16/04/2021, 01:16:15 PM
     Author     : Usuario
 --%>
+<%@page session = "true"%>
 <%@page import="Login.Model_Login"%>
 <%@page import="Usuarios.logica.Usuarios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

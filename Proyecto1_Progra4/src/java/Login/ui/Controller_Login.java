@@ -42,8 +42,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-        this.service = Service.instance();
-        this.model = new Model_Login();
+        this.service = Service.instance();;
         String solicitud = request.getServletPath();
         String respuesta = "";
         switch (solicitud) {
@@ -58,24 +57,27 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 //a sesión general debe ser manejada por el objeto httpsession debido a que es el cookie quien va a identificar
                 session.setAttribute("Usuario", u);
                 request.getRequestDispatcher(respuesta).forward(request, response);
+                break;
             }
             case ("/CerrarSesion"): {
                 respuesta = ".";//Por el momento se devuelve a la pestanna principal
                 HttpSession session = request.getSession(true);
                 session.removeAttribute("Usuario");
+                model.setCurrent_user(null);
                 request.getRequestDispatcher(respuesta).forward(request, response);
+                break;
             }
             case ("/Inicio"): {
                 respuesta = "index.jsp";//Por el momento se devuelve a la pestanna principal
                 HttpSession session = request.getSession(true);
-                Usuarios u = model.getCurrent_user();
+                Usuarios u = model.getCurrent_user();//El modelo no está almacenando ningun usuario actual
                 if(u != null){
                     session.setAttribute("Usuario", u);
                 }
-                request.getRequestDispatcher(respuesta).forward(request, response);
+                response.sendRedirect(respuesta);
+                break;
             }
-            default: {
-            }
+            default: {break;}
 
         }
     }
