@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Porras
  */
-@WebServlet(name = "Controller_Login", urlPatterns = {"/IniciarSesion", "/CerrarSesion", "/Perfil", "/Inicio"})
+@WebServlet(name = "Controller_Login", urlPatterns = {"/IniciarSesion", "/CerrarSesion", "/Perfil", "/Inicio", "/Registrarse"})
 public class Controller_Login extends javax.servlet.http.HttpServlet {
 
     /**
@@ -60,7 +60,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 break;
             }
             case ("/CerrarSesion"): {
-                respuesta = ".";//Por el momento se devuelve a la pestanna principal
+                respuesta = ".";
                 HttpSession session = request.getSession(true);
                 session.removeAttribute("Usuario");
                 model.setCurrent_user(null);
@@ -68,16 +68,23 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 break;
             }
             case ("/Inicio"): {
-                respuesta = ".";//Por el momento se devuelve a la pestanna principal
+                respuesta = ".";//Devuelve a la pestanna principal
                 HttpSession session = request.getSession(true);
-                Usuarios u = model.getCurrent_user();//El modelo no está almacenando ningun usuario actual
-                if(u != null){
+                Usuarios u = model.getCurrent_user();
+                if (u != null) {
                     session.setAttribute("Usuario", u);
                 }
                 response.sendRedirect(respuesta);
                 break;
             }
-            default: {break;}
+            case ("/Registrarse"): {
+                respuesta = "registrarse.jsp";
+                request.getRequestDispatcher(respuesta).forward(request, response);
+                break;
+            }
+            default: {
+                break;
+            }
 
         }
     }

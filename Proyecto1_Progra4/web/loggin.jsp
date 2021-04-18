@@ -16,35 +16,33 @@
     <body>
         <%@include file = "nav_bar.jsp"%>
         <section class="ftco-section">
-            <div class="bg-blend-overlay">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6 text-center mb-5">
-                            <h2 class="heading-section">Inicio de sesión</h2>
-                        </div>
+            <div class="container">
+                <div class="row justify-content-center p-5">
+                    <div class="col-md-6 text-center mb-5">
+                        <h2 class="heading-section">Inicio de sesión</h2>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-6 col-lg-5">
-                            <div class="login-wrap p-md-1">
-                                <form action="IniciarSesion" method="POST" class="login-form">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control rounded-right" placeholder="Nombre de usuario" name="id" />
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-5">
+                        <div class="login-wrap p-md-1">
+                            <form action="IniciarSesion" method="POST" class="login-form p-5">
+                                <div class="form-group">
+                                    <input type="text" class="form-control rounded-right" placeholder="Nombre de usuario" name="id" />
+                                </div>
+                                <div/>
+                                <div class="form-group">    
+                                    <input type="password" class="form-control rounded-left" placeholder="Contraseña" name ="contrasenna"/>
+                                </div>
+                                <div/>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary rounded submit w-100" >Iniciar sesión</button>
+                                </div>
+                                <div class="form-group d-md-flex p-4">
+                                    <div class="w-100 text-md-center">
+                                        <a href="Registrarse">Crear cuenta</a>
                                     </div>
-                                    <div/>
-                                    <div class="form-group">    
-                                        <input type="password" class="form-control rounded-left" placeholder="Contraseña" name ="contrasenna"/>
-                                    </div>
-                                    <div/>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary rounded submit w-100" >Iniciar sesión</button>
-                                    </div>
-                                    <div class="form-group d-md-flex ">
-                                        <div class="w-100 text-md-center">
-                                            <a href="#">Crear cuenta</a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
