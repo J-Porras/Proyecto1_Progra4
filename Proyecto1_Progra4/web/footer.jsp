@@ -4,7 +4,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <footer class="bg-dark text-center text-white">
-    <div class="container p-4">
+    <div class="container p-0">
         <section class="mb-4">
             <p>
                 Cursoslibres.com es su aliada a la hora de aprender a desenvolverse en el ambito laboral de un mundo tan cambiante.

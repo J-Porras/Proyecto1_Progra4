@@ -20,6 +20,7 @@ System.out.println(u.getNombre());
         <title>Perfil</title>
     </head>
     <body>
+        <%@include file="../../nav_bar.jsp" %>
         <div class="row container d-flex justify-content-center">
             <div class="col-xl-6 col-md-12">
                 <div class="card user-card-full">
@@ -57,4 +58,5 @@ System.out.println(u.getNombre());
                 </div>
             </div>
     </body>
+    <%@include file="../../footer.jsp" %>
 </html>

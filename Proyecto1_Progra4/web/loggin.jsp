@@ -14,6 +14,7 @@
         <title>Inicio de sesión</title>
     </head>
     <body>
+        <%@include file = "nav_bar.jsp"%>
         <section class="ftco-section">
             <div class="bg-blend-overlay">
                 <div class="container">
@@ -25,10 +26,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6 col-lg-5">
                             <div class="login-wrap p-md-1">
-                                <div class="icon d-flex align-items-center justify-content-center">
-                                    <span class="fa fa-user-o"></span>
-                                </div>
-                                <form action="/Proyecto1_Progra4/login/ui/IniciarSesion" method="POST" class="login-form">
+                                <form action="IniciarSesion" method="POST" class="login-form">
                                     <div class="form-group">
                                         <input type="text" class="form-control rounded-right" placeholder="Nombre de usuario" name="id" />
                                     </div>
@@ -53,4 +51,5 @@
             </div>
         </section>
     </body>
+    <%@include file = "footer.jsp"%>
 </html>

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Porras
  */
-@WebServlet(name = "Controller_Login", urlPatterns = {"/login/ui/IniciarSesion"})
+@WebServlet(name = "Controller_Login", urlPatterns = {"/IniciarSesion", "/CerrarSesion", "/Perfil", "/Inicio"})
 public class Controller_Login extends javax.servlet.http.HttpServlet {
 
     /**
@@ -37,21 +37,47 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
     private Model_Login model;
 
     public Controller_Login() {
-        this.service =  new Service();
+        this.service = new Service();
         this.model = new Model_Login();
     }
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception  {
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
         this.service = Service.instance();
         this.model = new Model_Login();
-        String contrasenna = request.getParameter("contrasenna");
-        String id_usuario = request.getParameter("id");
-        Usuarios u = Service.instance().login(new Usuarios(id_usuario, "", contrasenna, "", "", 0, ""));
-        model.setCurrent_user(u);
-        HttpSession session = request.getSession(true);
-        request.setAttribute("Model_Login", model);
-        request.getRequestDispatcher("/Presentation/perfil/perfil.jsp").forward(request, response);
-        
+        String solicitud = request.getServletPath();
+        String respuesta = "";
+        switch (solicitud) {
+            case ("/IniciarSesion"): {
+                respuesta = "Presentation/perfil/perfil.jsp";
+                String contrasenna = request.getParameter("contrasenna");
+                String id_usuario = request.getParameter("id");
+                Usuarios u = Service.instance().login(new Usuarios(id_usuario, "", contrasenna, "", "", 0, ""));
+                model.setCurrent_user(u);
+                HttpSession session = request.getSession(true);
+                request.setAttribute("Model_Login", model);//No se debe mandar el modelo, ya que es una instancia
+                //a sesión general debe ser manejada por el objeto httpsession debido a que es el cookie quien va a identificar
+                session.setAttribute("Usuario", u);
+                request.getRequestDispatcher(respuesta).forward(request, response);
+            }
+            case ("/CerrarSesion"): {
+                respuesta = ".";//Por el momento se devuelve a la pestanna principal
+                HttpSession session = request.getSession(true);
+                session.removeAttribute("Usuario");
+                request.getRequestDispatcher(respuesta).forward(request, response);
+            }
+            case ("/Inicio"): {
+                respuesta = "index.jsp";//Por el momento se devuelve a la pestanna principal
+                HttpSession session = request.getSession(true);
+                Usuarios u = model.getCurrent_user();
+                if(u != null){
+                    session.setAttribute("Usuario", u);
+                }
+                request.getRequestDispatcher(respuesta).forward(request, response);
+            }
+            default: {
+            }
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -25,5 +25,4 @@ public class Model_Login {
     public void setCurrent_user(Usuarios current_user) {
         this.current_user = current_user;
     }
-    
 }
