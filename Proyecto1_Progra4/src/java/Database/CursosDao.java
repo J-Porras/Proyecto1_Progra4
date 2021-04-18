@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 public class CursosDao {
      public void create(Curso cl) throws SQLException, Exception{
-        String sqlcommand =  "inserto into Usuario (id,tematica,descripcion,estado,precio)"
+        String sqlcommand =  "inserto into Cursos (id,tematica,descripcion,estado,precio)"
                 + "values(?,?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
        
