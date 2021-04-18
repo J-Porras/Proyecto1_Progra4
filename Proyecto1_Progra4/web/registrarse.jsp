@@ -25,7 +25,7 @@
                                 <h2 class="title text-center">Información de inscripción</h2>
                             </div>
                         </div>
-                        <form action="Registrarse" method="POST">
+                        <form action="RegistroCompleto" method="POST">
                             <div class="form-group">
                                 <input class="form-control rounded-right" type="text" placeholder="Nombre completo" name="Nombre">
                             </div>

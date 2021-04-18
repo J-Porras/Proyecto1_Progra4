@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Porras
  */
-@WebServlet(name = "Controller_Login", urlPatterns = {"/IniciarSesion", "/CerrarSesion", "/Perfil", "/Inicio", "/Registrarse"})
+@WebServlet(name = "Controller_Login", urlPatterns = {"/IniciarSesion", "/CerrarSesion", "/Perfil", "/Inicio", "/Registrarse","/RegistroCompleto"})
 public class Controller_Login extends javax.servlet.http.HttpServlet {
 
     /**
@@ -79,6 +79,30 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
             }
             case ("/Registrarse"): {
                 respuesta = "registrarse.jsp";
+                request.getRequestDispatcher(respuesta).forward(request, response);
+                break;
+            }
+             case ("/RegistroCompleto"): {
+                respuesta = "Presentation/perfil/perfil.jsp"; 
+                String respuestaError = "registrarse.jsp";
+                String nombre = request.getParameter("nombre");
+               String id= request.getParameter("id");
+                String email = request.getParameter("email");
+                String telefono = request.getParameter("telefono");
+                String contrasenna = request.getParameter("contrasenna");
+                if(nombre.isEmpty()||id.isEmpty()||email.isEmpty()||telefono.isEmpty()||contrasenna.isEmpty()){
+                    request.getRequestDispatcher(respuestaError).forward(request, response);
+                break;
+                }
+                 Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email, 0, ""));
+                 if(u==null){
+                     //En el caos que el usuario ya exista
+                   request.getRequestDispatcher(respuestaError).forward(request, response); 
+                 }
+                model.setCurrent_user(u);
+                HttpSession session = request.getSession(true);
+                request.setAttribute("Model_Login", model); 
+                session.setAttribute("Usuario", u);
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }

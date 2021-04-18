@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * @author pgat3000
  */
 public class UsuariosDAO {
-    public void create(Usuarios cl) throws SQLException, Exception{
+    public Usuarios create(Usuarios cl) throws SQLException, Exception{
         String sqlcommand =  "inserto into Usuario (id,nombre,contrasenna,telefono,email,rol,especialidad) "
                 + "values(?,?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
@@ -31,8 +31,11 @@ public class UsuariosDAO {
         
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
+            
             throw new Exception("Usuario ya existe");
+            
         }
+        return cl;
         
     }
     

@@ -5,6 +5,7 @@
  */
 package Service.logic;
 
+import Database.CursosDao;
 import Database.UsuariosDAO;
 import Usuarios.logica.Usuarios;
 
@@ -14,6 +15,7 @@ import Usuarios.logica.Usuarios;
  */
 public class Service {
     private UsuariosDAO usuarioDao;
+    private CursosDao cursosdao;
     public static Service theInstance;
     
     public static Service instance(){
@@ -27,6 +29,16 @@ public class Service {
         usuarioDao = new UsuariosDAO();
     }
     
+    public Usuarios crear_usario(Usuarios u){
+         Usuarios result = null;
+         try{
+            result=usuarioDao.create(u);
+         }
+         catch(Exception e){
+           return null ;//usuario ya existe 
+         }
+    return result;
+    }
     public Usuarios login(Usuarios u) throws Exception{
         Usuarios result = null;
         
