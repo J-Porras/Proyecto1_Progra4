@@ -42,7 +42,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-        this.service = Service.instance();;
+        this.service = Service.instance();
         String solicitud = request.getServletPath();
         String respuesta = "";
         switch (solicitud) {
@@ -68,7 +68,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 break;
             }
             case ("/Inicio"): {
-                respuesta = "index.jsp";//Por el momento se devuelve a la pestanna principal
+                respuesta = ".";//Por el momento se devuelve a la pestanna principal
                 HttpSession session = request.getSession(true);
                 Usuarios u = model.getCurrent_user();//El modelo no está almacenando ningun usuario actual
                 if(u != null){
