@@ -83,27 +83,37 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 break;
             }
              case ("/RegistroCompleto"): {
-                respuesta = "Presentation/perfil/perfil.jsp"; 
+                respuesta = "."; 
                 String respuestaError = "registrarse.jsp";
                 String nombre = request.getParameter("nombre");
                String id= request.getParameter("id");
                 String email = request.getParameter("email");
                 String telefono = request.getParameter("telefono");
                 String contrasenna = request.getParameter("contrasenna");
+                System.out.println("crear");
+                System.out.println(id);
+                
                 if(nombre.isEmpty()||id.isEmpty()||email.isEmpty()||telefono.isEmpty()||contrasenna.isEmpty()){
+                      System.out.println("vacio");
                     request.getRequestDispatcher(respuestaError).forward(request, response);
                 break;
                 }
-                 Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email, 0, ""));
+                
+                 Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email,0, " "));
+                  
                  if(u==null){
-                     //En el caos que el usuario ya exista
+                     //En el caso que el usuario ya exista
                    request.getRequestDispatcher(respuestaError).forward(request, response); 
                  }
+                 
                 model.setCurrent_user(u);
                 HttpSession session = request.getSession(true);
                 request.setAttribute("Model_Login", model); 
                 session.setAttribute("Usuario", u);
-                request.getRequestDispatcher(respuesta).forward(request, response);
+               System.out.println("crear2");
+
+             //   request.getRequestDispatcher(respuesta).forward(request, response);
+                   request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
             default: {

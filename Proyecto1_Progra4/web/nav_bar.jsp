@@ -24,7 +24,7 @@
                 <%if (actual != null) {%>
                 <a class="nav-link text-white" href="CerrarSesion">Logout</a>
                 <%} else {%>
-                <a class="nav-link text-white" href="loggin.jsp">Inicar Sesion</a><%-- Se dirige al jsp --%>
+                <a class="nav-link text-white" href="loggin.jsp">Iniciar Sesion</a><%-- Se dirige al jsp --%>
                 <%}%>
             </div>
         </nav>

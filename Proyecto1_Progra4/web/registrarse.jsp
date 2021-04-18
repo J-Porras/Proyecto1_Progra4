@@ -27,7 +27,7 @@
                         </div>
                         <form action="RegistroCompleto" method="POST">
                             <div class="form-group">
-                                <input class="form-control rounded-right" type="text" placeholder="Nombre completo" name="Nombre">
+                                <input class="form-control rounded-right" type="text" placeholder="Nombre completo" name="nombre">
                             </div>
                             <div class="form-group">
                                 <input class="form-control rounded-right" type="text" placeholder="Identificación" name="id">
@@ -41,6 +41,7 @@
                             <div class="form-group">
                                 <input class="form-control rounded-right" type="password" placeholder="Contraseña" name="contrasenna">
                             </div>
+                            
                             <div class="p-t-10">
                                 <button class="btn btn-primary rounded submit w-100" type="submit">Registrarse</button>
                             </div>

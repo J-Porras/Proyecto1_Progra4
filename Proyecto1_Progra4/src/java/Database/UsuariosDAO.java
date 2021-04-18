@@ -16,19 +16,19 @@ import java.sql.SQLException;
  */
 public class UsuariosDAO {
     public Usuarios create(Usuarios cl) throws SQLException, Exception{
-        String sqlcommand =  "inserto into Usuario (id,nombre,contrasenna,telefono,email,rol,especialidad) "
-                + "values(?,?,?,?,?)";
+        String sqlcommand =  "insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad)"
+                + "values(?,?,?,?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
        
         stm.setString(1,cl.getId());
         stm.setString(2,cl.getNombre());
         stm.setString(3,cl.getContrasenna());
         stm.setString(4,cl.getTelefono());
-        stm.setString(5,cl.getTelefono());
+        stm.setString(5,cl.getEmail());
         stm.setInt(6,cl.getRol());
         stm.setString(7,cl.getEspecialidad());
-        //stm.setString(5, "true");//dice que no es case sensitive y que 1 y 0 sirven
-        
+     
+        System.out.println(stm);
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {
             

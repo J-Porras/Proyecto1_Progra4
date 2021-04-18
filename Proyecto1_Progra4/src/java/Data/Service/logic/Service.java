@@ -33,11 +33,13 @@ public class Service {
          Usuarios result = null;
          try{
             result=usuarioDao.create(u);
+            System.out.println(u.getId());
+              return result;
          }
          catch(Exception e){
            return null ;//usuario ya existe 
          }
-    return result;
+   
     }
     public Usuarios login(Usuarios u) throws Exception{
         Usuarios result = null;
