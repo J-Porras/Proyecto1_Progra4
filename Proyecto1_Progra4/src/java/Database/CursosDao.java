@@ -7,16 +7,20 @@ package Database;
 
 
 import Cursos.Logica.Curso;
+import Grupos.Logica.Grupo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
  * @author pgat3000
  */
 public class CursosDao {
-     public void create(Curso cl) throws SQLException, Exception{
+     public Curso create(Curso cl) throws SQLException, Exception{
         String sqlcommand =  "insert into Cursos (id,tematica,descripcion,estado,precio)"
                 + "values(?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
@@ -33,7 +37,7 @@ public class CursosDao {
         if (count == 0) {
             throw new Exception("Curso ya existe");
         }
-        
+        return cl;
     }
     
     public Curso read(String id) throws Exception{
@@ -55,6 +59,34 @@ public class CursosDao {
             throw new Exception ("Curso no Existe");
         }
     }
+     public List<Curso> read_all_grupos() throws Exception{
+     List<Curso> cursos= Collections.synchronizedList(new ArrayList<Curso>());
+     String sqlcommand = "select * from Cursos";
+     System.out.println("Entransdo en DB");
+     PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+     System.out.println("Buscando Curso en DB con profesor ");  
+    
+     ResultSet rs =  Database.instance().executeQuery(stm); 
+      try {
+         
+            while(rs.next()){
+            Curso r= new Curso();
+            r.setId(rs.getInt("id"));
+            r.setTematica(rs.getString("nombre"));
+            r.setDescripcion(rs.getString("descripcion"));
+            r.setEstado(rs.getBoolean("estado"));
+            r.setPrecio(rs.getDouble("precio"));
+            
+            cursos.add(r);
+
+             }
+    }
+     catch (SQLException e){
+        System.out.println("Operacion no se logro(leer cursos)");
+                 
+    }
+     return cursos;
+     }
     
     //public 
     public Curso from (ResultSet rs){
@@ -62,9 +94,8 @@ public class CursosDao {
                 Curso r= new Curso();
             r.setId(rs.getInt("id"));
             r.setTematica(rs.getString("nombre"));
-            
             r.setDescripcion(rs.getString("descripcion"));
-             r.setEstado(rs.getBoolean("estado"));
+            r.setEstado(rs.getBoolean("estado"));
             r.setPrecio(rs.getDouble("precio"));
           
                    

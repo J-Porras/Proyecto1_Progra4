@@ -5,13 +5,18 @@
  */
 package Database;
 
+import Grupos.Logica.Grupo;
 import Matriculas.Logic.Matricula;
+import Usuarios.logica.Usuarios;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -81,7 +86,67 @@ public class MatriculasDAO {//Trabajar en esto
             return null;
         }
     }
+    
     //falta agregar leer estudiante por grupo
-    //estudiantes de profesor
-    //grupos de estudiante
+    public List<Usuarios> read_estudiante_por_grupo(String id_grupo) throws Exception{//terminar
+         List<Usuarios> grupo_est= Collections.synchronizedList(new ArrayList<Usuarios>());
+     String sqlcommand = "select * from Grupos where  id_grupo = ?";
+     System.out.println("Entransdo en DB");
+     PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+     System.out.println("Buscando Curso en DB con profesor ");  
+     stm.setString(1, id_grupo);
+     ResultSet rs =  Database.instance().executeQuery(stm); 
+      try {
+         
+            while(rs.next()){
+             
+                UsuariosDAO dao= new UsuariosDAO();
+                Usuarios r= dao.read( rs.getString("id_est"));
+         
+            
+                grupo_est.add(r);
+
+            }
+      }
+      catch (SQLException e){
+      System.out.println("Operacion no se logro(leer grupos est)");
+                 
+    }
+     return grupo_est;
+    
+    }
+
+    //grupos de estudiante(Hisotrial)
+    public List<Matricula> read_grupos_estudiante(String id_est) throws Exception{//terminar
+         List<Matricula> grupo_est= Collections.synchronizedList(new ArrayList<Matricula>());
+     String sqlcommand = "select * from Grupos where  id_est = ?";
+     System.out.println("Entransdo en DB");
+     PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+     System.out.println("Buscando Curso en DB con profesor ");  
+     stm.setString(1, id_est);
+     ResultSet rs =  Database.instance().executeQuery(stm); 
+      try {
+         
+            while(rs.next()){
+             
+             Matricula r= new Matricula();
+            r.setId_grupo(rs.getInt("id_grupo"));
+            r.setId_est(rs.getString("id_est"));
+            DateFormat df= new SimpleDateFormat("MM,dd,yyyy");
+            String dateStr= df.format(rs.getDate("fec_matricula"));
+            r.setFec_matricula(dateStr);
+            r.setCalificacion(rs.getDouble("calificacion"));;
+         
+            
+                grupo_est.add(r);
+
+            }
+      }
+      catch (SQLException e){
+      System.out.println("Operacion no se logro(leer grupos est)");
+                 
+    }
+     return grupo_est;
+    
+    }
 }

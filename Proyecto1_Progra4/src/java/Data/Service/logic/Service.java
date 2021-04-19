@@ -3,11 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Service.logic;
+package Data.Service.logic;
 
+import Cursos.Logica.Curso;
 import Database.CursosDao;
+import Database.GruposDAO;
+import Database.MatriculasDAO;
 import Database.UsuariosDAO;
+import Grupos.Logica.Grupo;
+import Matriculas.Logic.Matricula;
 import Usuarios.logica.Usuarios;
+import java.util.List;
 
 /**
  *
@@ -16,6 +22,9 @@ import Usuarios.logica.Usuarios;
 public class Service {
     private UsuariosDAO usuarioDao;
     private CursosDao cursosdao;
+    private GruposDAO gruposdao;
+    private MatriculasDAO matriculasdao;
+    
     public static Service theInstance;
     
     public static Service instance(){
@@ -27,8 +36,60 @@ public class Service {
     
     public Service(){
         usuarioDao = new UsuariosDAO();
+        cursosdao= new CursosDao();
+        gruposdao = new GruposDAO();
+        matriculasdao= new MatriculasDAO();
     }
-    
+    //Jalar lista de curso de la base de datos 
+    public List<Curso> lista_cursos() throws Exception{
+     try{    
+        return cursosdao.read_all_grupos();
+     }
+     catch(Exception e){
+         return null;
+     }
+        
+    }
+//crear nuevo matricula
+   public Matricula  crear_matricula(Matricula u){
+         Matricula result = null;
+         try{
+            result=matriculasdao.create(u);
+        //    System.out.println(u.getId());
+              return result;
+         }
+         catch(Exception e){
+           return null ;//usuario ya existe 
+         }
+   
+    }    
+//crear nuevp grupo
+    public Grupo crear_grupo(Grupo u){
+         Grupo result = null;
+         try{
+            result=gruposdao.create(u);
+            //System.out.println(u.getId());
+              return result;
+         }
+         catch(Exception e){
+           return null ;//Grupo ya existe 
+         }
+   
+    }   
+//crear nuevo curso
+     public Curso crear_curso(Curso u){
+         Curso result = null;
+         try{
+            result=cursosdao.create(u);
+            System.out.println(u.getId());
+              return result;
+         }
+         catch(Exception e){
+           return null ;//usuario ya existe 
+         }
+   
+    }
+    //crear usario nuevo en la base de datos
     public Usuarios crear_usario(Usuarios u){
          Usuarios result = null;
          try{

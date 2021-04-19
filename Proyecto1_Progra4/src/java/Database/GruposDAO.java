@@ -20,7 +20,7 @@ import java.util.List;
  * @author pg300
  */
 public class GruposDAO {
-         public void create(Grupo cl) throws SQLException, Exception{
+         public Grupo create(Grupo cl) throws SQLException, Exception{
         String sqlcommand =  "inserto into Grupos (num_grupo,id_curso,prof_titular,dias,horario)"
                 + "values(?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
@@ -37,7 +37,7 @@ public class GruposDAO {
         if (count == 0) {
             throw new Exception("Grupo ya existe");
         }
-        
+        return cl;
     }
     
     public Grupo read(String id) throws Exception{
