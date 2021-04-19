@@ -56,7 +56,7 @@ public class CursosDao {
         }
     }
     
-    
+    //public 
     public Curso from (ResultSet rs){
         try {
                 Curso r= new Curso();

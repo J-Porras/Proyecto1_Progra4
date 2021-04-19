@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS `cursos`;
 
 
 CREATE TABLE `cursos` (
-  `id(5)` int NOT NULL IDENTITY(100,100),
+  `id` int NOT NULL AUTO_INCREMENT,
   `tematica` varchar(50) NOT NULL ,
   `descripcion` varchar(1000),
   `estado` tinyint,
