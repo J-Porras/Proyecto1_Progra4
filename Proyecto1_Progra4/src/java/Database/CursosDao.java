@@ -18,14 +18,14 @@ import java.sql.SQLException;
 public class CursosDao {
      public void create(Curso cl) throws SQLException, Exception{
         String sqlcommand =  "insert into Cursos (id,tematica,descripcion,estado,precio)"
-                + "values(?,?,?,?,?)";
+                + "values(?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
        
-        stm.setInt(1,cl.getId());
-        stm.setString(2,cl.getTematica());
-        stm.setString(3,cl.getDescripcion());
-        stm.setBoolean(4,cl.getEstado());
-        stm.setDouble(5,cl.getPrecio());
+       // stm.setInt(1,cl.getId());
+        stm.setString(1,cl.getTematica());
+        stm.setString(2,cl.getDescripcion());
+        stm.setBoolean(3,cl.getEstado());
+        stm.setDouble(4,cl.getPrecio());
        
 
         

@@ -22,14 +22,14 @@ import java.util.List;
 public class GruposDAO {
          public void create(Grupo cl) throws SQLException, Exception{
         String sqlcommand =  "inserto into Grupos (num_grupo,id_curso,prof_titular,dias,horario)"
-                + "values(?,?,?,?,?)";
+                + "values(?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
        
-        stm.setInt(1,cl.getNum_grupo());
-        stm.setInt(2,cl.getId_curso());
-        stm.setString(3,cl.getProf_titular());
-        stm.setString(4,cl.getDias());
-        stm.setString(5,cl.getHorario());
+       // stm.setInt(1,cl.getNum_grupo());
+        stm.setInt(1,cl.getId_curso());
+        stm.setString(2,cl.getProf_titular());
+        stm.setString(3,cl.getDias());
+        stm.setString(4,cl.getHorario());
        
 
         

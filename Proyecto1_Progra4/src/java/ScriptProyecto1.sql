@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS `cursos`;
 
 
 CREATE TABLE `cursos` (
-  `id` int NOT NULL,
+  `id(5)` int NOT NULL IDENTITY(100,100),
   `tematica` varchar(50) NOT NULL ,
   `descripcion` varchar(1000),
   `estado` tinyint,
@@ -39,7 +39,7 @@ CREATE TABLE `cursos` (
 DROP TABLE IF EXISTS `grupos`;
 
 CREATE TABLE `grupos` (
-  `num_grupo` int NOT NULL,
+  `num_grupo` int NOT NULL  AUTO_INCREMENT,
   `id_curso` int DEFAULT NULL,
   `prof_titular` varchar(9) DEFAULT NULL,
   `dias` varchar(9) COLLATE utf8_bin NOT NULL,
