@@ -43,7 +43,7 @@ public class Service {
     //Jalar lista de curso de la base de datos 
     public List<Curso> lista_cursos() throws Exception{
      try{    
-        return cursosdao.read_all_grupos();
+        return cursosdao.read_all_cursos();
      }
      catch(Exception e){
          return null;
@@ -121,6 +121,10 @@ public class Service {
         return result;
     }
     
-    
-    
+    //falta solo de implementar en service, ya exise el metodo en dao respectivo
+    //FALTA leer grupos por curso
+    //FALTA LEER profesor por grupo
+    //FALTAleer grupos por profe
+    //FALTAgrupos por estudiante(historial)
+    //FALTAEstudiantes por grupo
 }

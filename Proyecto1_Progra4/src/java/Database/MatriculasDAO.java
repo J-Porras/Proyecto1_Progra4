@@ -87,7 +87,7 @@ public class MatriculasDAO {//Trabajar en esto
         }
     }
     
-    //falta agregar leer estudiante por grupo
+    //leer estudiante por grupo
     public List<Usuarios> read_estudiante_por_grupo(String id_grupo) throws Exception{//terminar
          List<Usuarios> grupo_est= Collections.synchronizedList(new ArrayList<Usuarios>());
      String sqlcommand = "select * from Grupos where  id_grupo = ?";

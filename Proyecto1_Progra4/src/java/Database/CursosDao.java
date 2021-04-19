@@ -59,7 +59,7 @@ public class CursosDao {
             throw new Exception ("Curso no Existe");
         }
     }
-     public List<Curso> read_all_grupos() throws Exception{
+     public List<Curso> read_all_cursos() throws Exception{
      List<Curso> cursos= Collections.synchronizedList(new ArrayList<Curso>());
      String sqlcommand = "select * from Cursos";
      System.out.println("Entransdo en DB");
