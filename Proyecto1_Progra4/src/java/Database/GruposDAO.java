@@ -11,7 +11,10 @@ import Usuarios.logica.Usuarios;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import javax.enterprise.inject.New;
 
 /**
  *
@@ -80,7 +83,7 @@ public class GruposDAO {
      public Usuarios readProfesor(String id_grupo) throws Exception{//terminar
          String sqlcommand = "select * from Grupos where num_grupo = ?";
          System.out.println("Entransdo en DB");
-        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
           System.out.println("Buscando Curso en DB con profesor ");
           
         stm.setString(1, id_grupo); 
@@ -99,37 +102,66 @@ public class GruposDAO {
         }
       
      }
-     /*
-       public ArrayList<Grupo> read_grupos_profesor(String id_grupo) throws Exception{//terminar
-        
-     }
-            public ArrayList<Grupo> read_grupos_curso(String id_grupo) throws Exception{//terminar
-        
-     }
-*/
-     /* Codigo Util para despujes
-      public ArrayList<Expenses> getExpenses() {
-        ArrayList<Expenses> expenses = new ArrayList<Expenses>();
-        try {
-            Statement stmt = myConnection.createStatement();
-            ResultSet result = stmt.executeQuery("SELECT * FROM expenses");
-            while(result.next()){
+ //leer grupos por profe    
+    public List<Grupo> read_grupos_profesor(String id_profesor) throws Exception{
+     List<Grupo> grupos_profe= Collections.synchronizedList(new ArrayList<Grupo>());
+     String sqlcommand = "select * from Grupos where  prof_titular = ?";
+     System.out.println("Entransdo en DB");
+     PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+     System.out.println("Buscando Curso en DB con profesor ");  
+     stm.setString(1, id_profesor);
+     ResultSet rs =  Database.instance().executeQuery(stm); 
+      try {
+         
+            while(rs.next()){
+            Grupo r= new Grupo();
+            r.setNum_grupo(rs.getInt("id_grupo"));
+            r.setId_curso(rs.getInt("id_est"));
+            
+            r.setProf_titular(rs.getString("prof_titular"));
+            r.setDias(rs.getString("dias"));
+            r.setHorario(rs.getString("horario"));
+            
+            grupos_profe.add(r);
 
-                Expenses expense = new Expenses();
-                expense.setNum(result.getInt(1));
-                expense.setPayment(result.getString(2));
-                expense.setReceiver(result.getInt(3));
-                expense.setValue(result.getDouble(4));
-
-                expenses.add(expense);
-
-                }
-        }
-            catch (SQLException e){
-                 System.out.println(e.getMessage());
              }
-        return expenses;
     }
-     
-     */
+     catch (SQLException e){
+        System.out.println("Operacion no se logro(leer grupos profesor)");
+                 
+    }
+     return grupos_profe;
+     }
+    
+ //leer grupos or curso
+    public List<Grupo> read_grupos_curso(String id_curso) throws Exception{//terminar
+         List<Grupo> grupos_curso= Collections.synchronizedList(new ArrayList<Grupo>());
+     String sqlcommand = "select * from Grupos where  id_curso = ?";
+     System.out.println("Entransdo en DB");
+     PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+     System.out.println("Buscando Curso en DB con profesor ");  
+     stm.setString(1, id_curso);
+     ResultSet rs =  Database.instance().executeQuery(stm); 
+      try {
+         
+            while(rs.next()){
+            Grupo r= new Grupo();
+            r.setNum_grupo(rs.getInt("id_grupo"));
+            r.setId_curso(rs.getInt("id_est"));
+            
+            r.setProf_titular(rs.getString("prof_titular"));
+            r.setDias(rs.getString("dias"));
+            r.setHorario(rs.getString("horario"));
+            
+            grupos_curso.add(r);
+
+             }
+    }
+     catch (SQLException e){
+        System.out.println("Operacion no se logro(leer grupos profesor)");
+                 
+    }
+     return grupos_curso;
+    }
+
 }
