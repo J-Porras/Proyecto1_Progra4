@@ -18,6 +18,8 @@
     <body>
         
         
+        <!--
+        Viejo espacio de matricular
         <div class="row">
             <div class="col-md-3">
                 <a href="#">
@@ -31,11 +33,10 @@
             </div>
             
             
-        </div>
+        </div>-->
         
         
-        //tabla de cursos en descuento
-        // si no hay cursos no genera la tabla del todo
+        //tabla de cursos en descuento, si no hay cursos no genera la tabla del todo
         <%List<Curso> cursos_off = (List<Curso>)request.getAttribute("cursos");%>
         <%if(cursos_off.isEmpty()){%>
             <p>Actualmente no hay cursos en descuento, vuelva mas tarde!</p>
@@ -46,22 +47,28 @@
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Precio</th>
+                    <th scope="col">Descripcion</th>
                     <th scope="col">Imagen</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Matricular</th>
                 </tr>
             </thead>
             <tbody>
               <tr>
-                    <th scope="row">1</th>
-                    <td>Mark prueba</td>
-                    <td>Otto prueba</td>
-                    <td>@mdo prueba</td>
+                    <th scope="row">nombre prueba</th>
+                    <td>texto prueba</td>
+                    <td>imagen aca</td>
+                    <td>texto prueba</td>
+                    <td>texto prueba</td>
               </tr>
               <%for (Curso c: cursos_off) {%>
                     <th scope="row"><%= c.getTematica() %></th>
+                    
+                    <th scope="row"><%= c.getDescripcion() %></th>
+                    //falta la imagen   
+                    <!-- <td><img src='/Proyecto1_Progra4/cursos/image?codigo=<%=c.getId()%>'></td> -->
                     <td><%=c.getPrecio() %></td> 
-                    //falta la imagen
-                    //<td><img src='/Proyecto1_Progra4/cursos/image?codigo=<%=c.getId()%>'></td> 
+                    <th scope="row"><a class="btn btn-primary" href="#">Matricularse</a></th>
                 <%} %>
               
             </tbody>
