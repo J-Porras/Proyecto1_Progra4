@@ -16,7 +16,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//import Cursos.Logica;
+import Data.Service.Logic.Service;
+import Cursos.Logic.Curso;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,20 +41,21 @@ public class ControllerIndex extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        String respuesta = "index.jsp";
+        String respuesta = "";
+        String _request = request.getServletPath();
         
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet index</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet index at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        switch(_request){
+            case "/index":
+                respuesta = this.show(request);
+                break;
+                    
+            
+            
+            default:
+                break;
+        }
+        if(respuesta!=null){
+            request.getRequestDispatcher(respuesta).forward( request, response);
         }
     }
     
@@ -74,9 +78,14 @@ public class ControllerIndex extends HttpServlet {
     
     //se llama la primera vez o cuando se recarga
     private String show(HttpServletRequest request) {     
-        //Curso curso = new Curso("","");
-        //request.setAttribute("curso", curso);
-        //request.setAttribute("cursos", Service.instance().cursosList());
+        Curso curso = new Curso(0,"","",false,0.0);
+        request.setAttribute("curso", curso);
+        try {
+            request.setAttribute("cursos", Service.instance().cursos_descuento());
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ControllerIndex.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return "/presentation/cursos/View.jsp";
     }
 

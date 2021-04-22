@@ -6,7 +6,7 @@
 package Database;
 
 
-import Usuarios.logica.Usuarios;
+import Usuarios.Logic.Usuarios;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

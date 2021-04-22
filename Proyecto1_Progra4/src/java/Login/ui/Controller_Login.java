@@ -5,9 +5,9 @@
  */
 package Login.ui;
 
-import Data.Service.logic.Service;
+import Data.Service.Logic.Service;
 import Login.Model_Login;
-import Usuarios.logica.Usuarios;
+import Usuarios.Logic.Usuarios;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -5,7 +5,7 @@
  */
 package Login;
 
-import Usuarios.logica.Usuarios;
+import Usuarios.Logic.Usuarios;
 
 /**
  *

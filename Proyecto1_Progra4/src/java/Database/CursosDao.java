@@ -6,14 +6,16 @@
 package Database;
 
 
-import Cursos.Logica.Curso;
-import Grupos.Logica.Grupo;
+import Cursos.Logic.Curso;
+import Grupos.Logic.Grupo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -59,34 +61,61 @@ public class CursosDao {
             throw new Exception ("Curso no Existe");
         }
     }
-     public List<Curso> read_all_cursos() throws Exception{
-     List<Curso> cursos= Collections.synchronizedList(new ArrayList<Curso>());
-     String sqlcommand = "select * from Cursos";
-     System.out.println("Entransdo en DB");
-     PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
-     System.out.println("Buscando Curso en DB con profesor ");  
+    public List<Curso> read_all_cursos() throws Exception{
+        List<Curso> cursos= Collections.synchronizedList(new ArrayList<Curso>());
+     
+        String sqlcommand = "select * from Cursos";
+        System.out.println("Entransdo en DB");
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+        System.out.println("Buscando Curso en DB con profesor ");  
     
-     ResultSet rs =  Database.instance().executeQuery(stm); 
-      try {
+        ResultSet rs =  Database.instance().executeQuery(stm); 
+        try {
          
             while(rs.next()){
-            Curso r= new Curso();
-            r.setId(rs.getInt("id"));
-            r.setTematica(rs.getString("nombre"));
-            r.setDescripcion(rs.getString("descripcion"));
-            r.setEstado(rs.getBoolean("estado"));
-            r.setPrecio(rs.getDouble("precio"));
-            
-            cursos.add(r);
+                Curso r= new Curso();
+                r.setId(rs.getInt("id"));
+                r.setTematica(rs.getString("nombre"));
+                r.setDescripcion(rs.getString("descripcion"));
+                r.setEstado(rs.getBoolean("estado"));
+                r.setPrecio(rs.getDouble("precio"));
 
-             }
-    }
-     catch (SQLException e){
-        System.out.println("Operacion no se logro(leer cursos)");
-                 
-    }
+                cursos.add(r);
+            }
+        }
+        catch (SQLException e){
+            System.out.println("Operacion no se logro(leer cursos)");
+        }
      return cursos;
-     }
+    }
+    
+    
+    //lee cursos en descuento
+    public List<Curso> read_discount() {
+        List<Curso> cursos= Collections.synchronizedList(new ArrayList<Curso>());
+        String sqlcommand = "select * from Cursos where estado = 1";
+        PreparedStatement stm;
+        try {
+            stm = Database.instance().prepareStatement(sqlcommand);
+            ResultSet rs =  Database.instance().executeQuery(stm); 
+            while(rs.next()){
+                Curso r= new Curso();
+                r.setId(rs.getInt("id"));
+                r.setTematica(rs.getString("nombre"));
+                r.setDescripcion(rs.getString("descripcion"));
+                r.setEstado(rs.getBoolean("estado"));
+                r.setPrecio(rs.getDouble("precio"));
+
+                cursos.add(r);
+            }
+             
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(CursosDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cursos;
+        
+    }
     
     //public 
     public Curso from (ResultSet rs){
