@@ -57,17 +57,20 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 request.setAttribute("Model_Login", model);//No se debe mandar el modelo, ya que es una instancia
                 //a sesión general debe ser manejada por el objeto httpsession debido a que es el cookie quien va a identificar
                 session.setAttribute("Usuario", u);
+                
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
             case ("/CerrarSesion"): {
-                respuesta = "/index.jsp";
+                respuesta = this.show(request);
                 HttpSession session = request.getSession(true);
                 session.removeAttribute("Usuario");
                 model.setCurrent_user(null);
+                System.out.println("REQUEST CERRAR SESION"); 
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
+            
             case ("/Inicio"): {
                 respuesta = this.show(request);//Devuelve a la pestanna principal
                 System.out.println("RESPUESTA SHOW");  
@@ -88,11 +91,12 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
-             case ("/RegistroCompleto"): {
+            
+            case ("/RegistroCompleto"): {
                 respuesta = "."; 
                 String respuestaError = "registrarse.jsp";
                 String nombre = request.getParameter("nombre");
-               String id= request.getParameter("id");
+                String id= request.getParameter("id");
                 String email = request.getParameter("email");
                 String telefono = request.getParameter("telefono");
                 String contrasenna = request.getParameter("contrasenna");
@@ -100,26 +104,26 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 System.out.println(id);
                 
                 if(nombre.isEmpty()||id.isEmpty()||email.isEmpty()||telefono.isEmpty()||contrasenna.isEmpty()){
-                      System.out.println("vacio");
+                    System.out.println("vacio");
                     request.getRequestDispatcher(respuestaError).forward(request, response);
-                break;
+                    break;
                 }
                 
-                 Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email,0, " "));
+                Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email,0, " "));
                   
-                 if(u==null){
+                if(u==null){
                      //En el caso que el usuario ya exista
                    request.getRequestDispatcher(respuestaError).forward(request, response); 
-                 }
+                }
                  
                 model.setCurrent_user(u);
                 HttpSession session = request.getSession(true);
                 request.setAttribute("Model_Login", model); 
                 session.setAttribute("Usuario", u);
-               System.out.println("crear2");
+                System.out.println("crear2");
 
              //   request.getRequestDispatcher(respuesta).forward(request, response);
-                   request.getRequestDispatcher(respuesta).forward(request, response);
+                request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
             default: {
