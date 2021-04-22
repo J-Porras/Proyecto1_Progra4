@@ -6,8 +6,8 @@
 package Database;
 
 
-import Grupos.Logic.Grupo;
-import Usuarios.Logic.Usuarios;
+import Grupos.Logica.Grupo;
+import Usuarios.logica.Usuarios;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

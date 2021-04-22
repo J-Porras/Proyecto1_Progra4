@@ -5,9 +5,9 @@
  */
 package Database;
 
-import Grupos.Logic.Grupo;
+import Grupos.Logica.Grupo;
 import Matriculas.Logic.Matricula;
-import Usuarios.Logic.Usuarios;
+import Usuarios.logica.Usuarios;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
