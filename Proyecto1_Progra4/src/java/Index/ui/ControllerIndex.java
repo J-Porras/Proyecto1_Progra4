@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  *
  * @author Porras
  */
-@WebServlet(name = "ControllerIndex", urlPatterns = {"/index"})
+@WebServlet(name = "ControllerIndex", urlPatterns = {"/index","/index/show"})
 @MultipartConfig(location="C:/images")
 public class ControllerIndex extends HttpServlet {
 
@@ -45,7 +45,7 @@ public class ControllerIndex extends HttpServlet {
         String _request = request.getServletPath();
         
         switch(_request){
-            case "/index":
+            case "/index/show":
                 respuesta = this.show(request);
                 break;
                     
@@ -76,7 +76,7 @@ public class ControllerIndex extends HttpServlet {
             
     }
     
-    //se llama la primera vez o cuando se recarga
+    //se llama la primera vez o cuando se recarga, carga cursos en descuento
     private String show(HttpServletRequest request) {     
         Curso curso = new Curso(0,"","",false,0.0);
         request.setAttribute("curso", curso);
@@ -86,7 +86,7 @@ public class ControllerIndex extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(ControllerIndex.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "/presentation/cursos/View.jsp";
+        return "/index.jsp";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
