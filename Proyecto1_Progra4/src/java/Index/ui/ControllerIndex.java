@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import Cursos.Logica.Curso;
+import Data.Service.logic.Service;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -74,9 +76,9 @@ public class ControllerIndex extends HttpServlet {
     
     //se llama la primera vez o cuando se recarga
     private String show(HttpServletRequest request) {     
-        //Curso curso = new Curso("","");
-        //request.setAttribute("curso", curso);
-        //request.setAttribute("cursos", Service.instance().cursosList());
+        Curso curso = new Curso(0,"","",false,0.0);
+        request.setAttribute("curso", curso);
+        request.setAttribute("cursos", Service.instance().);
         return "/presentation/cursos/View.jsp";
     }
 
