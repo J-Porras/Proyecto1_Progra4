@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Porras
  */
-@WebServlet(name = "ControllerIndex", urlPatterns = {"/index"})
+@WebServlet(name = "ControllerIndex", urlPatterns = {"/index","/index/show"})
 @MultipartConfig(location="C:/images")
 public class ControllerIndex extends HttpServlet {
 
@@ -40,21 +42,20 @@ public class ControllerIndex extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        String respuesta = "index.jsp";
+        String urlresponse = "";
         
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet index</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet index at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        switch (request.getServletPath()) {
+            case "/index/show":
+                this.show(request);
+                
+                break;
+            default:
+                break;
         }
+        if(urlresponse!=null){
+            request.getRequestDispatcher(urlresponse).forward( request, response);
+        }
+
     }
     
     
@@ -74,12 +75,16 @@ public class ControllerIndex extends HttpServlet {
             
     }
     
-    //se llama la primera vez o cuando se recarga
+    //se llama la primera vez 
     private String show(HttpServletRequest request) {     
         Curso curso = new Curso(0,"","",false,0.0);
         request.setAttribute("curso", curso);
-        request.setAttribute("cursos", Service.instance().);
-        return "/presentation/cursos/View.jsp";
+        try {
+            request.setAttribute("cursos", Service.instance().cursos_descuento());
+        } catch (Exception ex) {
+            Logger.getLogger(ControllerIndex.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "/index.jsp";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
