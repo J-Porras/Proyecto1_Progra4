@@ -62,6 +62,7 @@ public class CursosDao {
     
     
     public List<Curso> read_all_cursos() throws Exception{
+        System.out.println("READ ALL CURSOS------- ");  
         List<Curso> cursos= Collections.synchronizedList(new ArrayList<Curso>());
         String sqlcommand = "select * from Cursos";
         System.out.println("Entransdo en DB");
@@ -95,7 +96,7 @@ public class CursosDao {
         String sqlcommand = "select * from Cursos where estado = 1";
         System.out.println("Entransdo en DB");
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
-        System.out.println("Buscando Curso en DB con profesor ");  
+        System.out.println("Buscando cursos_off ");  
 
         ResultSet rs =  Database.instance().executeQuery(stm); 
         try {
@@ -116,6 +117,8 @@ public class CursosDao {
         catch (SQLException e){
             System.out.println("Operacion no se logro(leer cursos)");
         }
+        System.out.println("RETURN CURSOS OFF------- ");  
+
         return cursos;
     }
     

@@ -5,6 +5,7 @@
  */
 package Login.ui;
 
+import Cursos.Logica.Curso;
 import Data.Service.logic.Service;
 import Login.Model_Login;
 import Usuarios.logica.Usuarios;
@@ -60,7 +61,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 break;
             }
             case ("/CerrarSesion"): {
-                respuesta = ".";
+                respuesta = "/index.jsp";
                 HttpSession session = request.getSession(true);
                 session.removeAttribute("Usuario");
                 model.setCurrent_user(null);
@@ -68,13 +69,18 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 break;
             }
             case ("/Inicio"): {
-                respuesta = ".";//Devuelve a la pestanna principal
+                respuesta = this.show(request);//Devuelve a la pestanna principal
+                System.out.println("RESPUESTA SHOW");  
                 HttpSession session = request.getSession(true);
                 Usuarios u = model.getCurrent_user();
                 if (u != null) {
+                    
                     session.setAttribute("Usuario", u);
                 }
-                response.sendRedirect(respuesta);
+                System.out.println("RESPONDE SEND REDIRECT");  
+                //response.sendRedirect(respuesta);
+                request.getRequestDispatcher(respuesta).forward(request, response);
+                
                 break;
             }
             case ("/Registrarse"): {
@@ -121,6 +127,18 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
             }
 
         }
+    }
+    
+    private String show(HttpServletRequest request) {     
+        Curso curso = new Curso(0,"","",false,0.0);
+        request.setAttribute("curso", curso);
+        try {
+            request.setAttribute("cursos", Service.instance().cursos_descuento());
+        } catch (Exception ex) {
+            Logger.getLogger(Controller_Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("RETURN EN SHOW");  
+        return "/index.jsp";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
