@@ -41,7 +41,7 @@
             <p>Actualmente no hay cursos en descuento, vuelva mas tarde!</p>
         <%}%>
         
-        <%else{%>
+        <%if(!cursos_off.isEmpty()){%>
          <table class="table">
             <thead>
                 <tr>

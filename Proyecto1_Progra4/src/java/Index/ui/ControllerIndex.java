@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Porras
  */
-@WebServlet(name = "ControllerIndex", urlPatterns = {"/index","/index/show"})
+@WebServlet(name = "ControllerIndex", urlPatterns = {"/index"})
 @MultipartConfig(location="C:/images")
 public class ControllerIndex extends HttpServlet {
 
@@ -45,8 +45,8 @@ public class ControllerIndex extends HttpServlet {
         String urlresponse = "";
         
         switch (request.getServletPath()) {
-            case "/index/show":
-                this.show(request);
+            case "/index":
+                urlresponse = this.show(request);
                 
                 break;
             default:
