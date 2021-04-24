@@ -78,7 +78,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 break;
             }
             case ("/CerrarSesion"): {
-                respuesta = this.show(request);
+                respuesta = "/InicioPrincipal";
                 HttpSession session = request.getSession(true);
                 session.removeAttribute("Usuario");
                 model.setCurrent_user(null);
@@ -87,7 +87,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 break;
             }
             
-            case ("/Inicio"): {//no deberia estar aqui
+            case ("/Inicio"): {//no deberia estar aqui//Depricated
                 respuesta = this.show(request);//Devuelve a la pestanna principal
                 System.out.println("RESPUESTA SHOW");  
                 HttpSession session = request.getSession(true);

@@ -18,7 +18,7 @@
         <nav class ="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <div class="navbar-nav">
-                    <a class="navbar-brand text-center text-white" href="Inicio">CursosLibres.com</a>
+                    <a class="navbar-brand text-center text-white" href="InicioPrincipal">CursosLibres.com</a>
                     <%Usuarios actual = (Usuarios) session.getAttribute("Usuario");%>
                     <%if (actual != null) {%>
                     <a class="navbar-brand text-center text-white" href="CerrarSesion">Logout</a>
