@@ -5,8 +5,12 @@
  */
 package Controller_Cursos.ui;
 
+import Cursos.Logica.Curso;
+import Data.Service.logic.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Usuario
  */
-@WebServlet(name = "ServletCursos", urlPatterns = {"/cursos"})
+@WebServlet(name = "ServletCursos", urlPatterns = {"/cursos","/CursoRegistrado"})
 public class Controller_Cursos extends HttpServlet {
 
     /**
@@ -30,23 +34,39 @@ public class Controller_Cursos extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-/*        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletCursos</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletCursos at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            throws ServletException, IOException, Exception {
+    response.setContentType("text/html;charset=UTF-8");
+    String ruta = request.getServletPath();
+        switch(ruta){
+            case "/CursoRegistrado":{//Por el momento solo va la pestanna
+                String respuesta="/CrearCursos";
+                System.out.println("Registrado");
+                String nombre = request.getParameter("nombre");
+                String tematica = request.getParameter("tematica");
+                System.out.println(request.getParameter("oferta"));
+             
+                 Boolean estado;
+                if(request.getParameter("oferta")!=null){
+                    estado =true;
+                }
+                else{
+                    estado=false;
+                }
+               
+               System.out.println(estado);
+                Double precio = Double.parseDouble(request.getParameter("precio"));
+                int cantidad_cursos=Service.instance().lista_cursos().size();
+                
+                Service.instance().crear_curso(new Curso(0,nombre,tematica,estado,precio));
+                request.getRequestDispatcher(respuesta).forward(request, response);
+                break;
+            }
+            default:
+                break;
         }
-*/
-    request.getRequestDispatcher("cursos.jsp").forward(request, response);
-    }
 
+   
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -59,7 +79,11 @@ public class Controller_Cursos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Controller_Cursos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -73,7 +97,11 @@ public class Controller_Cursos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Controller_Cursos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

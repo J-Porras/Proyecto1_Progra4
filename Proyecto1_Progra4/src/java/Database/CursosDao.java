@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class CursosDao {
      public Curso create(Curso cl) throws SQLException, Exception{
-        String sqlcommand =  "insert into Cursos (id,nombre,tematica,estado,precio)"
+        String sqlcommand =  "insert into Cursos (nombre,tematica,estado,precio)"
                 + "values(?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
        
@@ -30,10 +30,11 @@ public class CursosDao {
         stm.setString(2,cl.getTematica());
         stm.setBoolean(3,cl.getEstado());
         stm.setDouble(4,cl.getPrecio());
-       
+       System.out.println("Creando curso");
 
         
         int count = Database.instance().executeUpdate(stm);
+         System.out.println(stm);
         if (count == 0) {
             throw new Exception("Curso ya existe");
         }
@@ -67,10 +68,10 @@ public class CursosDao {
         String sqlcommand = "select * from Cursos";
         System.out.println("Entransdo en DB");
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
-        System.out.println("Buscando Curso en DB con profesor ");  
+        System.out.println("Buscando Curso en DB  ");  
 
         ResultSet rs =  Database.instance().executeQuery(stm); 
-        try {
+    
             
             while(rs.next()){
             Curso r= new Curso();
@@ -81,13 +82,11 @@ public class CursosDao {
             r.setPrecio(rs.getDouble("precio"));
 
             cursos.add(r);
-
+System.out.println("Buscando cursos_off ");  
             }
-        }
         
-        catch (SQLException e){
-            System.out.println("Operacion no se logro(leer cursos)");
-        }
+        
+      
         return cursos;
     }
     

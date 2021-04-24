@@ -25,21 +25,29 @@
                                 <h2 class="title text-center">Información de nuevo curso</h2>
                             </div>
                         </div>
-                        <form action="ingresarcursos" method="POST">
+                        <form action="CursoRegistrado" method="POST">
                             <div class="form-group">
                                 <input class="form-control rounded-right" type="text" placeholder="Nombre del curso" name="nombre">
                             </div>
                             <div class="form-group">
-                                <input class="form-control rounded-right" type="text" placeholder="Descripción" name="descripcion">
+                                <input class="form-control rounded-right" type="text" placeholder="Tematica" name="tematica">
                             </div>
+                            <!--
+                         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                             <div class="form-check-inline">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="Oferta" id="flexRadioDefault1"value="1">
                                 <label class="form-check-label" for="flexRadioDefault1">En oferta</label>
                             </div>
                             <div class="form-check-inline">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <input class="form-check-input" type="radio" name="Oferta" id="flexRadioDefault2"value ="0" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">No oferta</label>
                             </div>
+                           </div>
+                            -->
+                              <div class="form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="oferta" value="1">
+                            <label class="form-check-label" for="flexRadioDefault2">En Oferta</label>
+                              </div>
                             <div class="form-group">
                                 <input class="form-control rounded-right" type="text" placeholder="Precio de matricula" name="precio">
                             </div>
@@ -53,8 +61,11 @@
                         </form>
                     </div>
                 </div>
+                   <%@include file = "cursos_Admin.jsp"%>
             </div>
+             
         </div>
+      
         <%@include file="footer.jsp"%>
     </body>
 </html>
