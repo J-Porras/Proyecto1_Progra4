@@ -80,10 +80,10 @@ public class GruposDAO {
     }
     ///////////////////////////////////////////////////////////////
      public Usuarios readProfesor(String id_grupo) throws Exception{//terminar
-         String sqlcommand = "select * from Grupos where num_grupo = ?";
-         System.out.println("Entransdo en DB");
+        String sqlcommand = "select * from Grupos where num_grupo = ?";
+        System.out.println("Entransdo en DB");
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
-          System.out.println("Buscando Curso en DB con profesor ");
+        System.out.println("Buscando Curso en DB con profesor ");
           
         stm.setString(1, id_grupo); 
         ResultSet rs =  Database.instance().executeQuery(stm); 
@@ -92,8 +92,7 @@ public class GruposDAO {
             
             String id_profesor= from(rs).getProf_titular();
             UsuariosDAO dao= new UsuariosDAO();
-            return dao.read(id_profesor);
-            
+            return dao.read(id_profesor); 
         }
         else{
             System.out.println("Database: Grupo no existe, profesor no ecnontrado");
@@ -113,17 +112,17 @@ public class GruposDAO {
       try {
          
             while(rs.next()){
-            Grupo r= new Grupo();
-            r.setNum_grupo(rs.getInt("id_grupo"));
-            r.setId_curso(rs.getInt("id_est"));
-            
-            r.setProf_titular(rs.getString("prof_titular"));
-            r.setDias(rs.getString("dias"));
-            r.setHorario(rs.getString("horario"));
-            
-            grupos_profe.add(r);
+                Grupo r= new Grupo();
+                r.setNum_grupo(rs.getInt("id_grupo"));
+                r.setId_curso(rs.getInt("id_curso"));
 
-             }
+                r.setProf_titular(rs.getString("prof_titular"));
+                r.setDias(rs.getString("dias"));
+                r.setHorario(rs.getString("horario"));
+
+                grupos_profe.add(r);
+
+            }
     }
      catch (SQLException e){
         System.out.println("Operacion no se logro(leer grupos profesor)");
