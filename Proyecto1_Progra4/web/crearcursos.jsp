@@ -43,6 +43,10 @@
                             <div class="form-group">
                                 <input class="form-control rounded-right" type="text" placeholder="Precio de matricula" name="precio">
                             </div>
+                            <div class="form-group">
+                            <label class="form-label" for="archivo">Seleccione archivo</label>
+                            <input type="file" class="form-control" id="archivo" />
+                            </div>
                             <div class="p-t-10">
                                 <button class="btn btn-primary rounded submit w-100" type="submit">Registrar nuevo curso</button>
                             </div>
