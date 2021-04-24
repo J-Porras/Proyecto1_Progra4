@@ -42,6 +42,22 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
         this.model = new Model_Login();
     }
 
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public Model_Login getModel() {
+        return model;
+    }
+
+    public void setModel(Model_Login model) {
+        this.model = model;
+    }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
         this.service = Service.instance();
         String solicitud = request.getServletPath();
