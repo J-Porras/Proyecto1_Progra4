@@ -21,13 +21,13 @@ import java.util.List;
  */
 public class CursosDao {
      public Curso create(Curso cl) throws SQLException, Exception{
-        String sqlcommand =  "insert into Cursos (id,tematica,descripcion,estado,precio)"
+        String sqlcommand =  "insert into Cursos (id,nombre,tematica,estado,precio)"
                 + "values(?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
        
        // stm.setInt(1,cl.getId());
-        stm.setString(1,cl.getTematica());
-        stm.setString(2,cl.getDescripcion());
+        stm.setString(1,cl.getNombre());
+        stm.setString(2,cl.getTematica());
         stm.setBoolean(3,cl.getEstado());
         stm.setDouble(4,cl.getPrecio());
        
@@ -75,8 +75,8 @@ public class CursosDao {
             while(rs.next()){
             Curso r= new Curso();
             r.setId(rs.getInt("id"));
-            r.setTematica(rs.getString("nombre"));
-            r.setDescripcion(rs.getString("descripcion"));
+            r.setNombre(rs.getString("nombre"));
+            r.setTematica(rs.getString("Tematica"));
             r.setEstado(rs.getBoolean("estado"));
             r.setPrecio(rs.getDouble("precio"));
 
@@ -92,33 +92,26 @@ public class CursosDao {
     }
     
     public List<Curso> read_cursos_oferta() throws Exception{
-        List<Curso> cursos= Collections.synchronizedList(new ArrayList<Curso>());
+        List<Curso> cursos= new ArrayList<Curso>();
         String sqlcommand = "select * from Cursos where estado = 1";
         System.out.println("Entransdo en DB");
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         System.out.println("Buscando cursos_off ");  
-
-        ResultSet rs =  Database.instance().executeQuery(stm); 
-        try {
-            
+        ResultSet rs =  Database.instance().executeQuery(stm);
             while(rs.next()){
             Curso r= new Curso();
             r.setId(rs.getInt("id"));
-            r.setTematica(rs.getString("nombre"));
-            r.setDescripcion(rs.getString("descripcion"));
+            r.setNombre(rs.getString("nombre"));
+            r.setTematica(rs.getString("tematica"));
             r.setEstado(rs.getBoolean("estado"));
             r.setPrecio(rs.getDouble("precio"));
-
+            System.out.println("en while");
             cursos.add(r);
 
             }
-        }
-        
-        catch (SQLException e){
-            System.out.println("Operacion no se logro(leer cursos)");      
-        } 
+       
   System.out.println("RETURN CURSOS OFF------- ");  
-
+         System.out.println(cursos.size());   
         return cursos;
     }
     
@@ -129,8 +122,8 @@ public class CursosDao {
         try {
                 Curso r= new Curso();
             r.setId(rs.getInt("id"));
-            r.setTematica(rs.getString("nombre"));
-            r.setDescripcion(rs.getString("descripcion"));
+            r.setNombre(rs.getString("nombre"));
+            r.setTematica(rs.getString("descripcion"));
             r.setEstado(rs.getBoolean("estado"));
             r.setPrecio(rs.getDouble("precio"));
           

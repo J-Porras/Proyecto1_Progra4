@@ -4,9 +4,14 @@
     Author     : Usuario
 --%>
 
+<%@page import="Controller_index.Model_index"%>
 <%@page import="Cursos.Logica.Curso"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% Model_index model =( Model_index)request.getAttribute("Model_index");
+   List<Curso> cursos=model.getCursos();
+   System.out.println(cursos.size());
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,6 +21,7 @@
         <title>Cursos</title>
     </head>
     <body>
+        <%for(Curso c: cursos){%>
         <div class="row">
             <div class="col-md-3">
                 <a href="#">
@@ -23,10 +29,12 @@
                 </a>
             </div>
             <div class="col-md-5">
-                <h3>Curso 1</h3>
-                <p>Descripción de curso</p>
+                <h3><%out.print(c.getNombre());%></h3>
+                <p><%out.print(c.getTematica());%></p>
+                <p>Precio: <%out.print(c.getPrecio());%></p>
                 <a class="btn btn-primary" href="#">Matricularse</a>
             </div>
         </div>
+        <%}%>
     </body>
 </html>

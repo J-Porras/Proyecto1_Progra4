@@ -5,6 +5,7 @@
  */
 package Controller_index.ui;
 
+import Controller_index.Model_index;
 import Cursos.Logica.Curso;
 import Data.Service.logic.Service;
 import Login.Model_Login;
@@ -12,6 +13,7 @@ import Login.ui.Controller_Login;
 import Usuarios.logica.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -40,10 +42,10 @@ public class Controller_index extends HttpServlet {
     
        private Service service;
     private Controller_Login controller_login;
-
+    private Model_index model;
         public Controller_index() {
         this.service = new Service();
-        
+        this.model = new Model_index();
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -98,9 +100,13 @@ public class Controller_index extends HttpServlet {
         Curso curso = new Curso(0,"","",false,0.0);
         request.setAttribute("curso", curso);
         try {
-            request.setAttribute("cursos", Service.instance().cursos_ofrecidos());
+            List<Curso> cursos= Service.instance().cursos_ofrecidos();
+            model.setCursos(cursos);
+              System.out.println("Controller");
+            System.out.println(cursos.size());
+            request.setAttribute("Model_index",model);
         } catch (Exception ex) {
-            Logger.getLogger(Controller_Login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Controller_index.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("RETURN EN SHOW");  
         return "/index.jsp";

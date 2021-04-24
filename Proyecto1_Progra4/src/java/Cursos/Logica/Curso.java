@@ -11,18 +11,18 @@ package Cursos.Logica;
  */
 public class Curso {
     private int id;
+    private String Nombre;
     private String tematica;
-    private String Descripcion;
     private Boolean estado;
     private Double precio;
 
     public Curso() {
     }
 
-    public Curso(int id, String tematica, String Descripcion, Boolean estado, Double precio) {
+    public Curso(int id, String Nombre, String tematica, Boolean estado, Double precio) {
         this.id = id;
+        this.Nombre = Nombre;
         this.tematica = tematica;
-        this.Descripcion = Descripcion;
         this.estado = estado;
         this.precio = precio;
     }
@@ -35,20 +35,20 @@ public class Curso {
         this.id = id;
     }
 
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
     public String getTematica() {
         return tematica;
     }
 
     public void setTematica(String tematica) {
         this.tematica = tematica;
-    }
-
-    public String getDescripcion() {
-        return Descripcion;
-    }
-
-    public void setDescripcion(String Descripcion) {
-        this.Descripcion = Descripcion;
     }
 
     public Boolean getEstado() {
@@ -66,5 +66,6 @@ public class Curso {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
-    
+
+   
 }
