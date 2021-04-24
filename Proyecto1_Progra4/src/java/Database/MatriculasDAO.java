@@ -115,7 +115,9 @@ public class MatriculasDAO {//Trabajar en esto
      return grupo_est;
     
     }
-
+void update_calficacion(String id_est){
+    String sqlcommand = "update * from Grupos where  id_est = ?";
+}
     //grupos de estudiante(Hisotrial)
     public List<Matricula> read_grupos_estudiante(String id_est) throws Exception{//terminar
          List<Matricula> grupo_est= Collections.synchronizedList(new ArrayList<Matricula>());
