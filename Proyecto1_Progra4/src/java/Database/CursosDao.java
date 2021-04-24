@@ -91,7 +91,7 @@ public class CursosDao {
         return cursos;
     }
     
-    public List<Curso> read_discount_cursos() throws Exception{
+    public List<Curso> read_cursos_oferta() throws Exception{
         List<Curso> cursos= Collections.synchronizedList(new ArrayList<Curso>());
         String sqlcommand = "select * from Cursos where estado = 1";
         System.out.println("Entransdo en DB");

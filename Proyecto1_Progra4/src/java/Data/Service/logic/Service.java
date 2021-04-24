@@ -51,9 +51,9 @@ public class Service {
         }    
     }
     
-    //devuelve cursos con descuento
-    public List<Curso> cursos_descuento() throws Exception{
-        return cursosdao.read_discount_cursos();   
+    //devuelve cursos en oferta
+    public List<Curso> cursos_ofrecidos() throws Exception{
+        return cursosdao.read_cursos_oferta();   
     }
     
     

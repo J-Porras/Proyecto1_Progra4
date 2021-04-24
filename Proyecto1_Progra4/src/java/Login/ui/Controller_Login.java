@@ -137,7 +137,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
         Curso curso = new Curso(0,"","",false,0.0);
         request.setAttribute("curso", curso);
         try {
-            request.setAttribute("cursos", Service.instance().cursos_descuento());
+            request.setAttribute("cursos", Service.instance().cursos_ofrecidos());
         } catch (Exception ex) {
             Logger.getLogger(Controller_Login.class.getName()).log(Level.SEVERE, null, ex);
         }
