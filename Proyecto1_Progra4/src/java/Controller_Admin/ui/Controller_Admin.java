@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pg300
  */
-@WebServlet(urlPatterns = {"/Administrador", "/CrearCursos"})
+@WebServlet(name = "Controller_Admin", urlPatterns = {"/Administrador", "/CrearCursos"})
 public class Controller_Admin extends HttpServlet {
 
     /**
@@ -31,7 +31,15 @@ public class Controller_Admin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-  
+        String ruta = request.getServletPath();
+        switch(ruta){
+            case "/CrearCursos":{//Por el momento solo va la pestanna
+                request.getRequestDispatcher("crearcursos.jsp").forward(request, response);
+                break;
+            }
+            default:
+                break;
+        }
         //basura
     }
 
