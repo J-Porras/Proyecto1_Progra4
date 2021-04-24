@@ -64,7 +64,9 @@ public class Controller_Profe extends HttpServlet {
                 double nota_est = Double.parseDouble(request.getParameter("nota_est"));
                 
                 service.updateMatricula(est.getId(), grupo_actual.getId_curso(), nota_est);
-                
+                respuesta = "/cursosProfe";
+                //no existe el url
+                request.getRequestDispatcher(respuesta).forward(request, response);
                 
                 break;
             }
