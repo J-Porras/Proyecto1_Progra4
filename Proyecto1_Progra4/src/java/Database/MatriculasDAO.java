@@ -115,11 +115,12 @@ public class MatriculasDAO {//Trabajar en esto
      return grupo_est;
     
     }
-    void update_calficacion(String id_est, Double nota) throws SQLException{
-        String sqlcommand = "update matriculas set calificacion=? where  id_est = ?";
+    void update_calficacion(String id_est, int id_grupo, Double nota) throws SQLException{
+        String sqlcommand = "update matriculas set calificacion=? where  id_est = ? and id_grupo=?";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setDouble(1, nota);
         stm.setString(2, id_est);
+        stm.setInt(3,id_grupo);
         System.out.println("Nota modificado");
        }
     //grupos de estudiante(Hisotrial)
