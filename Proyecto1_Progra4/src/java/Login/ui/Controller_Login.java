@@ -81,7 +81,6 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                     session.setAttribute("Usuario", u);
                 }
                 System.out.println("RESPONDE SEND REDIRECT");  
-                //response.sendRedirect(respuesta);
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 
                 break;

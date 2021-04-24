@@ -20,10 +20,10 @@ import java.util.List;
  * @author pgat3000
  */
 public class Service {
-    private UsuariosDAO usuarioDao;
-    private CursosDao cursosdao;
-    private GruposDAO gruposdao;
-    private MatriculasDAO matriculasdao;
+    private final UsuariosDAO usuarioDao;
+    private final CursosDao cursosdao;
+    private final GruposDAO gruposdao;
+    private final MatriculasDAO matriculasdao;
     
     private static Service theInstance;
     
