@@ -71,7 +71,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 break;
             }
             
-            case ("/Inicio"): {
+            case ("/Inicio"): {//no deberia estar aqui
                 respuesta = this.show(request);//Devuelve a la pestanna principal
                 System.out.println("RESPUESTA SHOW");  
                 HttpSession session = request.getSession(true);
