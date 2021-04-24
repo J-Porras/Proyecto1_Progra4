@@ -14,6 +14,8 @@ import Grupos.Logica.Grupo;
 import Matriculas.Logic.Matricula;
 import Usuarios.logica.Usuarios;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -51,7 +53,7 @@ public class Service {
         }    
     }
     
-    //devuelve cursos en oferta
+    //devuelve cursos en oferta NO USAR
     public List<Curso> cursos_ofrecidos() throws Exception{
         return cursosdao.read_cursos_oferta();   
     }
@@ -109,6 +111,41 @@ public class Service {
          }
    
     }
+    
+    
+    
+    
+    public Grupo getGrupo(String id_grupo){
+        try {
+            Grupo result = gruposdao.read(id_grupo);
+            return result;
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+        
+    }
+    
+    public Usuarios getUsuario(String id){
+        Usuarios result = null;
+        try {
+            result = usuarioDao.read(id);
+            if(result == null){
+                throw new Exception();
+            }
+            else{
+                return result;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        return null;
+    }
+    
+    
+    
     public Usuarios login(Usuarios u) throws Exception{
         Usuarios result = null;
         

@@ -6,7 +6,9 @@
 package Controller_profe.ui;
 
 import Data.Service.logic.Service;
+import Grupos.Logica.Grupo;
 import Login.Model_Login;
+import Usuarios.logica.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -52,7 +54,13 @@ public class Controller_Profe extends HttpServlet {
                 break;
             }
             case "/NewNota":{
+                //se añade la nota de un estudiante en un grupo especifico
                 HttpSession session = request.getSession(true);
+                String id_grupo = request.getParameter("id_grupo");
+                Grupo grupo_actual = service.getGrupo(id_grupo);
+                String id_estudiante =  request.getParameter("id_est");
+                Usuarios est = service.getUsuario(id_estudiante);
+                float nota_est = Float.parseFloat(request.getParameter("nota_est"));
                 
                 
                 break;
