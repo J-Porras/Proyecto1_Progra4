@@ -13,6 +13,7 @@ import Database.UsuariosDAO;
 import Grupos.Logica.Grupo;
 import Matriculas.Logic.Matricula;
 import Usuarios.logica.Usuarios;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,6 +73,16 @@ public class Service {
          }
    
     }    
+   
+   public void updateMatricula(String id_est,int id_grupo,double nota){
+        try {
+            matriculasdao.update_calficacion(id_est,id_grupo , nota);
+        } catch (SQLException ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
+   
+   
 //crear nuevp grupo
     public Grupo crear_grupo(Grupo u){
          Grupo result = null;

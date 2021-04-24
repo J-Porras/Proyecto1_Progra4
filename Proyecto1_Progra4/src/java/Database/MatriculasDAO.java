@@ -115,7 +115,7 @@ public class MatriculasDAO {//Trabajar en esto
      return grupo_est;
     
     }
-    void update_calficacion(String id_est, int id_grupo, Double nota) throws SQLException{
+    public void update_calficacion(String id_est, int id_grupo, double nota) throws SQLException{
         String sqlcommand = "update matriculas set calificacion=? where  id_est = ? and id_grupo=?";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
         stm.setDouble(1, nota);

@@ -54,12 +54,16 @@ public class Controller_Profe extends HttpServlet {
             }
             case "/NewNota":{
                 //se añade la nota de un estudiante en un grupo especifico
+                
                 HttpSession session = request.getSession(true);
+                
                 String id_grupo = request.getParameter("id_grupo");
                 Grupo grupo_actual = service.getGrupo(id_grupo);
                 String id_estudiante =  request.getParameter("id_est");
                 Usuarios est = service.getUsuario(id_estudiante);
-                float nota_est = Float.parseFloat(request.getParameter("nota_est"));
+                double nota_est = Double.parseDouble(request.getParameter("nota_est"));
+                
+                service.updateMatricula(est.getId(), grupo_actual.getId_curso(), nota_est);
                 
                 
                 break;
