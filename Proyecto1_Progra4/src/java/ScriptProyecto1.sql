@@ -63,7 +63,7 @@ CREATE TABLE `matriculas` (
 
 insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) values('1234', 'Pedro Prueba','1234','232323','1234?@mail.com',3,null);
 insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) values('2222', 'Jose Prueba','2222','3233','1234@mail.com',2,'Artes');
-insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) values('1111', 'Admin Prueba','1111','3233','1234@mail.com',2,null);
+insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) values('1111', 'Admin Prueba','1111','3233','1234@mail.com',1,null);
 select * from Usuarios;
 
 insert into Cursos(tematica,descripcion,estado,precio)values('Biologia','Fisiologia de Jose',1,0);
