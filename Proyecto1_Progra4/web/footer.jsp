@@ -3,12 +3,12 @@
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 </head>
-<footer class="bg-dark text-center text-white text-lg-start">
-    <div class="container p-0">
-        <section class="mb-4">
-            <p>
+<footer class="bg-dark text-center text-white text-lg-start fixed-bottom">
+    <div class="container">
+        <section class="mb-1">
+            <p class="text-center">
                 Cursoslibres.com es su aliada a la hora de aprender a desenvolverse en el ambito laboral de un mundo tan cambiante.
-                Todos los derechos reservados. Consultas a <a class="text-white" href="">Cursoslibres@gmail.com</a>
+                Todos los derechos reservados.Consultas a <a class="text-white" href="">Cursoslibres@gmail.com</a>
             </p>
         </section>
     </div>

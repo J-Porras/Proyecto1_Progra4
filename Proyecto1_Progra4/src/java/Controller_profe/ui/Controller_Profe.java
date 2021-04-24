@@ -10,7 +10,6 @@ import Grupos.Logica.Grupo;
 import Login.Model_Login;
 import Usuarios.logica.Usuarios;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Porras
  */
-@WebServlet(name = "Controller_Profe", urlPatterns = {"/Controller_Profe","/VerGrupos","NewNota"})
+@WebServlet(name = "Controller_Profe", urlPatterns = {"/Controller_Profe","/VerGrupos","/NewNota"})
 public class Controller_Profe extends HttpServlet {
     
     private Service service;

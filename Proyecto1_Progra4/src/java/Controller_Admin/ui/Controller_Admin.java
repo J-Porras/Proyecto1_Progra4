@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pg300
  */
-@WebServlet(urlPatterns = {"/Administrador"})
+@WebServlet(urlPatterns = {"/Administrador", "/CrearCursos"})
 public class Controller_Admin extends HttpServlet {
 
     /**

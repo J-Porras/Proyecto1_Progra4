@@ -15,17 +15,36 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <nav class ="navbar navbar-dark bg-dark navbar-expand-lg">
-            <div class="navbar-nav">
-                <a class="navbar-brand text-center text-white" href="Inicio">CursosLibres.com</a>
-            </div>
-            <div class="navbar-nav">
-                <%Usuarios actual = (Usuarios) session.getAttribute("Usuario");%>
-                <%if (actual != null) {%>
-                <a class="nav-link text-white" href="CerrarSesion">Logout</a>
-                <%} else {%>
-                <a class="nav-link text-white" href="loggin.jsp">Iniciar Sesion</a><%-- Se dirige al jsp --%>
-                <%}%>
+        <nav class ="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <div class="navbar-nav">
+                    <a class="navbar-brand text-center text-white" href="Inicio">CursosLibres.com</a>
+                    <%Usuarios actual = (Usuarios) session.getAttribute("Usuario");%>
+                    <%if (actual != null) {%>
+                    <a class="navbar-brand text-center text-white" href="CerrarSesion">Logout</a>
+                    <a class="navbar-brand text-center text-white" href="#">Perfil</a>
+                    <%if (actual.getRol() == 1) {%>
+                    <a class="navbar-brand text-center text-white" href="crearcursos">Gestionar cursos</a>
+                    <a class="navbar-brand text-center text-white" href="#">Gestionar grupos</a>
+                    <a class="navbar-brand text-center text-white" href="#">Gestionar profesores</a>
+                    <%}%>
+                    <%if (actual.getRol() == 2) {%>
+                    <a class="navbar-brand text-center text-white" href="#">Mis grupos</a>
+                    <%}%>
+                    <%if (actual.getRol() == 3) {%>
+                    <a class="navbar-brand text-center text-white" href="#">Mis cursos</a>
+                    <%}%>  
+                    <%} else {%>
+                    <a class="navbar-brand text-center text-white" href="loggin.jsp">Iniciar Sesion</a>
+                    <%}%>
+                </div>
+                <div class="col-md-2 navbar-nav-right">
+                    <form action="" class="search-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="nombrecurso" placeholder="Buscar curso...">
+                        </div>
+                    </form>
+                </div>
             </div>
         </nav>
     </body>
