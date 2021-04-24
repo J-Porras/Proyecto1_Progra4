@@ -21,13 +21,13 @@ import java.util.List;
  */
 public class CursosDao {
      public Curso create(Curso cl) throws SQLException, Exception{
-        String sqlcommand =  "insert into Cursos (id,tematica,descripcion,estado,precio)"
+        String sqlcommand =  "insert into Cursos (id,nombre,tematica,estado,precio)"
                 + "values(?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
        
        // stm.setInt(1,cl.getId());
-        stm.setString(1,cl.getTematica());
-        stm.setString(2,cl.getDescripcion());
+        stm.setString(1,cl.getNombre());
+        stm.setString(2,cl.getTematica());
         stm.setBoolean(3,cl.getEstado());
         stm.setDouble(4,cl.getPrecio());
        
@@ -75,8 +75,8 @@ public class CursosDao {
             while(rs.next()){
             Curso r= new Curso();
             r.setId(rs.getInt("id"));
-            r.setTematica(rs.getString("nombre"));
-            r.setDescripcion(rs.getString("descripcion"));
+            r.setNombre(rs.getString("nombre"));
+            r.setTematica(rs.getString("Tematica"));
             r.setEstado(rs.getBoolean("estado"));
             r.setPrecio(rs.getDouble("precio"));
 
@@ -101,8 +101,8 @@ public class CursosDao {
             while(rs.next()){
             Curso r= new Curso();
             r.setId(rs.getInt("id"));
+            r.setNombre(rs.getString("nombre"));
             r.setTematica(rs.getString("tematica"));
-            r.setDescripcion(rs.getString("descripcion"));
             r.setEstado(rs.getBoolean("estado"));
             r.setPrecio(rs.getDouble("precio"));
             System.out.println("en while");
@@ -122,8 +122,8 @@ public class CursosDao {
         try {
                 Curso r= new Curso();
             r.setId(rs.getInt("id"));
-            r.setTematica(rs.getString("nombre"));
-            r.setDescripcion(rs.getString("descripcion"));
+            r.setNombre(rs.getString("nombre"));
+            r.setTematica(rs.getString("descripcion"));
             r.setEstado(rs.getBoolean("estado"));
             r.setPrecio(rs.getDouble("precio"));
           

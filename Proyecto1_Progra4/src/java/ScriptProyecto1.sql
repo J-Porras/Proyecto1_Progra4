@@ -29,8 +29,8 @@ DROP TABLE IF EXISTS `cursos`;
 
 CREATE TABLE `cursos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `tematica` varchar(50) NOT NULL ,
-  `descripcion` varchar(1000),
+  `nombre` varchar(50) NOT NULL ,
+  `tematica` varchar(1000),
   `estado` tinyint,
   `precio` double DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -66,7 +66,7 @@ insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) val
 insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) values('1111', 'Admin Prueba','1111','3233','1234@mail.com',1,null);
 select * from Usuarios;
 
-insert into Cursos(tematica,descripcion,estado,precio)values('Biologia','Fisiologia de Jose',1,0);
+insert into Cursos(nombre,tematica,estado,precio)values('Fisiologia de Jose','Biologia',1,0);
 select * from cursos;
 insert into Grupos(id_curso,prof_titular,dias,horario)values(1,'2222','L y J','10am-12pm');
 select * from grupos;

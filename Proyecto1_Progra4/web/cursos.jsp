@@ -29,9 +29,9 @@
                 </a>
             </div>
             <div class="col-md-5">
-                <h3><%out.print(c.getTematica());%></h3>
-                <p><%out.print(c.getDescripcion());%></p>
-                <p><%out.print(c.getPrecio());%></p>
+                <h3><%out.print(c.getNombre());%></h3>
+                <p><%out.print(c.getTematica());%></p>
+                <p>Precio: <%out.print(c.getPrecio());%></p>
                 <a class="btn btn-primary" href="#">Matricularse</a>
             </div>
         </div>
