@@ -115,9 +115,9 @@ public class CursosDao {
         }
         
         catch (SQLException e){
-            System.out.println("Operacion no se logro(leer cursos)");
-        }
-        System.out.println("RETURN CURSOS OFF------- ");  
+            System.out.println("Operacion no se logro(leer cursos)");      
+        } 
+  System.out.println("RETURN CURSOS OFF------- ");  
 
         return cursos;
     }
