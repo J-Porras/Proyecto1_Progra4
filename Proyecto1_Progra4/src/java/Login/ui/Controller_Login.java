@@ -5,6 +5,7 @@
  */
 package Login.ui;
 
+import Cursos.Logica.Curso;
 import Data.Service.logic.Service;
 import Login.Model_Login;
 import Usuarios.logica.Usuarios;
@@ -56,25 +57,33 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 request.setAttribute("Model_Login", model);//No se debe mandar el modelo, ya que es una instancia
                 //a sesión general debe ser manejada por el objeto httpsession debido a que es el cookie quien va a identificar
                 session.setAttribute("Usuario", u);
+                
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
             case ("/CerrarSesion"): {
-                respuesta = ".";
+                respuesta = this.show(request);
                 HttpSession session = request.getSession(true);
                 session.removeAttribute("Usuario");
                 model.setCurrent_user(null);
+                System.out.println("REQUEST CERRAR SESION"); 
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
+            
             case ("/Inicio"): {
-                respuesta = ".";//Devuelve a la pestanna principal
+                respuesta = this.show(request);//Devuelve a la pestanna principal
+                System.out.println("RESPUESTA SHOW");  
                 HttpSession session = request.getSession(true);
                 Usuarios u = model.getCurrent_user();
                 if (u != null) {
+                    
                     session.setAttribute("Usuario", u);
                 }
-                response.sendRedirect(respuesta);
+                System.out.println("RESPONDE SEND REDIRECT");  
+                //response.sendRedirect(respuesta);
+                request.getRequestDispatcher(respuesta).forward(request, response);
+                
                 break;
             }
             case ("/Registrarse"): {
@@ -82,11 +91,12 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
-             case ("/RegistroCompleto"): {
+            
+            case ("/RegistroCompleto"): {
                 respuesta = "."; 
                 String respuestaError = "registrarse.jsp";
                 String nombre = request.getParameter("nombre");
-               String id= request.getParameter("id");
+                String id= request.getParameter("id");
                 String email = request.getParameter("email");
                 String telefono = request.getParameter("telefono");
                 String contrasenna = request.getParameter("contrasenna");
@@ -94,26 +104,26 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 System.out.println(id);
                 
                 if(nombre.isEmpty()||id.isEmpty()||email.isEmpty()||telefono.isEmpty()||contrasenna.isEmpty()){
-                      System.out.println("vacio");
+                    System.out.println("vacio");
                     request.getRequestDispatcher(respuestaError).forward(request, response);
-                break;
+                    break;
                 }
                 
-                 Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email,0, " "));
+                Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email,0, " "));
                   
-                 if(u==null){
+                if(u==null){
                      //En el caso que el usuario ya exista
                    request.getRequestDispatcher(respuestaError).forward(request, response); 
-                 }
+                }
                  
                 model.setCurrent_user(u);
                 HttpSession session = request.getSession(true);
                 request.setAttribute("Model_Login", model); 
                 session.setAttribute("Usuario", u);
-               System.out.println("crear2");
+                System.out.println("crear2");
 
              //   request.getRequestDispatcher(respuesta).forward(request, response);
-                   request.getRequestDispatcher(respuesta).forward(request, response);
+                request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
             default: {
@@ -121,6 +131,18 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
             }
 
         }
+    }
+    
+    private String show(HttpServletRequest request) {     
+        Curso curso = new Curso(0,"","",false,0.0);
+        request.setAttribute("curso", curso);
+        try {
+            request.setAttribute("cursos", Service.instance().cursos_descuento());
+        } catch (Exception ex) {
+            Logger.getLogger(Controller_Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("RETURN EN SHOW");  
+        return "/index.jsp";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

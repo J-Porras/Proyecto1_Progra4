@@ -25,7 +25,7 @@ public class Service {
     private GruposDAO gruposdao;
     private MatriculasDAO matriculasdao;
     
-    public static Service theInstance;
+    private static Service theInstance;
     
     public static Service instance(){
         if(theInstance==null){
@@ -42,14 +42,21 @@ public class Service {
     }
     //Jalar lista de curso de la base de datos 
     public List<Curso> lista_cursos() throws Exception{
-     try{    
-        return cursosdao.read_all_cursos();
-     }
-     catch(Exception e){
-         return null;
-     }
         
+        try{    
+            return cursosdao.read_all_cursos();
+        }
+        catch(Exception e){
+            return null;
+        }    
     }
+    
+    //devuelve cursos con descuento
+    public List<Curso> cursos_descuento() throws Exception{
+        return cursosdao.read_discount_cursos();   
+    }
+    
+    
 //crear nuevo matricula
    public Matricula  crear_matricula(Matricula u){
          Matricula result = null;

@@ -59,16 +59,19 @@ public class CursosDao {
             throw new Exception ("Curso no Existe");
         }
     }
-     public List<Curso> read_all_cursos() throws Exception{
-     List<Curso> cursos= Collections.synchronizedList(new ArrayList<Curso>());
-     String sqlcommand = "select * from Cursos";
-     System.out.println("Entransdo en DB");
-     PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
-     System.out.println("Buscando Curso en DB con profesor ");  
     
-     ResultSet rs =  Database.instance().executeQuery(stm); 
-      try {
-         
+    
+    public List<Curso> read_all_cursos() throws Exception{
+        System.out.println("READ ALL CURSOS------- ");  
+        List<Curso> cursos= Collections.synchronizedList(new ArrayList<Curso>());
+        String sqlcommand = "select * from Cursos";
+        System.out.println("Entransdo en DB");
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+        System.out.println("Buscando Curso en DB con profesor ");  
+
+        ResultSet rs =  Database.instance().executeQuery(stm); 
+        try {
+            
             while(rs.next()){
             Curso r= new Curso();
             r.setId(rs.getInt("id"));
@@ -76,17 +79,50 @@ public class CursosDao {
             r.setDescripcion(rs.getString("descripcion"));
             r.setEstado(rs.getBoolean("estado"));
             r.setPrecio(rs.getDouble("precio"));
-            
+
             cursos.add(r);
 
-             }
+            }
+        }
+        
+        catch (SQLException e){
+            System.out.println("Operacion no se logro(leer cursos)");
+        }
+        return cursos;
     }
-     catch (SQLException e){
-        System.out.println("Operacion no se logro(leer cursos)");
-                 
+    
+    public List<Curso> read_discount_cursos() throws Exception{
+        List<Curso> cursos= Collections.synchronizedList(new ArrayList<Curso>());
+        String sqlcommand = "select * from Cursos where estado = 1";
+        System.out.println("Entransdo en DB");
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+        System.out.println("Buscando cursos_off ");  
+
+        ResultSet rs =  Database.instance().executeQuery(stm); 
+        try {
+            
+            while(rs.next()){
+            Curso r= new Curso();
+            r.setId(rs.getInt("id"));
+            r.setTematica(rs.getString("nombre"));
+            r.setDescripcion(rs.getString("descripcion"));
+            r.setEstado(rs.getBoolean("estado"));
+            r.setPrecio(rs.getDouble("precio"));
+
+            cursos.add(r);
+
+            }
+        }
+        
+        catch (SQLException e){
+            System.out.println("Operacion no se logro(leer cursos)");
+        }
+        System.out.println("RETURN CURSOS OFF------- ");  
+
+        return cursos;
     }
-     return cursos;
-     }
+    
+    
     
     //public 
     public Curso from (ResultSet rs){

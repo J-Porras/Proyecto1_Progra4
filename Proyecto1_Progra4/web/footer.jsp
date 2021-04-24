@@ -3,7 +3,7 @@
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 </head>
-<footer class="bg-dark text-center text-white">
+<footer class="bg-dark text-center text-white text-lg-start">
     <div class="container p-0">
         <section class="mb-4">
             <p>
