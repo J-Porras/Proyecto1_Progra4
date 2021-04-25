@@ -108,7 +108,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
             }
             
             case ("/RegistroCompleto"): {
-                respuesta = "."; 
+                respuesta = "/InicioPrincipal";
                 String respuestaError = "registrarse.jsp";
                 String nombre = request.getParameter("nombre");
                 String id= request.getParameter("id");

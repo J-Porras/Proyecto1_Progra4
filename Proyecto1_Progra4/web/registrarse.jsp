@@ -28,7 +28,11 @@
                                 <h2 class="title text-center">Información de inscripción</h2>
                             </div>
                         </div>
+                          <%if (actual != null && actual.getRol() == 1) {%>
+                           <form action="ProfesorRegistrado" method="POST">
+                           <%}else{%>
                         <form action="RegistroCompleto" method="POST">
+                             <%}%>
                             <div class="form-group">
                                 <input class="form-control rounded-right" type="text" placeholder="Nombre completo" name="nombre">
                             </div>

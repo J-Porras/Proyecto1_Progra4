@@ -72,7 +72,28 @@ public class Controller_Profe extends HttpServlet {
                 break;
             }
             case "/ProfesorRegistrado" :{
+                 respuesta = "/CrearProfesores";
+                String nombre = request.getParameter("nombre");
+                String id= request.getParameter("id");
+                String email = request.getParameter("email");
+                String telefono = request.getParameter("telefono");
+                String contrasenna = request.getParameter("contrasenna");
+                String especialidad = request.getParameter("especialidad");
                 
+                System.out.println("crear");
+                System.out.println(id);
+                if(nombre.isEmpty()||id.isEmpty()||email.isEmpty()||telefono.isEmpty()||contrasenna.isEmpty()||especialidad.isEmpty()){
+                    System.out.println("vacio");
+                    request.getRequestDispatcher(respuesta).forward(request, response);
+                    break;
+                }
+                
+                Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email,2, especialidad));
+                
+                     //En el caso que el usuario ya exista
+               request.getRequestDispatcher(respuesta).forward(request, response); 
+              
+                 
                 break;
             }
             

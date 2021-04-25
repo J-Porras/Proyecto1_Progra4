@@ -25,6 +25,7 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
+                    <th scope="col">Password</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Especialidad</th>
                     <th scope="col">Telefono</th>
@@ -34,7 +35,8 @@
             <tbody>
                  <%for (Usuarios c : profesores) {%>
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row"><%out.print(c.getId());%></th>
+                     <td><%out.print(c.getContrasenna());%></td>
                     <td><%out.print(c.getNombre());%></td>
                     <td><%out.print(c.getEspecialidad());%></td>
                     <td><%out.print(c.getTelefono());%></td>
