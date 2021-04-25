@@ -8,7 +8,11 @@ package Controller_Cursos.ui;
 import Cursos.Logica.Curso;
 import Data.Service.logic.Service;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -23,7 +27,7 @@ import javax.servlet.http.Part;
  *
  * @author Usuario
  */
-@WebServlet(name = "ServletCursos", urlPatterns = {"/cursos","/CursoRegistrado"})
+@WebServlet(name = "ServletCursos", urlPatterns = {"/cursos","/CursoRegistrado","/images/image"})
 @MultipartConfig(location="C:/images")
 public class Controller_Cursos extends HttpServlet {
 
@@ -84,12 +88,38 @@ public class Controller_Cursos extends HttpServlet {
                 
                 break;
             }
+            
+            case "/images/image":{
+                String respuesta = this.image(request, response);
+                request.getRequestDispatcher(respuesta).forward(request, response);
+                break;
+            }
             default:
                 break;
         }
 
    
     }
+    
+    private String image(HttpServletRequest request,  HttpServletResponse response) {     
+        try {
+            int id_new_curso=Service.instance().lista_cursos().size() + 1 ;
+        } catch (Exception ex) {
+            Logger.getLogger(Controller_Cursos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String codigo = request.getParameter("codigo");
+        Path path = FileSystems.getDefault().getPath("C:/images", codigo);
+        try (OutputStream out = response.getOutputStream()) {
+            Files.copy(path, out);
+            out.flush();
+        } catch (IOException e) {
+            // handle exception
+        }
+        return null;
+    } 
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
