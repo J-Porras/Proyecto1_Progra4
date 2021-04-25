@@ -57,8 +57,6 @@
                                 <label class="form-label" for="archivo">Seleccione archivo</label>
                                 <input type="file" name="archivo" class="form-control" id="archivo">
                             </div>
-                            
-                            
                             <div class="p-t-10">
                                 <button class="btn btn-primary rounded submit w-100" type="submit">Registrar nuevo curso</button>
                             </div>
@@ -69,7 +67,6 @@
             </div>
              
         </div>
-      
         <%@include file="footer.jsp"%>
     </body>
 </html>

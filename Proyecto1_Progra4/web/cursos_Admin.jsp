@@ -9,9 +9,9 @@
 <%@page import="Cursos.Logica.Curso"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% Model_Admin model =( Model_Admin)request.getAttribute("Model_Admin");
-   List<Curso> cursos=model.getCursos();
-   System.out.println(cursos.size());
+<% Model_Admin model = (Model_Admin) request.getAttribute("Model_Admin");
+    List<Curso> cursos = model.getCursos();
+    System.out.println(cursos.size());
 %>
 <!DOCTYPE html>
 <html>
@@ -22,24 +22,28 @@
         <title>Cursos</title>
     </head>
     <body>
-        <%for(Curso c: cursos){%>
-        <div class="row">
-            <div class="col-md-3">
-                <a href="#">
-                    <img class="img-fluid rounded mb-3 mb-md-0" src="images/image?codigo=<%=c.getId()%>">
-                </a>
-            </div>
-            <div class="col-md-5">
-                <h3><%out.print(c.getNombre());%></h3>
-                <p><%out.print(c.getTematica());%></p>
-                <p>Precio: <%out.print(c.getPrecio());%></p>
-                <%if(c.getEstado()!=false){%>
-                    <p>CURSO DISPONIPLE</p>
-                <%}else{%>
-                    <p>CURSO NO DISPONIPLE</p>
-                <%}%>
-            </div>
+        <div class="row justify-content-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Codigo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Tematica</th>
+                        <th scope="col">Precio matricula</th>
+                        <th scope="col">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for (Curso c : cursos) {%>
+                    <tr>
+                        <th scope="row"><%out.print(c.getId());%></th>
+                        <td><%out.print(c.getNombre());%></td>
+                        <td><%out.print(c.getTematica());%></td>
+                        <td><%out.print(c.getPrecio());%></td>
+                        <td><%out.print(c.getEstado()?"En oferta":"Archivado");%></td>
+                    </tr>
+                    <%}%>
+                </tbody>
         </div>
-        <%}%>
     </body>
 </html>

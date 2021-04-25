@@ -41,11 +41,25 @@
                             <div class="form-group">
                                 <input class="form-control rounded-right" type="password" placeholder="Contraseña" name="contrasenna">
                             </div>
-                            
+                            <!-- Para crear un profesor, en el controler ver sí el campo está presente
+                            en el request, es profesor, caso contrario es un estudiante-->
+                            <%if (actual != null && actual.getRol() == 1) {%>
+                            <div class="form-group">
+                                <input class="form-control rounded-right" type="text" placeholder="Especialidad" name="especialidad">
+                            </div>
+                            <%}%>
                             <div class="p-t-10">
                                 <button class="btn btn-primary rounded submit w-100" type="submit">Registrarse</button>
                             </div>
                         </form>
+                        <%if (actual != null && actual.getRol() == 1) {%>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 text-center mb-5">
+                                <h4 class="title text-center">Profesores en sistema</h4>
+                            </div>
+                        </div>
+                        <%@include  file="profesores.jsp"%>
+                        <%}%>
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pg300
  */
-@WebServlet(name = "Controller_Admin", urlPatterns = {"/Administrador", "/CrearCursos"})
+@WebServlet(name = "Controller_Admin", urlPatterns = {"/Administrador", "/CrearCursos", "/CrearProfesores"})
 public class Controller_Admin extends HttpServlet {
 
     /**
@@ -35,21 +35,27 @@ public class Controller_Admin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private Model_Admin model;
-    public Controller_Admin(){
-        model= new Model_Admin();
+
+    public Controller_Admin() {
+        model = new Model_Admin();
     }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         String ruta = request.getServletPath();
-        switch(ruta){
-            case "/CrearCursos":{//Por el momento solo va la pestanna
-            List<Curso> cursos= Service.instance().lista_cursos();
-            model.setCursos(cursos);
-              System.out.println("Controller");
-            System.out.println(cursos.size());
-            request.setAttribute("Model_Admin",model);
+        switch (ruta) {
+            case "/CrearCursos": {//Por el momento solo va la pestanna
+                List<Curso> cursos = Service.instance().lista_cursos();
+                model.setCursos(cursos);
+                System.out.println("Controller");
+                System.out.println(cursos.size());
+                request.setAttribute("Model_Admin", model);
                 request.getRequestDispatcher("crearcursos.jsp").forward(request, response);
+                break;
+            }
+            case "/CrearProfesores":{
+                request.getRequestDispatcher("registrarse.jsp").forward(request, response);
                 break;
             }
             default:
