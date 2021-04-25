@@ -12,16 +12,19 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Usuario
  */
 @WebServlet(name = "ServletCursos", urlPatterns = {"/cursos","/CursoRegistrado"})
+@MultipartConfig(location="C:/images")
 public class Controller_Cursos extends HttpServlet {
 
     /**
@@ -39,26 +42,46 @@ public class Controller_Cursos extends HttpServlet {
     String ruta = request.getServletPath();
         switch(ruta){
             case "/CursoRegistrado":{//Por el momento solo va la pestanna
+                final Part image;
                 String respuesta="/CrearCursos";
+                
                 System.out.println("Registrado");
                 String nombre = request.getParameter("nombre");
                 String tematica = request.getParameter("tematica");
                 System.out.println(request.getParameter("oferta"));
              
-                 Boolean estado;
+                Boolean estado;
                 if(request.getParameter("oferta")!=null){
                     estado =true;
                 }
                 else{
                     estado=false;
                 }
-               
-               System.out.println(estado);
-                Double precio = Double.parseDouble(request.getParameter("precio"));
-                int cantidad_cursos=Service.instance().lista_cursos().size();
                 
-                Service.instance().crear_curso(new Curso(0,nombre,tematica,estado,precio));
-                request.getRequestDispatcher(respuesta).forward(request, response);
+               
+                System.out.println(estado);
+                Double precio = Double.parseDouble(request.getParameter("precio"));
+                int id_new_curso=Service.instance().lista_cursos().size() + 1 ;
+                
+                if(nombre != null && tematica != null && precio != null){   
+                    System.out.println(" correctoasdadasdasdasdasdasdas");
+                    
+                    image = request.getPart("archivo");
+                    if(image!=null)
+                        System.out.println(" Imagen procesada");
+                    else{
+                        System.out.println(" RIP IMAGE");
+                    }
+                    image.write(Integer.toString(id_new_curso));
+                    
+                    Service.instance().crear_curso(new Curso(0,nombre,tematica,estado,precio));
+                    request.getRequestDispatcher(respuesta).forward(request, response);
+                }
+                else{
+                     System.out.println(" RIP ------------");
+                }
+                
+                
                 break;
             }
             default:

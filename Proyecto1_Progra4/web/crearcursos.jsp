@@ -25,7 +25,7 @@
                                 <h2 class="title text-center">Información de nuevo curso</h2>
                             </div>
                         </div>
-                        <form action="CursoRegistrado" method="POST">
+                        <form action="CursoRegistrado" method="POST" enctype="multipart/form-data" >
                             <div class="form-group">
                                 <input class="form-control rounded-right" type="text" placeholder="Nombre del curso" name="nombre">
                             </div>
@@ -44,17 +44,21 @@
                             </div>
                            </div>
                             -->
-                              <div class="form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="oferta" value="1">
-                            <label class="form-check-label" for="flexRadioDefault2">En Oferta</label>
-                              </div>
+                            <div class="form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="oferta" value="1">
+                                <label class="form-check-label" for="flexRadioDefault2">En Oferta</label>
+                            </div>
                             <div class="form-group">
                                 <input class="form-control rounded-right" type="text" placeholder="Precio de matricula" name="precio">
                             </div>
+                            
+                            <!--subida archivo -->
                             <div class="form-group">
-                            <label class="form-label" for="archivo">Seleccione archivo</label>
-                            <input type="file" class="form-control" id="archivo" />
+                                <label class="form-label" for="archivo">Seleccione archivo</label>
+                                <input type="file" name="archivo" class="form-control" id="archivo">
                             </div>
+                            
+                            
                             <div class="p-t-10">
                                 <button class="btn btn-primary rounded submit w-100" type="submit">Registrar nuevo curso</button>
                             </div>
