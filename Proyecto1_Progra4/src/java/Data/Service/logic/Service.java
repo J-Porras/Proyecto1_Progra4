@@ -184,6 +184,14 @@ public class Service {
             return null;
         } 
     }
+        public List<Usuarios> read_all_usuarios(){
+         try{    
+            return usuarioDao.read_all();
+        }
+        catch(Exception e){
+            return null;
+        } 
+    }
     //falta solo de implementar en service, ya exise el metodo en dao respectivo
     //FALTA leer grupos por curso
     //FALTA LEER profesor por grupo

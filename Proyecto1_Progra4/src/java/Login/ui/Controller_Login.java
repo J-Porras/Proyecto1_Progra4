@@ -124,7 +124,7 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                     break;
                 }
                 
-                Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email,0, " "));
+                Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email,3,null));
                   
                 if(u==null){
                      //En el caso que el usuario ya exista

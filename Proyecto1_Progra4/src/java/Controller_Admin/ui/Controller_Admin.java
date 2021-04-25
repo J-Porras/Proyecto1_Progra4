@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pg300
  */
-@WebServlet(name = "Controller_Admin", urlPatterns = {"/Administrador", "/CrearCursos", "/CrearProfesores"})
+@WebServlet(name = "Controller_Admin", urlPatterns = {"/Administrador", "/CrearCursos", "/CrearProfesores","/ListaUsuarios"})
 public class Controller_Admin extends HttpServlet {
 
     /**
@@ -61,6 +61,14 @@ public class Controller_Admin extends HttpServlet {
                 System.out.println(profesores.size());
                 request.setAttribute("Model_Admin", model);   
                 request.getRequestDispatcher("registrarse.jsp").forward(request, response);
+                break;
+            }
+             case "/ListaUsuarios":{
+                List<Usuarios> usuarios = Service.instance().read_all_usuarios();
+                model.setUsuarios(usuarios);
+                System.out.println(usuarios.size());
+                request.setAttribute("Model_Admin", model);   
+                request.getRequestDispatcher("usuarios.jsp").forward(request, response);
                 break;
             }
             default:

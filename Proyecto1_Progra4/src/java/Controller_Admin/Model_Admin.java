@@ -16,6 +16,15 @@ import java.util.List;
 public class Model_Admin {
      private List<Curso> cursos;
      private List<Usuarios> profesores;
+    private List<Usuarios> usuarios;
+
+    public List<Usuarios> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuarios> usuarios) {
+        this.usuarios = usuarios;
+    }
     public List<Curso> getCursos() {
         return cursos;
     }
