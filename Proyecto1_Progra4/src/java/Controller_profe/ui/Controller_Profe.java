@@ -21,7 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Porras
  */
-@WebServlet(name = "Controller_Profe", urlPatterns = {"/Controller_Profe","/VerGrupos","/NewNota"})
+@WebServlet(name = "Controller_Profe", urlPatterns = {"/Controller_Profe","/VerGrupos","/NewNota","/ProfesorRegistrado"})
+
 public class Controller_Profe extends HttpServlet {
     
     private Service service;
@@ -70,7 +71,10 @@ public class Controller_Profe extends HttpServlet {
                 
                 break;
             }
-            
+            case "/ProfesorRegistrado" :{
+                
+                break;
+            }
             
             default:{
                 break;
