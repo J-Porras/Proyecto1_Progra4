@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pg300
  */
-@WebServlet(name = "Controller_Admin", urlPatterns = {"/Administrador", "/CrearCursos", "/CrearProfesores","/ListaUsuarios","/CrearGrupos"})
+@WebServlet(name = "Controller_Admin", urlPatterns = {"/Administrador", "/CrearCursos", "/CrearProfesores", "/ListaUsuarios", "/CrearGrupos"})
 public class Controller_Admin extends HttpServlet {
 
     /**
@@ -55,26 +55,26 @@ public class Controller_Admin extends HttpServlet {
                 request.getRequestDispatcher("crearcursos.jsp").forward(request, response);
                 break;
             }
-            case "/CrearProfesores":{
+            case "/CrearProfesores": {
                 List<Usuarios> profesores = Service.instance().read_all_profesores();
                 model.setProfesores(profesores);
                 System.out.println(profesores.size());
-                request.setAttribute("Model_Admin", model);   
+                request.setAttribute("Model_Admin", model);
                 request.getRequestDispatcher("registrarse.jsp").forward(request, response);
                 break;
             }
-             case "/ListaUsuarios":{
+            case "/ListaUsuarios": {
                 List<Usuarios> usuarios = Service.instance().read_all_usuarios();
                 model.setUsuarios(usuarios);
                 System.out.println(usuarios.size());
-                request.setAttribute("Model_Admin", model);   
+                request.setAttribute("Model_Admin", model);
                 request.getRequestDispatcher("usuarios.jsp").forward(request, response);
                 break;
             }
-             case "/CrearGrupos":{
-                 
-                 break;
-             }
+            case "/CrearGrupos": {
+                request.getRequestDispatcher("creargrupos.jsp").forward(request, response);
+                break;
+            }
             default:
                 break;
         }

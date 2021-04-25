@@ -22,28 +22,36 @@
         <title>Cursos</title>
     </head>
     <body>
-        <div class="row justify-content-center">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Codigo</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Tematica</th>
-                        <th scope="col">Precio matricula</th>
-                        <th scope="col">Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%for (Curso c : cursos) {%>
-                    <tr>
-                        <th scope="row"><%out.print(c.getId());%></th>
-                        <td><%out.print(c.getNombre());%></td>
-                        <td><%out.print(c.getTematica());%></td>
-                        <td><%out.print(c.getPrecio());%></td>
-                        <td><%out.print(c.getEstado()?"En oferta":"Archivado");%></td>
-                    </tr>
-                    <%}%>
-                </tbody>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-7">
+                    <div class="card-body">
+                        <div class="row justify-content-center">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Codigo</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Tematica</th>
+                                        <th scope="col">Precio matricula</th>
+                                        <th scope="col">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%for (Curso c : cursos) {%>
+                                    <tr>
+                                        <th scope="row"><%out.print(c.getId());%></th>
+                                        <td><%out.print(c.getNombre());%></td>
+                                        <td><%out.print(c.getTematica());%></td>
+                                        <td><%out.print(c.getPrecio());%></td>
+                                        <td><%out.print(c.getEstado() ? "En oferta" : "Archivado");%></td>
+                                    </tr>
+                                    <%}%>
+                                </tbody>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

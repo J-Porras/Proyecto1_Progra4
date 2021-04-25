@@ -1,0 +1,117 @@
+<%-- 
+    Document   : creargrupos
+    Created on : 25/04/2021, 03:06:27 PM
+    Author     : Usuario
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <title>Gestion de grupos</title>
+    </head>
+    <body>
+        <%@include file="nav_bar.jsp"%>
+        <div class="row justify-content-center">
+            <h3 class="text-center">Ingresar nuevo grupo</h3>
+        </div>
+        <div class = "container p-3">
+            <form action="" class="form-check-inline">
+                <div class="row">
+                    <div class="col-4 mb-3">
+                        <label class="form-select-label" for="selectCurso"><b>Curso para creacion: </b></label>
+                        <select class="form-select-sm" aria-label="default select example" id="selectCurso" name="selectCurso">
+                            <option selected>Tematica</option>
+                            <option value="1">Curso1</option>
+                            <option value="2">Curso2</option>
+                            <option value="3">Curso3</option>
+                        </select>
+                    </div>
+                    <div class="col-4 mb-3">
+                        <label class="form-select-label" for="selectProfe"><b>Profesor a asignar: </b></label>
+                        <select class="form-select-sm" aria-label="default select example" id="selectProfe" name="selectProfe">
+                            <option selected>Profesor</option>
+                            <option value="1">Profesor1</option>
+                            <option value="2">Profesor2</option>
+                            <option value="3">Profesor3</option>
+                        </select>
+                    </div>
+                    <div class="col-4 mb-3">
+                        <label class="form-select-label" for="selectHora"><b>Hora de inicio: </b></label>
+                        <select class="form-select-sm" aria-label="default select example" id="selectHora" name="selectHora">
+                            <option selected>Hora de inicio</option>
+                            <%for (int i = 8; i <= 20; i++) {%>
+                            <option value=<%=i%>><%out.print(i);%>:00</option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="col-12 mb-3 text-center">
+                        <label class="form-check-label"><b>Dias a impartir clase: </b></label> 
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="Lunes" value="Lunes" name="dias">
+                            <label class="form-check-label" for="Lunes">Lunes(L)</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="Martes" value="Martes" name="dias">
+                            <label class="form-check-label" for="Martes">Martes(M)</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="Miercoles" value="Miercoles" name="dias">
+                            <label class="form-check-label" for="Miercoles">Miercoles(K)</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="Jueves" value="Jueves" name="dias">
+                            <label class="form-check-label" for="Jueves">Jueves(J)</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="Viernes" value="Viernes" name="dias">
+                            <label class="form-check-label" for="Viernes">Viernes(V)</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="p-t-10">
+                            <button class="btn btn-primary rounded submit w-100" type="submit">Registrar nuevo grupo</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row justify-content-center">
+                <h3 class="text-center">Listado de grupos en sistema</h3>
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-7">
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Num. Grupo</th>
+                                            <th scope="col">Curso</th>
+                                            <th scope="col">Profesor titular</th>
+                                            <th scope="col">Dias lectivos</th>
+                                            <th scope="col">Horario</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Curso1</td>
+                                            <td>Profesor1</td>
+                                            <td>L-V</td>
+                                            <td>20:00-21:45</td>
+                                        </tr>
+                                    </tbody>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/bootstrap.bundle.js" type="text/javascript"></script>
+    </body>
+    <%@include file="footer.jsp"%>
+</html>
