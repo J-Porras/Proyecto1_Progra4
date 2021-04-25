@@ -33,7 +33,11 @@
                 <h3><%out.print(c.getNombre());%></h3>
                 <p><%out.print(c.getTematica());%></p>
                 <p>Precio: <%out.print(c.getPrecio());%></p>
-                <a class="btn btn-primary" href="#">Matricularse</a>
+                <%if(c.getEstado()!=false){%>
+                    <p>CURSO DISPONIPLE</p>
+                <%}else{%>
+                    <p>CURSO NO DISPONIPLE</p>
+                <%}%>
             </div>
         </div>
         <%}%>
