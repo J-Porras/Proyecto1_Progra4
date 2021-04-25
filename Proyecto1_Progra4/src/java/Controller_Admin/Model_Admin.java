@@ -6,6 +6,7 @@
 package Controller_Admin;
 
 import Cursos.Logica.Curso;
+import Usuarios.logica.Usuarios;
 import java.util.List;
 
 /**
@@ -14,9 +15,17 @@ import java.util.List;
  */
 public class Model_Admin {
      private List<Curso> cursos;
-
+     private List<Usuarios> profesores;
     public List<Curso> getCursos() {
         return cursos;
+    }
+
+    public List<Usuarios> getProfesores() {
+        return profesores;
+    }
+
+    public void setProfesores(List<Usuarios> profesores) {
+        this.profesores = profesores;
     }
 
     public void setCursos(List<Curso> cursos) {

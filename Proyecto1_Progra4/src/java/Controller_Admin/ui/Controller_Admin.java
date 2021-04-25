@@ -7,6 +7,7 @@
 import Controller_Admin.Model_Admin;
 import Cursos.Logica.Curso;
 import Data.Service.logic.Service;
+import Usuarios.logica.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -55,6 +56,10 @@ public class Controller_Admin extends HttpServlet {
                 break;
             }
             case "/CrearProfesores":{
+                List<Usuarios> profesores = Service.instance().read_all_profesores();
+                model.setProfesores(profesores);
+                System.out.println(profesores.size());
+                request.setAttribute("Model_Admin", model);   
                 request.getRequestDispatcher("registrarse.jsp").forward(request, response);
                 break;
             }

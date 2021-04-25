@@ -6,10 +6,14 @@
 package Database;
 
 
+import Cursos.Logica.Curso;
 import Usuarios.logica.Usuarios;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 /**
  *
  * @author pgat3000
@@ -59,6 +63,56 @@ public class UsuariosDAO {
         }
     }
     
+    public List<Usuarios> read_all() throws Exception{
+      
+         List<Usuarios> usuarios= Collections.synchronizedList(new ArrayList<Usuarios>());
+        String sqlcommand = "select * from usuarios ";
+        System.out.println("Entransdo en DB");
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
+          System.out.println("Buscando Usuario en DB");
+       
+        ResultSet rs =  Database.instance().executeQuery(stm);           
+       while(rs.next()) {
+            Usuarios r= new Usuarios();
+            r.setId(rs.getString("id"));
+            r.setNombre(rs.getString("nombre"));
+            
+            r.setContrasenna(rs.getString("contrasenna"));
+            r.setTelefono(rs.getString("telefono"));
+            r.setEmail(rs.getString("email"));
+            r.setRol(rs.getInt("rol"));
+            r.setEspecialidad(rs.getString("especialidad"));
+            usuarios.add(r);
+            
+        }
+      return usuarios;
+    }
+       public List<Usuarios> read_all_profes() throws Exception{
+      
+         List<Usuarios> usuarios= Collections.synchronizedList(new ArrayList<Usuarios>());
+        String sqlcommand = "select * from usuarios ";
+        System.out.println("Entransdo en DB");
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
+          System.out.println("Buscando Usuario en DB");
+       
+        ResultSet rs =  Database.instance().executeQuery(stm);           
+       while(rs.next()) {
+            Usuarios r= new Usuarios();
+            r.setId(rs.getString("id"));
+            r.setNombre(rs.getString("nombre"));
+            
+            r.setContrasenna(rs.getString("contrasenna"));
+            r.setTelefono(rs.getString("telefono"));
+            r.setEmail(rs.getString("email"));
+            r.setRol(rs.getInt("rol"));
+            r.setEspecialidad(rs.getString("especialidad"));
+            if(r.getRol()==2){
+            usuarios.add(r);
+            }
+            
+        }
+      return usuarios;
+    }
     
     public Usuarios from (ResultSet rs){
         try {

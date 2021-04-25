@@ -4,7 +4,14 @@
     Author     : Usuario
 --%>
 
+<%@page import="Usuarios.logica.Usuarios"%>
+<%@page import="java.util.List"%>
+<%@page import="Controller_Admin.Model_Admin"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% Model_Admin model = (Model_Admin) request.getAttribute("Model_Admin");
+    List<Usuarios> profesores= model.getProfesores();
+    System.out.println(profesores.size());
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,20 +32,16 @@
                 </tr>
             </thead>
             <tbody>
+                 <%for (Usuarios c : profesores) {%>
                 <tr>
                     <th scope="row">1</th>
-                    <td>Profesor1</td>
-                    <td>Especialidad1</td>
-                    <td>11111111</td>
-                    <td>email1@email.com</td>
+                    <td><%out.print(c.getNombre());%></td>
+                    <td><%out.print(c.getEspecialidad());%></td>
+                    <td><%out.print(c.getTelefono());%></td>
+                    <td><%out.print(c.getEmail());%></td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Profesor2</td>
-                    <td>Especialidad2</td>
-                    <td>22222222</td>
-                    <td>email2@email.com</td>
-                </tr>
+                <%}%>
+               
             </tbody>
         </table>
     </body>
