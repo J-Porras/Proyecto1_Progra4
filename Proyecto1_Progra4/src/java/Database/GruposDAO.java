@@ -109,7 +109,7 @@ public class GruposDAO {
      System.out.println("Buscando Curso en DB con profesor ");  
      stm.setString(1, id_profesor);
      ResultSet rs =  Database.instance().executeQuery(stm); 
-      try {
+     
          
             while(rs.next()){
                 Grupo r= new Grupo();
@@ -123,11 +123,7 @@ public class GruposDAO {
                 grupos_profe.add(r);
 
             }
-    }
-     catch (SQLException e){
-        System.out.println("Operacion no se logro(leer grupos profesor)");
-                 
-    }
+  
      return grupos_profe;
      }
     
@@ -140,7 +136,7 @@ public class GruposDAO {
      System.out.println("Buscando Curso en DB con profesor ");  
      stm.setString(1, id_curso);
      ResultSet rs =  Database.instance().executeQuery(stm); 
-      try {
+     
          
             while(rs.next()){
             Grupo r= new Grupo();
@@ -154,11 +150,8 @@ public class GruposDAO {
             grupos_curso.add(r);
 
              }
-    }
-     catch (SQLException e){
-        System.out.println("Operacion no se logro(leer grupos profesor)");
-                 
-    }
+    
+   
      return grupos_curso;
     }
 
