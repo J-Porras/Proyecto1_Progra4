@@ -20,6 +20,17 @@ public class Model_Admin {
     private List<Usuarios> usuarios;
     private List<Grupo> grupos;
     private List<Grupo> grupostodos;
+    private Curso curso;
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+  
 
     public List<Grupo> getGrupostodos() {
         return grupostodos;

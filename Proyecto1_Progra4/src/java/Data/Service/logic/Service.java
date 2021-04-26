@@ -128,7 +128,18 @@ public class Service {
          }
    
     }
-    
+      public Curso getCurso(int id ){
+        try {
+            Curso result = cursosdao.read(id);
+            return result;
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
+        
+    } 
     
     
     

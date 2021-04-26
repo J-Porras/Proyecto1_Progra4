@@ -12,6 +12,7 @@
     List<Curso> cursos = model.getCursos();
     List<Grupo> grupos = model.getGrupos();
     List<Grupo> grupostodos=model.getGrupostodos();
+    Curso curso = model.getCurso();
     System.out.println(profesores.size());
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -96,7 +97,9 @@
                 </div>
             </form>
             <div class="row justify-content-center">
-                <h3 class="text-center">Listado de grupos en sistema</h3>
+                <h3 class="text-center">Listado de grupos de: <% out.print(curso.getNombre());
+                    System.out.println(curso.getNombre());
+                    %> </h3>
             </div>
             <div class="container">
                 <div class="row justify-content-center">

@@ -81,10 +81,13 @@ public class Controller_Admin extends HttpServlet {
                 int id= Integer.parseInt(request.getParameter("id"));
                 List<Grupo> grupos= Service.instance().read_grupos_curso(id);
                 List<Grupo> grupostodos=Service.instance().read_all_grupos();
+                Curso grupoC = Service.instance().getCurso(id);
                 model.setGrupostodos(grupostodos);
                 model.setGrupos(grupos);
+                model.setCurso(grupoC);
                 System.out.println(grupos.size());
                 request.setAttribute("Model_Admin", model);
+                request.removeAttribute("id");
                 request.getRequestDispatcher("creargrupos.jsp").forward(request, response);
                 break;
             }
