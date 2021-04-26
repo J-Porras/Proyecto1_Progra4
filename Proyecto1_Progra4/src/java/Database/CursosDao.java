@@ -41,14 +41,14 @@ public class CursosDao {
         return cl;
     }
     
-    public Curso read(String id) throws Exception{
+    public Curso read(int id) throws Exception{
       
         
         String sqlcommand = "select * from cursos where id = ?";
         System.out.println("Entransdo en DB");
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);//Crashea Glassfish
           System.out.println("Buscando Curso en DB");
-        stm.setString(1, id);
+        stm.setInt(1, id);
         ResultSet rs =  Database.instance().executeQuery(stm);           
         if (rs.next()) {
             System.out.println("Curso encontrado base de datos");
@@ -77,7 +77,7 @@ public class CursosDao {
             Curso r= new Curso();
             r.setId(rs.getInt("id"));
             r.setNombre(rs.getString("nombre"));
-            r.setTematica(rs.getString("Tematica"));
+            r.setTematica(rs.getString("tematica"));
             r.setEstado(rs.getBoolean("estado"));
             r.setPrecio(rs.getDouble("precio"));
 
@@ -122,7 +122,7 @@ System.out.println("Buscando cursos_off ");
                 Curso r= new Curso();
             r.setId(rs.getInt("id"));
             r.setNombre(rs.getString("nombre"));
-            r.setTematica(rs.getString("descripcion"));
+            r.setTematica(rs.getString("tematica"));
             r.setEstado(rs.getBoolean("estado"));
             r.setPrecio(rs.getDouble("precio"));
           
@@ -133,12 +133,16 @@ System.out.println("Buscando cursos_off ");
             return null;
         }
     }
-      public void update_estado(String id,Boolean estado) throws SQLException{
-        String sqlcommand = "update cursos set estado=? where  id=?";
+      public void update_estado(int id) throws SQLException, Exception{
+        String sqlcommand = "update cursos set estado=? where id=?";
+        Boolean estado;
+        estado = !this.read(id).getEstado();
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
-         stm.setBoolean(1, estado);
-        stm.setString(2, id);
+        stm.setBoolean(1, estado);
+        stm.setInt(2, id);
+        System.out.println(stm);
+        Database.instance().executeUpdate(stm);
        
         System.out.println("Estado modificado");
-       }
+      }
 }

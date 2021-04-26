@@ -82,9 +82,9 @@ public class Service {
         }
    }
    
-      public void updateEnOferta(String id, Boolean estado){
+      public void updateEnOferta(int id) throws Exception{
         try {
-           cursosdao.update_estado(id, estado);
+           cursosdao.update_estado(id);
         } catch (SQLException ex) {
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -121,6 +121,7 @@ public class MatriculasDAO {//Trabajar en esto
         stm.setDouble(1, nota);
         stm.setString(2, id_est);
         stm.setInt(3,id_grupo);
+        Database.instance().executeUpdate(stm);
         System.out.println("Nota modificado");
        }
     //grupos de estudiante(Hisotrial)

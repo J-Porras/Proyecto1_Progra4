@@ -27,7 +27,7 @@ import javax.servlet.http.Part;
  *
  * @author Usuario
  */
-@WebServlet(name = "ServletCursos", urlPatterns = {"/cursos","/CursoRegistrado","/images/image"})
+@WebServlet(name = "ServletCursos", urlPatterns = {"/cursos","/CursoRegistrado","/images/image","/CambioEstado"})
 @MultipartConfig(location="C:/images")
 public class Controller_Cursos extends HttpServlet {
 
@@ -97,6 +97,13 @@ public class Controller_Cursos extends HttpServlet {
                 String respuesta = this.image(request, response);
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
+            }
+            case "/CambioEstado":{
+                String respuesta="/CrearCursos";
+                System.out.println(request.getParameter("id"));
+                String id_curso=request.getParameter("id");
+                Service.instance().updateEnOferta(Integer.parseInt(id_curso));
+                request.getRequestDispatcher(respuesta).forward(request, response);
             }
             default:
                 break;

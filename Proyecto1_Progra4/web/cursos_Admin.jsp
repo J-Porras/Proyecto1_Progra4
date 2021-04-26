@@ -40,11 +40,11 @@
                                 <tbody>
                                     <%for (Curso c : cursos) {%>
                                     <tr>
-                                        <th scope="row"><%out.print(c.getId());%></th>
-                                        <td><%out.print(c.getNombre());%></td>
+                                        <th scope="row" ><%out.print(c.getId());%></th>
+                                        <td> <a class="text-black-50"href="#?id=<%=c.getId()%>" name="id" value="<%=c.getId()%>"><%out.print(c.getNombre());%><a/></td>
                                         <td><%out.print(c.getTematica());%></td>
                                         <td><%out.print(c.getPrecio());%></td>
-                                        <td><%out.print(c.getEstado() ? "En oferta" : "Archivado");%></td>
+                                        <td > <a href="CambioEstado?id=<%=c.getId()%>" class="text-black-50"name="id" value="<%=c.getId()%> " method="POST" ><%out.print(c.getEstado() ? "En oferta" : "Archivado");%><a/></td>
                                     </tr>
                                     <%}%>
                                 </tbody>
