@@ -4,6 +4,7 @@
     Author     : Usuario
 --%>
 
+<%@page import="Usuarios.logica.Usuarios"%>
 <%@page import="Controller_index.Model_index"%>
 <%@page import="Cursos.Logica.Curso"%>
 <%@page import="java.util.List"%>
@@ -21,18 +22,23 @@
         <title>Cursos</title>
     </head>
     <body>
-        <%for (Curso c : cursos) {%>
-        <div class="row">
-            <div class="col-md-2">
-                <img class="img-thumbnail" src="images/image?codigo=<%=c.getId()%>">
-            </div>
-            <div class="col-md-2">
-                <h3><%out.print(c.getNombre());%></h3>
-                <p><%out.print(c.getTematica());%></p>
-                <p>Precio: <%out.print(c.getPrecio());%></p>
-                <a class="btn btn-primary" href="#">Matricularse</a>
+        <%Usuarios u = (Usuarios) session.getAttribute("Usuario");%>
+        <div class="container pb-xxl-1">
+            <div class="row">
+                <%for (Curso c : cursos) {%>
+                <div class="col-4">
+                    <img class="w-100 h-50" src="images/image?codigo=<%=c.getId()%>">
+                    <div class="col-4">
+                        <h4><%out.print(c.getNombre());%></h4>
+                        <div class="text-dark"><%out.print(c.getTematica());%></div>
+                        <div class="text-dark">Precio:<%out.print(c.getPrecio());%></div>
+                        <%if (u != null && u.getRol() == 3) {%>
+                        <a class="btn btn-primary" href="#">Matricularse</a>
+                        <%}%>
+                    </div>
+                </div>
+                <%}%>
             </div>
         </div>
-        <%}%>
     </body>
 </html>

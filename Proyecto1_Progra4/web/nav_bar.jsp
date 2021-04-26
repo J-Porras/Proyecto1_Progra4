@@ -33,7 +33,7 @@
                     <a class="navbar-brand text-center text-white" href="#">Mis grupos</a>
                     <%}%>
                     <%if (actual.getRol() == 3) {%>
-                    <a class="navbar-brand text-center text-white" href="#">Mis cursos</a>
+                    <a class="navbar-brand text-center text-white" href="MisCursos">Mis cursos</a>
                     <%}%>  
                     <%} else {%>
                     <a class="navbar-brand text-center text-white" href="loggin.jsp">Iniciar Sesion</a>
