@@ -192,6 +192,17 @@ public class Service {
             return null;
         } 
     }
+        public List<Grupo> read_all_grupos(){
+         try{    
+            return gruposdao.read_all_grupos();
+        }
+        catch(Exception e){  
+            System.out.println("no sirvio");
+            return null;
+        } 
+           
+          
+    }
     //falta solo de implementar en service, ya exise el metodo en dao respectivo
     //FALTA leer grupos por curso
     //FALTA LEER profesor por grupo

@@ -154,5 +154,30 @@ public class GruposDAO {
    
      return grupos_curso;
     }
+  public List<Grupo> read_all_grupos() throws Exception{//terminar
+         List<Grupo> grupos_curso= Collections.synchronizedList(new ArrayList<Grupo>());
+     String sqlcommand = "select * from Grupos";
+     System.out.println("Entransdo en DB");
+     PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+     System.out.println(stm);  
+     
+     ResultSet rs =  Database.instance().executeQuery(stm); 
+     
+         
+            while(rs.next()){
+            Grupo r= new Grupo();
+            r.setNum_grupo(rs.getInt("num_grupo"));
+            r.setId_curso(rs.getInt("id_curso"));
+            
+            r.setProf_titular(rs.getString("prof_titular"));
+            r.setDias(rs.getString("dias"));
+            r.setHorario(rs.getString("horario"));
+            
+            grupos_curso.add(r);
 
+             }
+    
+   
+     return grupos_curso;
+    }
 }

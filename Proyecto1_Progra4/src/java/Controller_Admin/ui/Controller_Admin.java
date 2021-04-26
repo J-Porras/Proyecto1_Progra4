@@ -7,6 +7,7 @@
 import Controller_Admin.Model_Admin;
 import Cursos.Logica.Curso;
 import Data.Service.logic.Service;
+import Grupos.Logica.Grupo;
 import Usuarios.logica.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -66,12 +67,21 @@ public class Controller_Admin extends HttpServlet {
             case "/ListaUsuarios": {
                 List<Usuarios> usuarios = Service.instance().read_all_usuarios();
                 model.setUsuarios(usuarios);
+                
                 System.out.println(usuarios.size());
                 request.setAttribute("Model_Admin", model);
                 request.getRequestDispatcher("usuarios.jsp").forward(request, response);
                 break;
             }
             case "/CrearGrupos": {
+                List<Curso> cursos = Service.instance().lista_cursos();
+                model.setCursos(cursos);
+                List<Usuarios> profesores = Service.instance().read_all_profesores();
+                model.setProfesores(profesores);
+                List<Grupo> grupos= Service.instance().read_all_grupos();
+                model.setGrupos(grupos);
+                System.out.println(grupos.size());
+                request.setAttribute("Model_Admin", model);
                 request.getRequestDispatcher("creargrupos.jsp").forward(request, response);
                 break;
             }

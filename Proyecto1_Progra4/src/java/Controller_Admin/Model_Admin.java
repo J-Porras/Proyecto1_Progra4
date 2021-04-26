@@ -6,6 +6,7 @@
 package Controller_Admin;
 
 import Cursos.Logica.Curso;
+import Grupos.Logica.Grupo;
 import Usuarios.logica.Usuarios;
 import java.util.List;
 
@@ -14,10 +15,18 @@ import java.util.List;
  * @author pg300
  */
 public class Model_Admin {
-     private List<Curso> cursos;
-     private List<Usuarios> profesores;
+    private List<Curso> cursos;
+    private List<Usuarios> profesores;
     private List<Usuarios> usuarios;
+    private List<Grupo> grupos;
 
+    public List<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
+    }
     public List<Usuarios> getUsuarios() {
         return usuarios;
     }

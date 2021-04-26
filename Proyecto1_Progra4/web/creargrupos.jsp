@@ -3,7 +3,16 @@
     Created on : 25/04/2021, 03:06:27 PM
     Author     : Usuario
 --%>
-
+<%@page import="Grupos.Logica.Grupo"%>
+<%@page import="Cursos.Logica.Curso"%>
+<%@page import="java.util.List"%>
+<%@page import="Controller_Admin.Model_Admin"%>
+<% Model_Admin model = (Model_Admin) request.getAttribute("Model_Admin");
+    List<Usuarios> profesores = model.getProfesores();
+    List<Curso> cursos = model.getCursos();
+    List<Grupo> grupos = model.getGrupos();
+    System.out.println(profesores.size());
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,24 +28,25 @@
             <h3 class="text-center">Ingresar nuevo grupo</h3>
         </div>
         <div class = "container p-3">
-            <form action="" class="form-check-inline">
+            <form action="GrupoRegistrado" class="form-check-inline">
                 <div class="row">
                     <div class="col-4 mb-3">
                         <label class="form-select-label" for="selectCurso"><b>Curso para creacion: </b></label>
                         <select class="form-select-sm" aria-label="default select example" id="selectCurso" name="selectCurso">
                             <option selected>Tematica</option>
-                            <option value="1">Curso1</option>
-                            <option value="2">Curso2</option>
-                            <option value="3">Curso3</option>
+                           <%for (Curso c : cursos) {%>
+                            <option value="<%=c.getId()%>"><%out.print(c.getNombre());%></option>
+                            <%}%>
+                        
                         </select>
                     </div>
                     <div class="col-4 mb-3">
                         <label class="form-select-label" for="selectProfe"><b>Profesor a asignar: </b></label>
                         <select class="form-select-sm" aria-label="default select example" id="selectProfe" name="selectProfe">
                             <option selected>Profesor</option>
-                            <option value="1">Profesor1</option>
-                            <option value="2">Profesor2</option>
-                            <option value="3">Profesor3</option>
+                              <%for (Usuarios c : profesores) {%>
+                            <option value="<%=c.getId()%>"><%out.print(c.getNombre());%></option>
+                             <%}%>
                         </select>
                     </div>
                     <div class="col-4 mb-3">
@@ -98,11 +108,13 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Curso1</td>
-                                            <td>Profesor1</td>
-                                            <td>L-V</td>
-                                            <td>20:00-21:45</td>
+                                        <%for (Grupo c : grupos) {%>
+                                        <th scope="row"><%out.print(c.getNum_grupo());%></th>
+                                            <td><%out.print(c.getId_curso());%></td>
+                                            <td><%out.print(c.getProf_titular());%></td>v
+                                            <td><%out.print(c.getDias());%></td>
+                                            <td><%out.print(c.getHorario());%></td>
+                                            <%}%>
                                         </tr>
                                     </tbody>
                             </div>
