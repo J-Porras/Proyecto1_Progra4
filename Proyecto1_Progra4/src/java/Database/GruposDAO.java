@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class GruposDAO {
          public Grupo create(Grupo cl) throws SQLException, Exception{
-        String sqlcommand =  "inserto into Grupos (num_grupo,id_curso,prof_titular,dias,horario)"
+        String sqlcommand =  "insert into Grupos (id_curso,prof_titular,dias,horario)"
                 + "values(?,?,?,?)";
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
        
@@ -31,7 +31,7 @@ public class GruposDAO {
         stm.setString(3,cl.getDias());
         stm.setString(4,cl.getHorario());
        
-
+System.out.println(stm);
         
         int count = Database.instance().executeUpdate(stm);
         if (count == 0) {

@@ -82,7 +82,13 @@ public class Service {
         }
    }
    
-   
+      public void updateEnOferta(String id, Boolean estado){
+        try {
+           cursosdao.update_estado(id, estado);
+        } catch (SQLException ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
 //crear nuevp grupo
     public Grupo crear_grupo(Grupo u){
          Grupo result = null;

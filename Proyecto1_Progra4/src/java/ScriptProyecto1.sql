@@ -62,13 +62,14 @@ CREATE TABLE `matriculas` (
 );
 
 insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) values('1234', 'Pedro Prueba','1234','232323','1234?@mail.com',3,null);
+insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) values('123456', 'The Tiger','123456','232323','thetiger@mail.com',2,'Tecnologia');
 insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) values('2222', 'Jose Prueba','2222','3233','1234@mail.com',2,'Artes');
 insert into Usuarios (id,nombre,contrasenna,telefono,email,rol,especialidad) values('1111', 'Admin Prueba','1111','3233','1234@mail.com',1,null);
 select * from Usuarios;
 
 insert into Cursos(nombre,tematica,estado,precio)values('Fisiologia de Jose','Biologia',1,0);
 select * from cursos;
-insert into Grupos(id_curso,prof_titular,dias,horario)values(1,'2222','L y J','10am-12pm');
+insert into Grupos(id_curso,prof_titular,dias,horario)values(1,'2222','L-J','10:00-12:00');
 select * from grupos;
 insert into matriculas(id_grupo,id_est,fec_matricula,calificacion)values(1,'1234',SYSDATE(),null);
 select * from matriculas;

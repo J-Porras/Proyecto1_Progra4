@@ -64,6 +64,10 @@ public class Controller_Cursos extends HttpServlet {
                 
                
                 System.out.println(estado);
+                if(request.getParameter("precio").isEmpty()){
+                    request.getRequestDispatcher(respuesta).forward(request, response);
+                break;
+                }
                 Double precio = Double.parseDouble(request.getParameter("precio"));
                 int id_new_curso=Service.instance().lista_cursos().size() + 1 ;
                 

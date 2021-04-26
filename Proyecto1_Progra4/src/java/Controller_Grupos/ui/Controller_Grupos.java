@@ -5,8 +5,12 @@
  */
 package Controller_Grupos.ui;
 
+import Data.Service.logic.Service;
+import Grupos.Logica.Grupo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,11 +35,54 @@ public class Controller_Grupos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+      
         String ruta = request.getServletPath();
         switch (ruta) {
             case "/GrupoRegistrado": {
-                
+                String respuesta = "/CrearGrupos";
+            String curso = request.getParameter("selectCurso");
+            String profe = request.getParameter("selectProfe");
+            String Hora = request.getParameter("selectHora");
+            String HoraF = request.getParameter("selectHoraF");
+            if(curso.equals("Tematica")||profe.equals("Profesor")||Hora.equals("Hora Incial")||HoraF.equals("Hora Final")){
+                    System.out.println("vacio");
+                    request.getRequestDispatcher(respuesta).forward(request, response);
+                    break;
+                }
+            if(HoraF.equals(Hora)){
+                request.getRequestDispatcher(respuesta).forward(request, response);  
+                break;
+            }
+            Hora= Hora+":00";
+            HoraF=HoraF+":00";
+            String HoraD=Hora+"-"+HoraF;
+            String[] dias = request.getParameterValues("dias");
+           
+            if(dias==null){
+                  request.getRequestDispatcher(respuesta).forward(request, response);  
+                break;
+            } 
+            List<String> dias_lista = Arrays.asList(dias);
+              System.out.println("Controller_Grupos");
+            System.out.println(dias_lista.toString());
+            
+            String diasListo=" ";
+            for(int i =0;i<dias_lista.size();i++){
+                if(i!=(dias_lista.size()-1)){
+                diasListo=diasListo+dias_lista.get(i)+"-";
+                }
+                else{
+                    diasListo=diasListo+dias_lista.get(i); 
+                }
+            }
+            System.out.println(diasListo);
+            
+             Grupo u= Service.instance().crear_grupo(new Grupo(0,Integer.parseInt(curso),profe,diasListo,HoraD));
+              if(u==null){
+                request.getRequestDispatcher(respuesta).forward(request, response);  
+                break;
+              }
+                request.getRequestDispatcher(respuesta).forward(request, response);  
             break;
             }
             }

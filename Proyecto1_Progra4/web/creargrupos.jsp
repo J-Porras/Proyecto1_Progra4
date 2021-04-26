@@ -28,7 +28,7 @@
             <h3 class="text-center">Ingresar nuevo grupo</h3>
         </div>
         <div class = "container p-3">
-            <form action="GrupoRegistrado" class="form-check-inline">
+            <form action="GrupoRegistrado" class="form-check-inline" method="POST">
                 <div class="row">
                     <div class="col-4 mb-3">
                         <label class="form-select-label" for="selectCurso"><b>Curso para creacion: </b></label>
@@ -50,9 +50,15 @@
                         </select>
                     </div>
                     <div class="col-4 mb-3">
-                        <label class="form-select-label" for="selectHora"><b>Hora de inicio: </b></label>
+                        <label class="form-select-label" for="selectHora"><b>Horario:  </b></label>
                         <select class="form-select-sm" aria-label="default select example" id="selectHora" name="selectHora">
-                            <option selected>Hora de inicio</option>
+                            <option selected>Hora Inicial </option>
+                            <%for (int i = 8; i <= 20; i++) {%>
+                            <option value=<%=i%>><%out.print(i);%>:00</option>
+                            <%}%>
+                        </select>
+                           <select class="form-select-sm" aria-label="default select example" id="selectHoraF" name="selectHoraF">
+                            <option selected>Hora Final</option>
                             <%for (int i = 8; i <= 20; i++) {%>
                             <option value=<%=i%>><%out.print(i);%>:00</option>
                             <%}%>
@@ -61,23 +67,23 @@
                     <div class="col-12 mb-3 text-center">
                         <label class="form-check-label"><b>Dias a impartir clase: </b></label> 
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Lunes" value="Lunes" name="dias">
+                            <input class="form-check-input" type="checkbox" id="Lunes" value="L" name="dias">
                             <label class="form-check-label" for="Lunes">Lunes(L)</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Martes" value="Martes" name="dias">
+                            <input class="form-check-input" type="checkbox" id="Martes" value="M" name="dias">
                             <label class="form-check-label" for="Martes">Martes(M)</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Miercoles" value="Miercoles" name="dias">
+                            <input class="form-check-input" type="checkbox" id="Miercoles" value="K" name="dias">
                             <label class="form-check-label" for="Miercoles">Miercoles(K)</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Jueves" value="Jueves" name="dias">
+                            <input class="form-check-input" type="checkbox" id="Jueves" value="J" name="dias">
                             <label class="form-check-label" for="Jueves">Jueves(J)</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Viernes" value="Viernes" name="dias">
+                            <input class="form-check-input" type="checkbox" id="Viernes" value="V" name="dias">
                             <label class="form-check-label" for="Viernes">Viernes(V)</label>
                         </div>
                     </div>
@@ -95,29 +101,30 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-lg-7">
                         <div class="card-body">
-                            <div class="row justify-content-center">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Num. Grupo</th>
+                                            <th scope="col">Num.Grupo</th>
                                             <th scope="col">Curso</th>
                                             <th scope="col">Profesor titular</th>
                                             <th scope="col">Dias lectivos</th>
-                                            <th scope="col">Horario</th>
+                                            <th scope="col">Horario(24h)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                      
                                         <%for (Grupo c : grupos) {%>
-                                        <th scope="row"><%out.print(c.getNum_grupo());%></th>
+                                          <tr>
+                                            <th scope="row"><%out.print(c.getNum_grupo());%></th>
                                             <td><%out.print(c.getId_curso());%></td>
                                             <td><%out.print(c.getProf_titular());%></td>v
                                             <td><%out.print(c.getDias());%></td>
                                             <td><%out.print(c.getHorario());%></td>
+                                          </tr>
                                             <%}%>
-                                        </tr>
                                     </tbody>
-                            </div>
+                                </table>
+                          
                         </div>
                     </div>
                 </div>

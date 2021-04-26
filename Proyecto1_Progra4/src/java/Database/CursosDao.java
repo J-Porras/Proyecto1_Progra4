@@ -133,4 +133,12 @@ System.out.println("Buscando cursos_off ");
             return null;
         }
     }
+      public void update_estado(String id,Boolean estado) throws SQLException{
+        String sqlcommand = "update cursos set estado=? where  id=?";
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+         stm.setBoolean(1, estado);
+        stm.setString(2, id);
+       
+        System.out.println("Estado modificado");
+       }
 }
