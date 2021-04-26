@@ -82,6 +82,7 @@ public class Controller_Grupos extends HttpServlet {
                 request.getRequestDispatcher(respuesta).forward(request, response);  
                 break;
               }
+                respuesta =respuesta+"?id="+curso;
                 request.getRequestDispatcher(respuesta).forward(request, response);  
             break;
             }

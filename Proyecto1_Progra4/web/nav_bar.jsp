@@ -25,7 +25,7 @@
                     <a class="navbar-brand text-center text-white" href="#">Perfil</a>
                     <%if (actual.getRol() == 1) {%>
                     <a class="navbar-brand text-center text-white" href="CrearCursos">Gestionar cursos</a>
-                    <a class="navbar-brand text-center text-white" href="CrearGrupos">Gestionar grupos</a>
+                   <!-- <a class="navbar-brand text-center text-white" href="CrearGrupos">Gestionar grupos</a>-->
                     <a class="navbar-brand text-center text-white" href="CrearProfesores">Gestionar Profesores</a>
                     <a class="navbar-brand text-center text-white" href="ListaUsuarios">Lista de Usuarios</a>
                     <%}%>

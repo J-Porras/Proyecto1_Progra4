@@ -19,6 +19,15 @@ public class Model_Admin {
     private List<Usuarios> profesores;
     private List<Usuarios> usuarios;
     private List<Grupo> grupos;
+    private List<Grupo> grupostodos;
+
+    public List<Grupo> getGrupostodos() {
+        return grupostodos;
+    }
+
+    public void setGrupostodos(List<Grupo> grupostodos) {
+        this.grupostodos = grupostodos;
+    }
 
     public List<Grupo> getGrupos() {
         return grupos;

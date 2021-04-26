@@ -78,7 +78,10 @@ public class Controller_Admin extends HttpServlet {
                 model.setCursos(cursos);
                 List<Usuarios> profesores = Service.instance().read_all_profesores();
                 model.setProfesores(profesores);
-                List<Grupo> grupos= Service.instance().read_all_grupos();
+                int id= Integer.parseInt(request.getParameter("id"));
+                List<Grupo> grupos= Service.instance().read_grupos_curso(id);
+                List<Grupo> grupostodos=Service.instance().read_all_grupos();
+                model.setGrupostodos(grupostodos);
                 model.setGrupos(grupos);
                 System.out.println(grupos.size());
                 request.setAttribute("Model_Admin", model);

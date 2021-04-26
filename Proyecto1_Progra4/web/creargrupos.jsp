@@ -11,6 +11,7 @@
     List<Usuarios> profesores = model.getProfesores();
     List<Curso> cursos = model.getCursos();
     List<Grupo> grupos = model.getGrupos();
+    List<Grupo> grupostodos=model.getGrupostodos();
     System.out.println(profesores.size());
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

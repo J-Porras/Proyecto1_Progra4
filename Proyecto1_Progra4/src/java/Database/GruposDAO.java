@@ -128,20 +128,20 @@ System.out.println(stm);
      }
     
  //leer grupos or curso
-    public List<Grupo> read_grupos_curso(String id_curso) throws Exception{//terminar
+    public List<Grupo> read_grupos_curso(int id_curso) throws Exception{//terminar
          List<Grupo> grupos_curso= Collections.synchronizedList(new ArrayList<Grupo>());
      String sqlcommand = "select * from Grupos where  id_curso = ?";
      System.out.println("Entransdo en DB");
      PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
      System.out.println("Buscando Curso en DB con profesor ");  
-     stm.setString(1, id_curso);
+     stm.setInt(1, id_curso);
      ResultSet rs =  Database.instance().executeQuery(stm); 
      
          
             while(rs.next()){
             Grupo r= new Grupo();
-            r.setNum_grupo(rs.getInt("id_grupo"));
-            r.setId_curso(rs.getInt("id_est"));
+            r.setNum_grupo(rs.getInt("num_grupo"));
+            r.setId_curso(rs.getInt("id_curso"));
             
             r.setProf_titular(rs.getString("prof_titular"));
             r.setDias(rs.getString("dias"));

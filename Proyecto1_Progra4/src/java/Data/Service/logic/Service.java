@@ -205,7 +205,17 @@ public class Service {
         catch(Exception e){  
             System.out.println("no sirvio");
             return null;
+        }
+        }
+         public List<Grupo> read_grupos_curso(int id){
+         try{    
+            return gruposdao.read_grupos_curso(id);
+        }
+        catch(Exception e){  
+            System.out.println("no sirvio");
+            return null;
         } 
+          
            
           
     }
