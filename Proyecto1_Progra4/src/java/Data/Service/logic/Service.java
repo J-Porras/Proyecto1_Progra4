@@ -218,6 +218,15 @@ public class Service {
             return null;
         }
         }
+             public List<Matricula> read_grupos_estudiante(String id){
+         try{    
+            return matriculasdao.read_grupos_estudiante(id);
+        }
+        catch(Exception e){  
+            System.out.println("no sirvio");
+            return null;
+        }
+        }
          public List<Grupo> read_grupos_curso(int id){
          try{    
             return gruposdao.read_grupos_curso(id);

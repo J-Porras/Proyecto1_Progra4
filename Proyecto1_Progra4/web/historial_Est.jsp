@@ -4,7 +4,21 @@
     Author     : Usuario
 --%>
 
+<%@page import="Controller_Est.Model_est"%>
+<%@page import="Matriculas.Logic.Matricula"%>
+<%@page import="Matriculas.Logic.Matricula"%>
+<%@page import="Grupos.Logica.Grupo"%>
+<%@page import="Cursos.Logica.Curso"%>
+<%@page import="Cursos.Logica.Curso"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% Model_est model = (Model_est) request.getAttribute("Model_est");
+    List<Matricula> cursos_est = model.getEstudiantes_matricula();
+    List<Grupo> grupos = model.getTodos_grupos();
+    List<Curso> cursos = model.getTodos_cursos();
+    System.out.println(cursos_est.size());
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,28 +45,41 @@
                                         <th scope="col">Cal. Final</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+			 <tbody>
+                                       <%for (Matricula c : cursos_est) {%>
                                     <tr>
-                                        <th scope="row" >01</th>
-                                        <td>Profesor01</td>
-                                        <td>Curso01</td>
-                                        <td>Fecha01</td>
-                                        <td>0</td>
+                                        <th scope="row" ><%out.print(c.getId_grupo());%></th>
+                                        <%
+                                            String profe= " ";
+                                             String nombreC= " ";
+                                        for(Grupo x: grupos){
+                                            if(x.getNum_grupo()==c.getId_grupo()){
+                                                profe =x.getProf_titular();
+                                                    
+                                                for(Curso u: cursos){
+                                                    if(u.getId()==x.getId_curso()){
+                                                        nombreC =u.getNombre();
+                                                        break;
+                                            }
+                                        }
+                                                break;
+                                            }
+                                        }
+                                        %>
+                                        <td><%out.print(profe);%></td>
+                                        
+                                        <td><%out.print(nombreC);%></td>
+                                        <td><%out.print(c.getFec_matricula());%></td>
+                                        <%
+                                        if(c.getCalificacion()==0){%>
+                                        <td><%out.print("En curso");%></td>
+                                       <% }else{%>
+                                        <td><%out.print(c.getCalificacion());%></td>
+                                            <%}
+                                        %>
+                                        <td><%out.print(c.getCalificacion());%></td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row" >02</th>
-                                        <td>Profesor02</td>
-                                        <td>Curso02</td>
-                                        <td>Fecha02</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" >03</th>
-                                        <td>Profesor03</td>
-                                        <td>Curso03</td>
-                                        <td>Fecha03</td>
-                                        <td>0</td>
-                                    </tr>
+                                    <%}%>
                                 </tbody>
                             </table>
                             <a href="HistorialPDF" class="btn btn-outline-dark">Descargar version en PDF</a>
