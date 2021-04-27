@@ -77,7 +77,7 @@
                                         <td><%out.print(c.getCalificacion());%></td>
                                             <%}
                                         %>
-                                        <td><%out.print(c.getCalificacion());%></td>
+                                       
                                     </tr>
                                     <%}%>
                                 </tbody>

@@ -127,7 +127,7 @@ public class MatriculasDAO {//Trabajar en esto
     //grupos de estudiante(Hisotrial)
     public List<Matricula> read_grupos_estudiante(String id_est) throws Exception{//terminar
          List<Matricula> grupo_est= Collections.synchronizedList(new ArrayList<Matricula>());
-     String sqlcommand = "select * from Grupos where  id_est = ?";
+     String sqlcommand = "select * from matriculas where  id_est = ?";
      System.out.println("Entransdo en DB");
      PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
      System.out.println("Buscando Curso en DB con profesor ");  
