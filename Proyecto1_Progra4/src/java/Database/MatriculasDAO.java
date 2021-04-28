@@ -88,30 +88,30 @@ public class MatriculasDAO {//Trabajar en esto
     }
     
     //leer estudiante por grupo
-    public List<Usuarios> read_estudiante_por_grupo(String id_grupo) throws Exception{//terminar
-         List<Usuarios> grupo_est= Collections.synchronizedList(new ArrayList<Usuarios>());
-     String sqlcommand = "select * from Grupos where  id_grupo = ?";
+    public List<Matricula> read_estudiante_por_grupo(int id_grupo) throws Exception{//terminar
+         List<Matricula> grupo_est= Collections.synchronizedList(new ArrayList<Matricula>());
+     String sqlcommand = "select * from matriculas  where  id_grupo = ?";
      System.out.println("Entransdo en DB");
      PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
-     System.out.println("Buscando Curso en DB con profesor ");  
-     stm.setString(1, id_grupo);
+     System.out.println("Buscando Curso en DB con grupo ");  
+     stm.setInt(1, id_grupo);
      ResultSet rs =  Database.instance().executeQuery(stm); 
-      try {
+      System.out.println(stm);  
          
             while(rs.next()){
-             
-                UsuariosDAO dao= new UsuariosDAO();
-                Usuarios r= dao.read( rs.getString("id_est"));
-         
-            
-                grupo_est.add(r);
+            Matricula r= new Matricula();
+            r.setId_grupo(rs.getInt("id_grupo"));
+            r.setId_est(rs.getString("id_est"));
+            DateFormat df= new SimpleDateFormat("MM,dd,yyyy");
+            String dateStr= df.format(rs.getDate("fec_matricula"));
+            r.setFec_matricula(dateStr);
+            r.setCalificacion(rs.getDouble("calificacion"));;
+             grupo_est.add(r);
 
             }
-      }
-      catch (SQLException e){
-      System.out.println("Operacion no se logro(leer grupos est)");
+     
                  
-    }
+    
      return grupo_est;
     
     }
@@ -122,6 +122,7 @@ public class MatriculasDAO {//Trabajar en esto
         stm.setString(2, id_est);
         stm.setInt(3,id_grupo);
         Database.instance().executeUpdate(stm);
+        System.out.println(stm);
         System.out.println("Nota modificado");
        }
     //grupos de estudiante(Hisotrial)

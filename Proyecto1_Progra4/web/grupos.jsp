@@ -77,12 +77,17 @@
                                         <td><%out.print(profe);%></td>
                                        <%}else{%>
                                        <%
+                                           
                                        for(Curso t:cursos){
+                                            System.out.println("Sirvio");
+                                       
                                       if(t.getId()==c.getId_curso()){
                                           cursoN=t.getNombre();
+                                          
+                                          
                                       }
                                   }  
-                                       
+                                        System.out.println("sirvio");
                       
                                        %>
                                         <td><%out.print(cursoN);%></td>
@@ -92,6 +97,7 @@
                                         <%if (actual.getRol() == 2) {%>
                                         <td > <a href="asignarNotas?codigo=<%=c.getNum_grupo()%>" class="btn btn-outline-dark" name="asignarNotas" value="" method="POST" >Link al codigo del grupo 1(Asignar Notas) Modificar<a/></td>
                                         <%} else {%>
+                                       
                                         <td > <a href="Matricularme?codigo=<%=c.getNum_grupo()%>" class="btn btn-outline-dark" name="matricularse" value="" method="POST" >Link al codigo del grupo 1(Matricularme) Modificar<a/></td>
                                         <%}%>
                                     </tr>

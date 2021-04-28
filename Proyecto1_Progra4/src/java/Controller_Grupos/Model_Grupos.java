@@ -7,6 +7,7 @@ package Controller_Grupos;
 
 import Cursos.Logica.Curso;
 import Grupos.Logica.Grupo;
+import Matriculas.Logic.Matricula;
 import Usuarios.logica.Usuarios;
 import java.util.List;
 
@@ -18,6 +19,15 @@ public class Model_Grupos {
     List<Grupo> grupos;
     List<Usuarios> posibleProfesor;
     List<Curso> cursos;
+    List<Matricula> estudiantes_profe;
+
+    public List<Matricula> getEstudiantes_profe() {
+        return estudiantes_profe;
+    }
+
+    public void setEstudiantes_profe(List<Matricula> estudiantes_profe) {
+        this.estudiantes_profe = estudiantes_profe;
+    }
 
     public List<Curso> getCursos() {
         return cursos;

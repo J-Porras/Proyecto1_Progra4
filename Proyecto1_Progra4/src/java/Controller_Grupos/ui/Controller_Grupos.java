@@ -9,6 +9,7 @@ import Controller_Grupos.Model_Grupos;
 import Cursos.Logica.Curso;
 import Data.Service.logic.Service;
 import Grupos.Logica.Grupo;
+import Matriculas.Logic.Matricula;
 import Usuarios.logica.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -109,7 +110,12 @@ public class Controller_Grupos extends HttpServlet {
 break;
             }
             case "/asignarNotas":{
+                int num_grupo = Integer.parseInt(request.getParameter("codigo"));
+                List<Matricula> matriculaEst =Service.instance().read_estudiantes_profesor(num_grupo);
+                model.setEstudiantes_profe(matriculaEst);
                 
+                request.setAttribute("Model_Grupos", model);;
+                System.out.println(matriculaEst.size());
 //Revisar las matriculas del número de grupo en la base de datos, en base al número de grupo
            respuesta = "estudiantesgrupo.jsp";
            break;
@@ -117,11 +123,13 @@ break;
             case "/MisGrupos" :{
                 System.out.println("Process request");
                 HttpSession session = request.getSession(true);
-                  
+                 List<Curso> cursos = Service.instance().lista_cursos(); 
                 Usuarios actual = (Usuarios) session.getAttribute("Usuario");
                 List<Grupo> grupos = Service.instance().read_grupos_profesor(actual.getId());
                 model.setGrupos(grupos);
-                request.setAttribute("Model_Grupos", model);;
+                model.setCursos(cursos);
+                request.setAttribute("Model_Grupos", model);
+                  System.out.println("Process request2");
                 respuesta = "grupos.jsp";
             break;
             }
@@ -129,6 +137,7 @@ break;
             default:
                 respuesta = "grupos.jsp";
 //Hacer acá toda la lógica relacionada para mostrar los grupos de un profesor, revisar el session para sacar el id del profesor
+                
                 break;
         }
         request.getRequestDispatcher(respuesta).forward(request, response);

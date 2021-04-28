@@ -244,7 +244,15 @@ public class Service {
             System.out.println("no sirvio");
             return null;
         } 
-           
+             }
+                 public List<Matricula> read_estudiantes_profesor(int id){
+         try{    
+            return matriculasdao.read_estudiante_por_grupo(id);
+        }
+        catch(Exception e){  
+            System.out.println("no sirvio");
+            return null;
+        }  
           
     }
     //falta solo de implementar en service, ya exise el metodo en dao respectivo

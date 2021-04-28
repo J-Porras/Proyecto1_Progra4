@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author pg300
  */
-@WebServlet(name = "Controller_Matricula", urlPatterns = {"/Matricularme"})
+@WebServlet(name = "Controller_Matricula", urlPatterns = {"/Matricularme","/actualizarNota"})
 public class Controller_Matricula extends HttpServlet {
 
     /**
@@ -57,6 +57,17 @@ public class Controller_Matricula extends HttpServlet {
                     
                 }
                 break;
+            }
+            case "/actualizarNota":{  
+               respuesta="/asignarNotas";
+               String id_Est = request.getParameter("idestu");
+               int grupo = Integer.parseInt(request.getParameter("codigo"));
+               Double nota= Double.parseDouble(request.getParameter("valornota"));
+               if(nota>0&& nota<=100){
+                   Service.instance().updateMatricula(id_Est, grupo, nota);
+               }
+             
+               break; 
             }
             default:{
                 
