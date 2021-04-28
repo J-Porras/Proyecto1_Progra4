@@ -31,8 +31,10 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Cell; 
+import java.io.ByteArrayOutputStream;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -115,36 +117,42 @@ public class Controller_Est extends HttpServlet {
             List<Matricula> cursos_est =  model.getEstudiantes_matricula();
             List<Grupo> grupos = model.getTodos_grupos();
             List<Curso> cursos = model.getTodos_cursos();
+            List<Usuarios> profesores =Service.instance().read_all_profesores();
             HttpSession session = request.getSession(true);
             
             System.out.println("LINEA 115");
-                  
+                 String pdfFilename= "constancia.pdf";   
             Usuarios actual = (Usuarios) session.getAttribute("Usuario");
              System.out.println("LINEA 118");
             //se crea un nuevo pdf y se guarda en response
-            PdfDocument pdf = new PdfDocument(new PdfWriter(response.getOutputStream()));  
+             ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            PdfDocument pdf = new PdfDocument(new PdfWriter(baos));  
+            PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
             System.out.println("after pdf writer");
-            
-            Document doc = new Document(pdf, PageSize.A4.rotate());
+           
+            Document doc = new Document(pdf);
             
             System.out.println("LINEA 123");
             
-            PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+            
             
             //codigo estanadar
-            doc.add(new Paragraph("HISTORIAL DE ESTUDIANTE: " + actual.getNombre()));
+            doc.add(new Paragraph("HISTORIAL DE ESTUDIANTE: CursoLibres.com " ) );
+            doc.add(new Paragraph("=============================================="));
+            doc.add(new Paragraph("Nombre del Estudiante: " + actual.getNombre()));
+            doc.add(new Paragraph("=============================================="));
             doc.add(new Paragraph("ID: " + actual.getId()));
-            doc.add(new Paragraph(""));
-            //parrafo de com.itextpdf.text.Paragraph
-       
+            doc.add(new Paragraph("=============================================="));
             
-            System.out.println("ANTES  TABLE  PDF");
+            
+            //parrafo de com.itextpdf.text.Paragraph
+                 System.out.println("ANTES  TABLE  PDF");
             
             //generando tabla de cursos
             //codigo de -> https://www.tutorialspoint.com/itext/itext_adding_table.htm
             //https://www.tutorialspoint.com/itext/itext_adding_image_to_pdf.htm
             
-            float [] pointColumnWidths = {150F, 150F, 150F};   
+            float [] pointColumnWidths = {150F, 150F, 150F,150F};   
             Table table = new Table(pointColumnWidths);
             
             //table.addCell(new Cell().add(new Paragraph("IMG"))); 
@@ -191,15 +199,36 @@ public class Controller_Est extends HttpServlet {
                 
                 table.addCell(nombre_curso);//nombre de grupo
                 table.addCell(Integer.toString(m.getId_grupo()));//id grupo
+                for(Usuarios c:profesores){
+                    if(nom_profe.equals(c.getId()));
+                    {
+                        nom_profe=c.getNombre();
+                        break;
+                    }
+                }
                 table.addCell(nom_profe);//nombre del profe
                 table.addCell(Double.toString(m.getCalificacion()));
                 
             }//fin ciclo matricula
-            doc.add(table);
-            doc.close();
-            response.setContentType("application/pdf");
-            response.addHeader("Content-disposition", "inline");
             
+           
+           doc.add(table);
+            doc.close();
+           // setting some response headers
+        response.setHeader("Expires", "0");
+        response.setHeader("Cache-Control",
+                "must-revalidate, post-check=0, pre-check=0");
+        response.setHeader("Pragma", "public");
+        // setting the content type
+        response.setContentType("application/pdf");
+        // the contentlength
+        response.setContentLength(baos.size());
+        // write ByteArrayOutputStream to the ServletOutputStream
+        OutputStream os = response.getOutputStream();
+        baos.writeTo(os);
+        os.flush();
+        os.close();
+        
             System.out.println("FIN CREATE PDF");
 
         }//fin try
