@@ -82,7 +82,7 @@
                                     <%}%>
                                 </tbody>
                             </table>
-                            <a target='_blank' href="HistorialPDF" class="btn btn-outline-dark">Descargar version en PDF</a>
+                            <a target='_blank' href="/Proyecto1_Progra4/HistorialPDF" class="btn btn-outline-dark">Descargar version en PDF</a>
                         </div>
                     </div>
                 </div>

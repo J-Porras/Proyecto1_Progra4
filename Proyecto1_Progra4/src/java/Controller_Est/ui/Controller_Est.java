@@ -13,10 +13,13 @@ import Data.Service.logic.Service;
 import Grupos.Logica.Grupo;
 import Matriculas.Logic.Matricula;
 import Usuarios.logica.Usuarios;
+import com.itextpdf.io.font.constants.StandardFonts;
 
 
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
 
 import com.itextpdf.kernel.geom.PageSize;
 
@@ -90,7 +93,9 @@ public class Controller_Est extends HttpServlet {
 				  
             }
             case "/HistorialPDF":
+                System.out.println("CASE HISTORIAL PDF");
                 respuesta = this.createPDF(request, response);
+                System.out.println("RESPUESTA: " + respuesta);
                 break;
                 
                 
@@ -98,36 +103,42 @@ public class Controller_Est extends HttpServlet {
                 respuesta = "";
                 break;
         }
-        request.getRequestDispatcher(respuesta).forward(request, response);
+        if(respuesta!=null){
+            request.getRequestDispatcher(respuesta).forward( request, response);
+        }
     }
     
     //genera el historial en PDF
     private String createPDF(HttpServletRequest request,  HttpServletResponse response){
         try {
-            
+            System.out.println("TRY HISTORIAL PDF");
             List<Matricula> cursos_est =  model.getEstudiantes_matricula();
             List<Grupo> grupos = model.getTodos_grupos();
             List<Curso> cursos = model.getTodos_cursos();
             HttpSession session = request.getSession(true);
+            
+            System.out.println("LINEA 115");
                   
             Usuarios actual = (Usuarios) session.getAttribute("Usuario");
+             System.out.println("LINEA 118");
             //se crea un nuevo pdf y se guarda en response
             PdfDocument pdf = new PdfDocument(new PdfWriter(response.getOutputStream()));  
+            System.out.println("after pdf writer");
             
             Document doc = new Document(pdf, PageSize.A4.rotate());
             
-            //PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+            System.out.println("LINEA 123");
+            
+            PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
             
             //codigo estanadar
-            com.itextpdf.layout.element.Paragraph _paragraph;// tipo de paraffo distinto para doc
-            
-            
             doc.add(new Paragraph("HISTORIAL DE ESTUDIANTE: " + actual.getNombre()));
             doc.add(new Paragraph("ID: " + actual.getId()));
             doc.add(new Paragraph(""));
             //parrafo de com.itextpdf.text.Paragraph
        
             
+            System.out.println("ANTES  TABLE  PDF");
             
             //generando tabla de cursos
             //codigo de -> https://www.tutorialspoint.com/itext/itext_adding_table.htm
@@ -136,18 +147,21 @@ public class Controller_Est extends HttpServlet {
             float [] pointColumnWidths = {150F, 150F, 150F};   
             Table table = new Table(pointColumnWidths);
             
-            table.addCell(new Cell().add(new Paragraph("IMG"))); 
+            //table.addCell(new Cell().add(new Paragraph("IMG"))); 
             table.addCell(new Cell().add(new Paragraph("CURSO")));       
             table.addCell(new Cell().add(new Paragraph("ID GRUPO"))); 
             table.addCell(new Cell().add(new Paragraph("PROFESOR"))); 
             table.addCell(new Cell().add(new Paragraph("NOTA"))); 
+            
+            
+            System.out.println("FIN INIT TABLE  PDF");
 
             ////////////////////////////////////////
             //añadiendo informacion de cada curso
             for(Matricula m : cursos_est){
                 String nom_profe = "-";
                 String nombre_curso ="-";
-                ImageData data = ImageDataFactory.create("C:/images/"+m.getId_grupo());
+                //ImageData data = ImageDataFactory.create("C:/images/"+m.getId_grupo());
                 
                 for(Grupo g: grupos){//itera por cada grupo de la DB
                     
@@ -168,10 +182,11 @@ public class Controller_Est extends HttpServlet {
                         break;
                     }
                 }
-                ImageData image_data = ImageDataFactory.create("C:/images/"+m.getId_grupo());
-                Image image_curso = new Image(image_data);
+                System.out.println("sacando IMAGEN DE PDF ");
+               // ImageData image_data = ImageDataFactory.create("C:/images/"+m.getId_grupo());
+                //Image image_curso = new Image(image_data);
                 
-                table.addCell(image_curso.setAutoScale(true));
+                //table.addCell(image_curso.setAutoScale(true));
                 //deberia reescalar la imagen
                 
                 table.addCell(nombre_curso);//nombre de grupo
@@ -184,6 +199,8 @@ public class Controller_Est extends HttpServlet {
             doc.close();
             response.setContentType("application/pdf");
             response.addHeader("Content-disposition", "inline");
+            
+            System.out.println("FIN CREATE PDF");
 
         }//fin try
         
