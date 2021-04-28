@@ -113,7 +113,7 @@ System.out.println(stm);
          
             while(rs.next()){
                 Grupo r= new Grupo();
-                r.setNum_grupo(rs.getInt("id_grupo"));
+                r.setNum_grupo(rs.getInt("num_grupo"));
                 r.setId_curso(rs.getInt("id_curso"));
 
                 r.setProf_titular(rs.getString("prof_titular"));

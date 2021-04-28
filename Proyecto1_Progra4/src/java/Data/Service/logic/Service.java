@@ -235,7 +235,15 @@ public class Service {
             System.out.println("no sirvio");
             return null;
         } 
-          
+         }
+             public List<Grupo> read_grupos_profesor(String id){
+         try{    
+            return gruposdao.read_grupos_profesor(id);
+        }
+        catch(Exception e){  
+            System.out.println("no sirvio");
+            return null;
+        } 
            
           
     }

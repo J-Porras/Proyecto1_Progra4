@@ -5,17 +5,23 @@
  */
 package Controller_Grupos.ui;
 
+import Controller_Grupos.Model_Grupos;
+import Cursos.Logica.Curso;
 import Data.Service.logic.Service;
 import Grupos.Logica.Grupo;
+import Usuarios.logica.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,9 +39,12 @@ public class Controller_Grupos extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    private Model_Grupos model;
+    public Controller_Grupos() {
+        model = new Model_Grupos();
+    }
 
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
         String ruta = request.getServletPath();
         String respuesta = "";
         switch (ruta) {
@@ -87,15 +96,36 @@ public class Controller_Grupos extends HttpServlet {
                 break;
             }
             case "/GruposSistema": {
+                int codigo = Integer.parseInt(request.getParameter("codigo"));
+                List<Grupo> grupos = Service.instance().read_grupos_curso(codigo);
+                List<Usuarios> profesor = Service.instance().read_all_profesores();
+                List<Curso> cursos = Service.instance().lista_cursos();
+                model.setCursos(cursos);
+                model.setPosibleProfesor(profesor);
+                model.setGrupos(grupos);
+                request.setAttribute("Model_Grupos", model);;
                 respuesta = "grupos.jsp";
 //Hacer acá toda la lógica relacionada para mostrar los grupos de un curso x, revisar los parametros del encabezado
-                break;
+break;
             }
             case "/asignarNotas":{
+                
 //Revisar las matriculas del número de grupo en la base de datos, en base al número de grupo
-                respuesta = "estudiantesgrupo.jsp";
-                break;
+           respuesta = "estudiantesgrupo.jsp";
+           break;
             }
+            case "/MisGrupos" :{
+                System.out.println("Process request");
+                HttpSession session = request.getSession(true);
+                  
+                Usuarios actual = (Usuarios) session.getAttribute("Usuario");
+                List<Grupo> grupos = Service.instance().read_grupos_profesor(actual.getId());
+                model.setGrupos(grupos);
+                request.setAttribute("Model_Grupos", model);;
+                respuesta = "grupos.jsp";
+            break;
+            }
+            
             default:
                 respuesta = "grupos.jsp";
 //Hacer acá toda la lógica relacionada para mostrar los grupos de un profesor, revisar el session para sacar el id del profesor
@@ -116,7 +146,11 @@ public class Controller_Grupos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Controller_Grupos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -130,7 +164,11 @@ public class Controller_Grupos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(Controller_Grupos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
