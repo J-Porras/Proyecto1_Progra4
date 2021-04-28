@@ -45,44 +45,44 @@
                                         <th scope="col">Cal. Final</th>
                                     </tr>
                                 </thead>
-			 <tbody>
-                                       <%for (Matricula c : cursos_est) {%>
-                                    <tr>
-                                        <th scope="row" ><%out.print(c.getId_grupo());%></th>
-                                        <%
-                                            String profe= " ";
-                                             String nombreC= " ";
-                                        for(Grupo x: grupos){
-                                            if(x.getNum_grupo()==c.getId_grupo()){
-                                                profe =x.getProf_titular();
-                                                    
-                                                for(Curso u: cursos){
-                                                    if(u.getId()==x.getId_curso()){
-                                                        nombreC =u.getNombre();
+                                <tbody>
+                                    <%for (Matricula c : cursos_est) {%>
+                                        <tr>
+                                            <th scope="row" ><%out.print(c.getId_grupo());%></th>
+                                            <%
+                                                String profe= " ";
+                                                String nombreC= " ";
+                                                for(Grupo x: grupos){
+                                                    if(x.getNum_grupo()==c.getId_grupo()){
+                                                        profe =x.getProf_titular();
+
+                                                        for(Curso u: cursos)
+                                                        {
+                                                            if(u.getId()==x.getId_curso()){
+                                                                nombreC =u.getNombre();
+                                                                break;
+                                                            }
+                                                        }
                                                         break;
-                                            }
-                                        }
-                                                break;
-                                            }
-                                        }
-                                        %>
-                                        <td><%out.print(profe);%></td>
-                                        
-                                        <td><%out.print(nombreC);%></td>
-                                        <td><%out.print(c.getFec_matricula().replace(',','-'));%></td>
-                                        <%
-                                        if(c.getCalificacion()==0){%>
-                                        <td><%out.print("En curso");%></td>
-                                       <% }else{%>
-                                        <td><%out.print(c.getCalificacion());%></td>
-                                            <%}
-                                        %>
+                                                    }
+                                                }
+                                            %>
+                                            <td><%out.print(profe);%></td>
+
+                                            <td><%out.print(nombreC);%></td>
+                                            <td><%out.print(c.getFec_matricula().replace(',','-'));%></td>
+                                            <%
+                                            if(c.getCalificacion()==0){%>
+                                                <td><%out.print("En curso");%></td>
+                                            <% }else{%>
+                                                <td><%out.print(c.getCalificacion());%></td>
+                                            <%}%>
                                        
-                                    </tr>
+                                        </tr>
                                     <%}%>
                                 </tbody>
                             </table>
-                            <a href="HistorialPDF" class="btn btn-outline-dark">Descargar version en PDF</a>
+                            <a target='_blank' href="href='/CursosImagenPdf/presentation/cursos/HistorialPDF'>  " class="btn btn-outline-dark">Descargar version en PDF</a>
                         </div>
                     </div>
                 </div>
