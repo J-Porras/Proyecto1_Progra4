@@ -133,4 +133,34 @@ public class UsuariosDAO {
             return null;
         }
     }
+    
+    public List<Usuarios> read_Filtrar_Profes(String filter) throws Exception{
+        List<Usuarios> usuarios= Collections.synchronizedList(new ArrayList<Usuarios>());
+        String sqlcommand = "select * from Usuarios where nombre like = ?%";
+        System.out.println("Entransdo en DB");
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+        stm.setString(1, filter);
+        System.out.println("Buscando cursos_off ");  
+        ResultSet rs =  Database.instance().executeQuery(stm);
+            while(rs.next()){
+             Usuarios r= new Usuarios();
+            r.setId(rs.getString("id"));
+            r.setNombre(rs.getString("nombre"));
+            
+            r.setContrasenna(rs.getString("contrasenna"));
+            r.setTelefono(rs.getString("telefono"));
+            r.setEmail(rs.getString("email"));
+            r.setRol(rs.getInt("rol"));
+            r.setEspecialidad(rs.getString("especialidad"));
+            if(r.getRol()==2){
+            usuarios.add(r);
+            }
+
+            }
+       
+  System.out.println("RETURN CURSOS OFF------- ");  
+         System.out.println(usuarios.size());   
+        return usuarios;
+    }
+
 }

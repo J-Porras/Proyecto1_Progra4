@@ -253,8 +253,28 @@ public class Service {
             System.out.println("no sirvio");
             return null;
         }  
-          
+                 }
+    public List<Curso> read_filtrados_Nombre(String filter){
+         try{    
+            return cursosdao.read_cursos_filtradosN(filter);
+        }
+        catch(Exception e){  
+            System.out.println("no sirvio");
+            return null;
+        
     }
+      }
+    public List<Curso> read_filtrados_Teamtica(String filter){
+         try{    
+            return cursosdao.read_cursos_filtradosT(filter);
+        }
+        catch(Exception e){  
+            System.out.println("no sirvio");
+            return null;
+        
+    }
+  }
+         
     //falta solo de implementar en service, ya exise el metodo en dao respectivo
     //FALTA leer grupos por curso
     //FALTA LEER profesor por grupo
