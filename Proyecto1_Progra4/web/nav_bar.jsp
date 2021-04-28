@@ -30,7 +30,7 @@
                     <a class="navbar-brand text-center text-white" href="ListaUsuarios">Lista de Usuarios</a>
                     <%}%>
                     <%if (actual.getRol() == 2) {%>
-                    <a class="navbar-brand text-center text-white" href="#">Mis grupos</a>
+                    <a class="navbar-brand text-center text-white" href="MisGrupos">Mis grupos</a>
                     <%}%>
                     <%if (actual.getRol() == 3) {%>
                     <a class="navbar-brand text-center text-white" href="MisCursos">Mis cursos</a>

@@ -28,12 +28,12 @@
                 <%for (Curso c : cursos) {%>
                 <div class="col-4">
                     <img class="w-100 h-50" src="images/image?codigo=<%=c.getId()%>">
+                    <h5 class="text-center"><%out.print(c.getNombre());%></h5>
                     <div class="col-4">
-                        <h4><%out.print(c.getNombre());%></h4>
                         <div class="text-dark"><%out.print(c.getTematica());%></div>
                         <div class="text-dark">Precio:<%out.print(c.getPrecio());%></div>
                         <%if (u != null && u.getRol() == 3) {%>
-                        <a class="btn btn-primary" href="#">Matricularse</a>
+                        <a class="btn btn-outline-danger" href="GruposSistema?codigo=<%=c.getId()%>">Matricularse</a>
                         <%}%>
                     </div>
                 </div>

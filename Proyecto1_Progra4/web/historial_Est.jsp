@@ -69,7 +69,7 @@
                                         <td><%out.print(profe);%></td>
                                         
                                         <td><%out.print(nombreC);%></td>
-                                        <td><%out.print(c.getFec_matricula());%></td>
+                                        <td><%out.print(c.getFec_matricula().replace(',','-'));%></td>
                                         <%
                                         if(c.getCalificacion()==0){%>
                                         <td><%out.print("En curso");%></td>
