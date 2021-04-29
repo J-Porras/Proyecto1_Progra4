@@ -31,27 +31,42 @@
                         <div class="row justify-content-center">
                             <%
                                 String cursoN= " ";
+                                if(actual!=null){
                               if (actual.getRol() != 2) {
                                   for(Curso t:cursos){
                                       if(t.getId()==Integer.parseInt(request.getParameter("codigo"))){
                                           cursoN=t.getNombre();
                                       }
-                                  }  
+                                  } 
+                              
                                   %>
                                   <h3>Matriculando en: <%out.print(cursoN);%></h3> 
                               <%}else{%>
                               <h3>Mis Grupos:</h3>
                          <%}%>
+                            <%}else{
+                            for(Curso t:cursos){
+                                      if(t.getId()==Integer.parseInt(request.getParameter("codigo"))){
+                                          cursoN=t.getNombre();
+                                      }
+                                  } 
+
+                             }%>
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">Num. Grupo</th>
+                                        <%if (actual!=null) {%>
                                             <%if (actual.getRol() != 2) {%>
                                         
                                         <th scope="col">Profesor</th>
                                             <%}else{%>
                                         <th scope="col">Curso</th>
                                         <%}%>
+                                         <%}else{%>
+                                          <th scope="col">Profesor</th>
+                                         <%}%>
+                                          
                                         <th scope="col">Dias lectivos</th>
                                         <th scope="col">Horario</th>
                                         <th scope="col">Seleccione el grupo</th>
@@ -62,6 +77,7 @@
                                     <tr>
                                         <th scope="row" ><%out.print(c.getNum_grupo());%></th>
                                             <%String profe=" ";
+                                            if(actual!=null){
                                                 if (actual.getRol() != 2) {
                                                 List<Usuarios> profesor = model.getPosibleProfesor();
                                                 for(Usuarios u:profesor){
@@ -92,14 +108,35 @@
                                        %>
                                         <td><%out.print(cursoN);%></td>
                                        <%}%>
+                                       <%}else{
+                                             {
+                                                List<Usuarios> profesor = model.getPosibleProfesor();
+                                                for(Usuarios u:profesor){
+                                                     System.out.println(u.getNombre());
+                                                    if(u.getId().equals(c.getProf_titular())){
+                                                        System.out.println("Sirvio");
+                                                       profe = u.getNombre();
+                                                    }
+                                                }
+                                                
+                                                
+                                            %>
+                                        <td><%out.print(profe);%></td>
+                                     
+                                        <%}%>
+                                            <%}%>
                                         <td><%out.print(c.getDias());%></td>
                                         <td><%out.print(c.getHorario());%></td>
+                                        <%if (actual!= null) {%> 
                                         <%if (actual.getRol() == 2) {%>
                                         <td > <a href="asignarNotas?codigo=<%=c.getNum_grupo()%>" class="btn btn-outline-dark" name="asignarNotas" value="" method="POST" >Link al codigo del grupo 1(Asignar Notas) Modificar<a/></td>
                                         <%} else {%>
                                        
                                         <td > <a href="Matricularme?codigo=<%=c.getNum_grupo()%>" class="btn btn-outline-dark" name="matricularse" value="" method="POST" >Link al codigo del grupo 1(Matricularme) Modificar<a/></td>
                                         <%}%>
+                                         <%}else{%>
+                                          <td > <a href="loggin.jsp" class="btn btn-outline-dark" name="matricularNoLogin" value="" method="POST" >Link al codigo del grupo 1(Matricularme) Modificar<a/></td>
+                                          <%}%>
                                     </tr>
                                      <%}%> 
                                   

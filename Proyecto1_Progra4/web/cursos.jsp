@@ -32,9 +32,13 @@
                     <div class="col-4">
                         <div class="text-dark"><%out.print(c.getTematica());%></div>
                         <div class="text-dark">Precio:<%out.print(c.getPrecio());%></div>
-                        <%if (u != null && u.getRol() == 3) {%>
+                        <%if(u!=null){%>
+                        <%if ( u.getRol() != 2||u.getRol() != 3) {%>
                         <a class="btn btn-outline-danger" method="POST" href="GruposSistema?codigo=<%=c.getId()%>">Matricularse</a>
                         <%}%>
+                      <%}else{%>
+                      <a class="btn btn-outline-danger" method="POST" href="GruposSistema?codigo=<%=c.getId()%>">Matricularse</a>
+                     <%}%>
                     </div>
                 </div>
                 <%}%>
