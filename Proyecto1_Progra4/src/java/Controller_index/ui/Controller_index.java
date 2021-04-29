@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author pgat3000
  */
-@WebServlet(name = "Controller_index", urlPatterns = {"/InicioPrincipal"})
+@WebServlet(name = "Controller_index", urlPatterns = {"/InicioPrincipal","/FiltradoCursos"})
 public class Controller_index extends HttpServlet {
     String respuesta;
     /**
@@ -40,15 +40,19 @@ public class Controller_index extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-       private Service service;
-    private Controller_Login controller_login;
-    private Model_index model;
+        private Service service;
+        private Controller_Login controller_login;
+        private Model_index model;
         public Controller_index() {
         this.service = new Service();
         this.model = new Model_index();
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String ruta = request.getServletPath();
+        String respuesta = "";
+        switch (ruta) {
+            case "/InicioPrincipal":{
         response.setContentType("text/html;charset=UTF-8");
         respuesta = this.show(request);//Devuelve a la pestanna principal
                 System.out.println("RESPUESTA SHOW");  
@@ -56,6 +60,13 @@ public class Controller_index extends HttpServlet {
                
                 System.out.println("RESPONDE SEND REDIRECT");  
                 request.getRequestDispatcher(respuesta).forward(request, response);
+                break;
+            }
+            case "/FiltradoCursos" :{
+                
+                break;
+            }
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
