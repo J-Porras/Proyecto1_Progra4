@@ -65,7 +65,7 @@
                                 <h4 class="title text-center">Profesores en sistema</h4>
                             </div>
                         </div>
-                        <%@include  file="profesores.jsp"%>
+                        <%@include file="profesores.jsp"%>
                         <%}%>
                     </div>
                 </div>

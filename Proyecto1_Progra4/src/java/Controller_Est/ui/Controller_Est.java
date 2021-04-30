@@ -150,7 +150,7 @@ public class Controller_Est extends HttpServlet {
             
             //generando tabla de cursos
             //codigo de -> https://www.tutorialspoint.com/itext/itext_adding_table.htm
-            //https://www.tutorialspoint.com/itext/itext_adding_image_to_pdf.htm
+            //https://www.tutorialspoint.com/itext/itext_adding_image_to_pdf.htm ?
             
             float [] pointColumnWidths = {150F, 150F, 150F,150F};   
             Table table = new Table(pointColumnWidths);
