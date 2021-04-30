@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pg300
  */
-@WebServlet(name = "Controller_Admin", urlPatterns = {"/Administrador", "/CrearCursos", "/CrearProfesores", "/ListaUsuarios", "/CrearGrupos"})
+@WebServlet(name = "Controller_Admin", urlPatterns = {"/Administrador", "/CrearCursos", "/CrearProfesores", "/ListaUsuarios", "/CrearGrupos","/buscarUsuarios","/buscarProfesor","/buscarCursosA"})
 public class Controller_Admin extends HttpServlet {
 
     /**
@@ -89,6 +89,63 @@ public class Controller_Admin extends HttpServlet {
                 request.setAttribute("Model_Admin", model);
                 request.removeAttribute("id");
                 request.getRequestDispatcher("creargrupos.jsp").forward(request, response);
+                break;
+            }
+            case "/buscarUsuarios":{
+                String texto = request.getParameter("Usuario");
+                 List<Usuarios> usuarios = Service.instance().read_filtradosU(texto);
+                model.setUsuarios(usuarios);
+                
+                System.out.println(usuarios.size());
+                request.setAttribute("Model_Admin", model);
+                request.getRequestDispatcher("usuarios.jsp").forward(request, response);
+                break;
+            }
+            case "/buscarProfesor":
+            {
+                  String texto = request.getParameter("profesor");
+                List<Usuarios> profesores = Service.instance().read_filtradosP(texto);
+                model.setProfesores(profesores);
+                System.out.println(profesores.size());
+                request.setAttribute("Model_Admin", model);
+                request.getRequestDispatcher("registrarse.jsp").forward(request, response);
+                break;
+             
+            }
+            case "/buscarCursosA" :{
+                System.out.print("FILTRO");
+                System.out.print(request.getParameter("Filtro"));
+                String Filtro = request.getParameter("Filtro");
+                String texto = request.getParameter("curso");
+                   switch(Filtro){
+                    case "1":{
+                        List<Curso> cursos = Service.instance().read_filtrados_Nombre(texto);
+                        model.setCursos(cursos);
+                        System.out.println("Controller");
+                        System.out.println(cursos.size());
+                        request.setAttribute("Model_Admin", model);
+                        request.getRequestDispatcher("crearcursos.jsp").forward(request, response);
+                break;
+                    }
+                    case "2":{
+                      List<Curso> cursos = Service.instance().read_filtrados_Teamtica(texto);
+                        model.setCursos(cursos);
+                        System.out.println("Controller");
+                        System.out.println(cursos.size());
+                        request.setAttribute("Model_Admin", model);
+                        request.getRequestDispatcher("crearcursos.jsp").forward(request, response);
+                        break;
+                    }
+                    case "0":{
+                       List<Curso> cursos = Service.instance().read_filtrados(texto);
+                        model.setCursos(cursos);
+                        System.out.println("Controller");
+                        System.out.println(cursos.size());
+                        request.setAttribute("Model_Admin", model);
+                        request.getRequestDispatcher("crearcursos.jsp").forward(request, response);
+                    }
+                    default:
+                }
                 break;
             }
             default:

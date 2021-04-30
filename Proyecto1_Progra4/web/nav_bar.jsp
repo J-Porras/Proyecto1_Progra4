@@ -42,6 +42,17 @@
                     <%}%>
                 </div>
                 <div class="navbar-nav-right">
+                     <%if (myURI.equals("/Proyecto1_Progra4/crearcursos.jsp")) {%>
+                    <form action="buscarCursosA" class="d-flex" method="POST">
+                         <select class="form-select-sm " aria-label="default select-sm example" id="selectFiltro" name="Filtro">
+                                    <option selected value="0">Filtro</option>
+                                    <option value="1">Nombre</option>
+                                    <option value="2">Tematica</option>
+                                </select>
+                        <div class="col-6">
+                            <div class="col"><input type="text" class="form-control" name="curso" placeholder="Cursos..."></div>
+                        </div>
+                        <%}else {%>
                     <%if (myURI.equals("/Proyecto1_Progra4/usuarios.jsp")) {%>
                     <form action="buscarUsuarios" class="d-flex" method="POST">
                         <div class="col-6">
@@ -50,7 +61,7 @@
                         <%} else if ((myURI.equals("/Proyecto1_Progra4/registrarse.jsp") && actual != null && actual.getRol() == 1)) {%>
                         <form action="buscarProfesor" class="d-flex" method="POST">
                             <div class="col-6">
-                                <div class="col"><input type="text" class="form-control" name="Usuario" placeholder="Usuario..."></div>
+                                <div class="col"><input type="text" class="form-control" name="profesor" placeholder="Usuario..."></div>
                             </div>
                             <%} else {%>
                             <form action="buscarCursos" class="d-flex" method="POST">
@@ -62,6 +73,7 @@
                                 <div class="col-6">
                                     <div class="col"><input type="text" class="form-control" name="curso" placeholder="Curso..."></div>
                                 </div>
+                                <%}%>
                                 <%}%>
                                 <button class="btn-sm btn-primary rounded submit w-100" type="submit">Buscar</button>
                             </form>

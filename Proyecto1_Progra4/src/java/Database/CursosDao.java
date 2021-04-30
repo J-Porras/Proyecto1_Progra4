@@ -117,10 +117,12 @@ System.out.println("Buscando cursos_off ");
     //==================================
    public List<Curso> read_cursos_filtradosN(String filter) throws Exception{
         List<Curso> cursos= new ArrayList<Curso>();
-        String sqlcommand = "select * from Cursos where nombre like = ?%";
+        String sqlcommand = "select * from Cursos where nombre like  ?";
         System.out.println("Entransdo en DB");
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+           filter= filter+"%";
         stm.setString(1, filter);
+         System.out.println(stm);  
         System.out.println("Buscando cursos_off ");  
         ResultSet rs =  Database.instance().executeQuery(stm);
             while(rs.next()){
@@ -142,11 +144,43 @@ System.out.println("Buscando cursos_off ");
    //===================================================
     public List<Curso> read_cursos_filtradosT(String filter) throws Exception{
         List<Curso> cursos= new ArrayList<Curso>();
-        String sqlcommand = "select * from Cursos where tematica like = ?%";
+        String sqlcommand = "select * from Cursos where tematica like ?";
         System.out.println("Entransdo en DB");
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+        filter= filter+"%";
         stm.setString(1, filter);
+         System.out.println(stm);  
         System.out.println("Buscando cursos_off ");  
+        System.out.println(stm);  
+        ResultSet rs =  Database.instance().executeQuery(stm);
+            while(rs.next()){
+            Curso r= new Curso();
+            r.setId(rs.getInt("id"));
+            r.setNombre(rs.getString("nombre"));
+            r.setTematica(rs.getString("tematica"));
+            r.setEstado(rs.getBoolean("estado"));
+            r.setPrecio(rs.getDouble("precio"));
+            System.out.println("en while");
+            cursos.add(r);
+
+            }
+       
+  System.out.println("RETURN CURSOS OFF------- ");  
+         System.out.println(cursos.size());   
+        return cursos;
+    }
+    
+     public List<Curso> read_cursos_filtrados(String filter) throws Exception{
+        List<Curso> cursos= new ArrayList<Curso>();
+        String sqlcommand = "select * from Cursos where tematica like  ? union select * from Cursos where nombre like ?" ;
+        System.out.println("Entransdo en DB");
+        PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
+           filter= filter+"%";
+        stm.setString(1, filter);
+         stm.setString(2, filter);
+        System.out.println("Buscando cursos_off ");  
+         System.out.println(stm);  
+           System.out.println(stm);  
         ResultSet rs =  Database.instance().executeQuery(stm);
             while(rs.next()){
             Curso r= new Curso();

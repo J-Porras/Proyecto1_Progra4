@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author pgat3000
  */
-@WebServlet(name = "Controller_index", urlPatterns = {"/InicioPrincipal","/FiltradoCursos"})
+@WebServlet(name = "Controller_index", urlPatterns = {"/InicioPrincipal","/buscarCursos"})
 public class Controller_index extends HttpServlet {
     String respuesta;
     /**
@@ -62,10 +62,43 @@ public class Controller_index extends HttpServlet {
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
-            case "/FiltradoCursos" :{
-                
+            case "/buscarCursos" :{
+                respuesta ="/index.jsp";
+                 System.out.print("FILTRO");
+                System.out.print(request.getParameter("Filtro"));
+                String Filtro = request.getParameter("Filtro");
+                String texto = request.getParameter("curso");
+                switch(Filtro){
+                    case "1":{
+                        List<Curso> cursos=Service.instance().read_filtrados_Nombre(texto);
+                        model.setCursos(cursos);
+                        System.out.println("Controller");
+                        System.out.println(cursos.size());
+                        request.setAttribute("Model_index",model);
+                        break;
+                    }
+                    case "2":{
+                        List<Curso> cursos=Service.instance().read_filtrados_Teamtica(texto);
+                        model.setCursos(cursos);
+                        System.out.println("Controller");
+                        System.out.println(cursos.size());
+                        request.setAttribute("Model_index",model);
+                        break;
+                    }
+                    case "0":{
+                        List<Curso> cursos=Service.instance().read_filtrados(texto);
+                        model.setCursos(cursos);
+                        System.out.println("Controller");
+                        System.out.println(cursos.size());
+                        request.setAttribute("Model_index",model);
+                        break;
+                    }
+                    default:
+                }
+                  request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
+            
     }
     }
 
