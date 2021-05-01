@@ -4,6 +4,8 @@
     Author     : Usuario
 --%>
 
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,6 +16,7 @@
         <title>Inicio de sesión</title>
     </head>
     <body>
+        <%Map<String, String> errores = (Map<String, String>) request.getAttribute("Error");%>
         <%@include file = "nav_bar.jsp"%>
         <section class="ftco-section">
             <div class="container">
@@ -26,12 +29,21 @@
                     <div class="col-md-6 col-lg-5">
                         <div class="login-wrap p-md-1">
                             <form action="IniciarSesion" method="POST" class="login-form p-5">
+                                <%
+                                    String idUsuario = "";
+                                    String contrasenna = "";
+                                    if (errores != null) {
+                                        idUsuario = errores.get("id");
+                                        contrasenna = errores.get("contrasenna");
+                                %>
+                                <div class="alert alert-danger" role="alert">Usuario o contraseña incorrecto</div>
+                                <%}%>
                                 <div class="form-group">
-                                    <input type="text" class="form-control rounded-right" placeholder="Nombre de usuario" name="id" />
+                                    <input type="text" class="form-control rounded-right" placeholder="Nombre de usuario" name="id" value="<%=idUsuario%>"/>
                                 </div>
                                 <div/>
                                 <div class="form-group">    
-                                    <input type="password" class="form-control rounded-left" placeholder="Contraseña" name ="contrasenna"/>
+                                    <input type="password" class="form-control rounded-left" placeholder="Contraseña" name ="contrasenna" value="<%=contrasenna%>"/>
                                 </div>
                                 <div/>
                                 <div class="form-group">

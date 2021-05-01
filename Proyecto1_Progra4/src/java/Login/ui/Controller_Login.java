@@ -10,6 +10,8 @@ import Data.Service.logic.Service;
 import Login.Model_Login;
 import Usuarios.logica.Usuarios;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Porras
  */
-@WebServlet(name = "Controller_Login", urlPatterns = {"/IniciarSesion", "/CerrarSesion", "/Perfil", "/Inicio", "/Registrarse","/RegistroCompleto"})
+@WebServlet(name = "Controller_Login", urlPatterns = {"/IniciarSesion", "/CerrarSesion", "/Login", "/Inicio", "/Registrarse", "/RegistroCompleto"})
 public class Controller_Login extends javax.servlet.http.HttpServlet {
 
     /**
@@ -62,18 +64,26 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
         this.service = Service.instance();
         String solicitud = request.getServletPath();
         String respuesta = "";
+        Map<String, String> errores = new HashMap<>();
         switch (solicitud) {
+
             case ("/IniciarSesion"): {
-                respuesta = "Presentation/perfil/perfil.jsp";
                 String contrasenna = request.getParameter("contrasenna");
                 String id_usuario = request.getParameter("id");
-                Usuarios u = Service.instance().login(new Usuarios(id_usuario, "", contrasenna, "", "", 0, ""));
-                model.setCurrent_user(u);
-                HttpSession session = request.getSession(true);
-                request.setAttribute("Model_Login", model);//No se debe mandar el modelo, ya que es una instancia
-                //a sesión general debe ser manejada por el objeto httpsession debido a que es el cookie quien va a identificar
-                session.setAttribute("Usuario", u);
-                
+                try {
+                    Usuarios u = Service.instance().login(new Usuarios(id_usuario, "", contrasenna, "", "", 0, ""));
+                    model.setCurrent_user(u);
+                    HttpSession session = request.getSession(true);
+                    request.setAttribute("Model_Login", model);//No se debe mandar el modelo, ya que es una instancia
+                    //a sesión general debe ser manejada por el objeto httpsession debido a que es el cookie quien va a identificar
+                    session.setAttribute("Usuario", u);
+                    respuesta = "/InicioPrincipal";
+                } catch (Exception e) {//Excepción de datos erroneos o inválidos
+                    errores.put("id", id_usuario);
+                    errores.put("contrasenna", contrasenna);
+                    request.setAttribute("Error", errores);
+                    respuesta = "loggin.jsp";
+                }
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
@@ -82,84 +92,64 @@ public class Controller_Login extends javax.servlet.http.HttpServlet {
                 HttpSession session = request.getSession(true);
                 session.removeAttribute("Usuario");
                 model.setCurrent_user(null);
-                System.out.println("REQUEST CERRAR SESION"); 
+                System.out.println("REQUEST CERRAR SESION");
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
-            
-            case ("/Inicio"): {//no deberia estar aqui//Depricated
-                respuesta = this.show(request);//Devuelve a la pestanna principal
-                System.out.println("RESPUESTA SHOW");  
-                HttpSession session = request.getSession(true);
-                Usuarios u = model.getCurrent_user();
-                if (u != null) {
-                    
-                    session.setAttribute("Usuario", u);
-                }
-                System.out.println("RESPONDE SEND REDIRECT");  
-                request.getRequestDispatcher(respuesta).forward(request, response);
-                
-                break;
-            }
+
             case ("/Registrarse"): {
                 respuesta = "registrarse.jsp";
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
-            
+
             case ("/RegistroCompleto"): {
                 respuesta = "/InicioPrincipal";
                 String respuestaError = "registrarse.jsp";
                 String nombre = request.getParameter("nombre");
-                String id= request.getParameter("id");
+                String id = request.getParameter("id");
                 String email = request.getParameter("email");
                 String telefono = request.getParameter("telefono");
                 String contrasenna = request.getParameter("contrasenna");
                 System.out.println("crear");
                 System.out.println(id);
-                
-                if(nombre.isEmpty()||id.isEmpty()||email.isEmpty()||telefono.isEmpty()||contrasenna.isEmpty()){
+
+                if (nombre.isEmpty() || id.isEmpty() || email.isEmpty() || telefono.isEmpty() || contrasenna.isEmpty()) {
                     System.out.println("vacio");
+                    errores.put("nombre", nombre);
+                    errores.put("id", id);
+                    errores.put("email", email);
+                    errores.put("tel", telefono);
+                    errores.put("contrasenna", contrasenna);
+                    request.setAttribute("Error", errores);
+                    respuesta = "Registrarse";
                     request.getRequestDispatcher(respuestaError).forward(request, response);
                     break;
                 }
-                
-                Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email,3,null));
-                  
-                if(u==null){
-                     //En el caso que el usuario ya exista
-                   request.getRequestDispatcher(respuestaError).forward(request, response); 
+
+                Usuarios u = Service.instance().crear_usario(new Usuarios(id, nombre, contrasenna, telefono, email, 3, null));
+
+                if (u == null) {
+                    //En el caso que el usuario ya exista
+                    request.getRequestDispatcher(respuestaError).forward(request, response);
                 }
-                 
+
                 model.setCurrent_user(u);
                 HttpSession session = request.getSession(true);
-                request.setAttribute("Model_Login", model); 
+                request.setAttribute("Model_Login", model);
                 session.setAttribute("Usuario", u);
                 System.out.println("crear2");
 
-             //   request.getRequestDispatcher(respuesta).forward(request, response);
+                //   request.getRequestDispatcher(respuesta).forward(request, response);
                 request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
             default: {
+                request.getRequestDispatcher("loggin.jsp").forward(request, response);
                 break;
             }
-
         }
     }
-    
-    private String show(HttpServletRequest request) {     
-        Curso curso = new Curso(0,"","",false,0.0);
-        request.setAttribute("curso", curso);
-        try {
-            request.setAttribute("cursos", Service.instance().cursos_ofrecidos());
-        } catch (Exception ex) {
-            Logger.getLogger(Controller_Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("RETURN EN SHOW");  
-        return "/index.jsp";
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

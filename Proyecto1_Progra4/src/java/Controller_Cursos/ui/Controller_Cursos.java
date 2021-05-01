@@ -9,10 +9,11 @@ import Cursos.Logica.Curso;
 import Data.Service.logic.Service;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -27,8 +28,8 @@ import javax.servlet.http.Part;
  *
  * @author Usuario
  */
-@WebServlet(name = "ServletCursos", urlPatterns = {"/cursos","/CursoRegistrado","/images/image","/CambioEstado"})
-@MultipartConfig(location="C:/images")
+@WebServlet(name = "ServletCursos", urlPatterns = {"/cursos", "/CursoRegistrado", "/images/image", "/CambioEstado"})
+@MultipartConfig(location = "C:/images")
 public class Controller_Cursos extends HttpServlet {
 
     /**
@@ -42,83 +43,56 @@ public class Controller_Cursos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-    response.setContentType("text/html;charset=UTF-8");
-    String ruta = request.getServletPath();
-        switch(ruta){
-            case "/CursoRegistrado":{//Por el momento solo va la pestanna
+        response.setContentType("text/html;charset=UTF-8");
+        String ruta = request.getServletPath();
+        Map<String, String> errores = new HashMap<>();
+        switch (ruta) {
+            case "/CursoRegistrado": {
                 final Part image;
-                String respuesta="/CrearCursos";
-                
-                System.out.println("Registrado");
+                String respuesta = "/CrearCursos";
                 String nombre = request.getParameter("nombre");
                 String tematica = request.getParameter("tematica");
-                System.out.println(request.getParameter("oferta"));
-             
-                Boolean estado;
-                if(request.getParameter("oferta")!=null){
-                    estado =true;
+                Boolean estado = request.getParameter("oferta") != null;
+                String precio = request.getParameter("precio");
+                image = request.getPart("archivo");
+                int id_new_curso = Service.instance().lista_cursos().size() + 1;
+                double Precio = 0;
+                try {
+                    Precio = Double.parseDouble(precio);
+                } catch (NumberFormatException e) {
+                    errores.put("precio", precio);
                 }
-                else{
-                    estado=false;
-                }
-                
-               
-                System.out.println(estado);
-                if(request.getParameter("precio").isEmpty()){
-                    request.getRequestDispatcher(respuesta).forward(request, response);
-                break;
-                }
-                Double precio = Double.parseDouble(request.getParameter("precio"));
-                int id_new_curso=Service.instance().lista_cursos().size() + 1 ;
-                
-                if(nombre != null && tematica != null && precio != null){   
-                    System.out.println(" correctoasdadasdasdasdasdasdas");
-                    
-                    image = request.getPart("archivo");
-                    if(image!=null)
-                        System.out.println(" Imagen procesada");
-                    else{
-                        System.out.println(" RIP IMAGE");
-                    }
+                if (nombre.isEmpty() || tematica.isEmpty() || precio.isEmpty() || image.getSize() == 0) {
+                    errores.put("nombre", nombre.isEmpty() ? "" : nombre);
+                    errores.put("tematica", tematica.isEmpty() ? "" : tematica);
+                    errores.put("precio", precio.isEmpty() ? "" : precio);
+                    request.setAttribute("Error", errores);
+                } else {
                     image.write(Integer.toString(id_new_curso));
-                    
-                    Service.instance().crear_curso(new Curso(0,nombre,tematica,estado,precio));
-                    request.getRequestDispatcher(respuesta).forward(request, response);
+                    Service.instance().crear_curso(new Curso(0, nombre, tematica, estado, Precio));
                 }
-                else{
-                     System.out.println(" RIP ------------");
-                }
-                
-                
                 break;
             }
-            
-            case "/images/image":{
-                String respuesta = this.image(request, response);
-                request.getRequestDispatcher(respuesta).forward(request, response);
+
+            case "/images/image": {
+                this.image(request, response);
                 break;
             }
-            case "/CambioEstado":{
-                String respuesta="/CrearCursos";
+            case "/CambioEstado": {
+                String respuesta = "/CrearCursos";
                 System.out.println(request.getParameter("id"));
-                String id_curso=request.getParameter("id");
+                String id_curso = request.getParameter("id");
                 Service.instance().updateEnOferta(Integer.parseInt(id_curso));
                 request.getRequestDispatcher(respuesta).forward(request, response);
+                break;
             }
             default:
                 break;
         }
 
-   
     }
-    
-    private String image(HttpServletRequest request,  HttpServletResponse response) {     
-        try {
-            int id_new_curso=Service.instance().lista_cursos().size() + 1 ;
-        } catch (Exception ex) {
-            Logger.getLogger(Controller_Cursos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+
+    private String image(HttpServletRequest request, HttpServletResponse response) {
         String codigo = request.getParameter("codigo");
         Path path = FileSystems.getDefault().getPath("C:/images", codigo);
         try (OutputStream out = response.getOutputStream()) {
@@ -128,9 +102,8 @@ public class Controller_Cursos extends HttpServlet {
             // handle exception
         }
         return null;
-    } 
-    
-    
+    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -146,6 +119,7 @@ public class Controller_Cursos extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
+            System.out.println("Error al llamar al proces request");
             Logger.getLogger(Controller_Cursos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -11,7 +11,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% Model_index model = (Model_index) request.getAttribute("Model_index");
     List<Curso> cursos = model.getCursos();
-    System.out.println(cursos.size());
 %>
 <!DOCTYPE html>
 <html>
@@ -23,13 +22,13 @@
     </head>
     <body>
         <%Usuarios u = (Usuarios) session.getAttribute("Usuario");%>
-        <div class="container pb-xxl-1">
+        <div class="container pb-5">
             <div class="row">
                 <%for (Curso c : cursos) {%>
                 <div class="col-4">
-                    <img class="w-100 h-50" src="images/image?codigo=<%=c.getId()%>">
+                    <img class="h-50 w-100 card-img" src="images/image?codigo=<%=c.getId()%>">
                     <h5 class="text-center"><%out.print(c.getNombre());%></h5>
-                    <div class="col-4">
+                    <div class=""card-body">
                         <div class="text-dark"><%out.print(c.getTematica());%></div>
                         <div class="text-dark">Precio:<%out.print(c.getPrecio());%></div>
                         <%if(u!=null){%>

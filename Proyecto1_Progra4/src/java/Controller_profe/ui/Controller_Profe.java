@@ -10,6 +10,8 @@ import Grupos.Logica.Grupo;
 import Login.Model_Login;
 import Usuarios.logica.Usuarios;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,10 +23,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author Porras
  */
-@WebServlet(name = "Controller_Profe", urlPatterns = {"/Controller_Profe","/VerGrupos","/NewNota","/ProfesorRegistrado"})
+@WebServlet(name = "Controller_Profe", urlPatterns = {"/Controller_Profe", "/VerGrupos", "/NewNota", "/ProfesorRegistrado"})
 
 public class Controller_Profe extends HttpServlet {
-    
+
     private Service service;
     private Model_Login model;
 
@@ -43,68 +45,68 @@ public class Controller_Profe extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
+            throws ServletException, IOException {
         this.service = Service.instance();
-        String solicitud = request.getServletPath();   
-        String respuesta ="";
-        
-        switch(solicitud){
-            case "/VerGrupos":{
+        String solicitud = request.getServletPath();
+        String respuesta = "";
+
+        switch (solicitud) {
+            case "/VerGrupos": {
                 break;
             }
-            case "/NewNota":{
-                //se añade la nota de un estudiante en un grupo especifico
-                
-                HttpSession session = request.getSession(true);
-                
+            case "/NewNota": {
                 String id_grupo = request.getParameter("id_grupo");
                 Grupo grupo_actual = service.getGrupo(id_grupo);
-                String id_estudiante =  request.getParameter("id_est");
+                String id_estudiante = request.getParameter("id_est");
                 Usuarios est = service.getUsuario(id_estudiante);
                 double nota_est = Double.parseDouble(request.getParameter("nota_est"));
-                
+
                 service.updateMatricula(est.getId(), grupo_actual.getId_curso(), nota_est);
                 respuesta = "/cursosProfe";
                 //no existe el url
                 request.getRequestDispatcher(respuesta).forward(request, response);
-                
+
                 break;
             }
-            case "/ProfesorRegistrado" :{
-                 respuesta = "/CrearProfesores";
+            case "/ProfesorRegistrado": {
+                Map<String, String> errores = new HashMap<>();
+                respuesta = "/CrearProfesores";
                 String nombre = request.getParameter("nombre");
-                String id= request.getParameter("id");
+                String id = request.getParameter("id");
                 String email = request.getParameter("email");
                 String telefono = request.getParameter("telefono");
                 String contrasenna = request.getParameter("contrasenna");
                 String especialidad = request.getParameter("especialidad");
-                
                 System.out.println("crear");
                 System.out.println(id);
-                if(nombre.isEmpty()||id.isEmpty()||email.isEmpty()||telefono.isEmpty()||contrasenna.isEmpty()||especialidad.isEmpty()){
+                if (nombre.isEmpty() || id.isEmpty() || email.isEmpty() || telefono.isEmpty() || contrasenna.isEmpty() || especialidad.isEmpty()) {
                     System.out.println("vacio");
+                    System.out.println("vacio");
+                    errores.put("nombre", nombre);
+                    errores.put("id", id);
+                    errores.put("email", email);
+                    errores.put("tel", telefono);
+                    errores.put("contrasenna", contrasenna);
+                    errores.put("especialidad", especialidad);
+                    request.setAttribute("Error", errores);
                     request.getRequestDispatcher(respuesta).forward(request, response);
                     break;
                 }
-                
-                Usuarios u= Service.instance().crear_usario(new Usuarios(id,nombre, contrasenna, telefono,email,2, especialidad));
-                
-                     //En el caso que el usuario ya exista
-               request.getRequestDispatcher(respuesta).forward(request, response); 
-              
-                 
+
+                Usuarios u = Service.instance().crear_usario(new Usuarios(id, nombre, contrasenna, telefono, email, 2, especialidad));
+
+                //En el caso que el usuario ya exista
+                request.getRequestDispatcher(respuesta).forward(request, response);
+
                 break;
             }
-            
-            default:{
+
+            default: {
                 break;
             }
-            
-            
+
         }
-        
- 
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

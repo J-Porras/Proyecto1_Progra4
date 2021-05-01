@@ -24,7 +24,6 @@
                     <%Usuarios actual = (Usuarios) session.getAttribute("Usuario");%>
                     <%if (actual != null) {%>
                     <a class="navbar-brand text-center text-white" href="CerrarSesion">Logout</a>
-                    <a class="navbar-brand text-center text-white" href="#">Perfil</a>
                     <%if (actual.getRol() == 1) {%>
                     <a class="navbar-brand text-center text-white" href="CrearCursos">Gestionar cursos</a>
                     <!-- <a class="navbar-brand text-center text-white" href="CrearGrupos">Gestionar grupos</a>-->
@@ -38,7 +37,7 @@
                     <a class="navbar-brand text-center text-white" href="MisCursos">Mis cursos</a>
                     <%}%>  
                     <%} else {%>
-                    <a class="navbar-brand text-center text-white" href="loggin.jsp">Iniciar Sesion</a>
+                    <a class="navbar-brand text-center text-white" href="Login">Iniciar Sesion</a>
                     <%}%>
                 </div>
                 <div class="navbar-nav-right">
