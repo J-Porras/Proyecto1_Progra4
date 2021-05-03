@@ -95,12 +95,8 @@
                                        <%
                                            
                                        for(Curso t:cursos){
-                                            System.out.println("Sirvio");
-                                       
                                       if(t.getId()==c.getId_curso()){
                                           cursoN=t.getNombre();
-                                          
-                                          
                                       }
                                   }  
                                         System.out.println("sirvio");
@@ -129,13 +125,13 @@
                                         <td><%out.print(c.getHorario());%></td>
                                         <%if (actual!= null) {%> 
                                         <%if (actual.getRol() == 2) {%>
-                                        <td > <a href="asignarNotas?codigo=<%=c.getNum_grupo()%>" class="btn btn-outline-dark" name="asignarNotas" value="" method="POST" >Link al codigo del grupo 1(Asignar Notas) Modificar<a/></td>
+                                        <td > <a href="asignarNotas?codigo=<%=c.getNum_grupo()%>" class="btn btn-outline-dark" name="asignarNotas" value="" method="POST" >Asignar Notas<a/></td>
                                         <%} else {%>
                                        
-                                        <td > <a href="Matricularme?codigo=<%=c.getNum_grupo()%>" class="btn btn-outline-dark" name="matricularse" value="" method="POST" >Link al codigo del grupo 1(Matricularme) Modificar<a/></td>
+                                        <td > <a href="Matricularme?codigo=<%=c.getNum_grupo()%>" class="btn btn-outline-dark" name="matricularse" value="" method="POST" >Matricularme<a/></td>
                                         <%}%>
                                          <%}else{%>
-                                          <td > <a href="loggin.jsp" class="btn btn-outline-dark" name="matricularNoLogin" value="" method="POST" >Link al codigo del grupo 1(Matricularme) Modificar<a/></td>
+                                          <td > <a href="loggin.jsp" class="btn btn-outline-dark" name="matricularNoLogin" value="" method="POST" >Matricularme<a/></td>
                                           <%}%>
                                     </tr>
                                      <%}%> 

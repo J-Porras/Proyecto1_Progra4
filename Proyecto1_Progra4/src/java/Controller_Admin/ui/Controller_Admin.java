@@ -121,8 +121,6 @@ public class Controller_Admin extends HttpServlet {
                     case "1":{
                         List<Curso> cursos = Service.instance().read_filtrados_Nombre(texto);
                         model.setCursos(cursos);
-                        System.out.println("Controller");
-                        System.out.println(cursos.size());
                         request.setAttribute("Model_Admin", model);
                         request.getRequestDispatcher("crearcursos.jsp").forward(request, response);
                 break;

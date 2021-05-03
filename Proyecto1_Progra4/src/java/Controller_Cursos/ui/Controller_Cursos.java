@@ -71,6 +71,7 @@ public class Controller_Cursos extends HttpServlet {
                     image.write(Integer.toString(id_new_curso));
                     Service.instance().crear_curso(new Curso(0, nombre, tematica, estado, Precio));
                 }
+                request.getRequestDispatcher(respuesta).forward(request, response);
                 break;
             }
 

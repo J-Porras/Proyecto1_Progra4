@@ -23,21 +23,25 @@
     <body>
         <%Usuarios u = (Usuarios) session.getAttribute("Usuario");%>
         <div class="container pb-5">
-            <div class="row">
+            <div class="row mb-5">
                 <%for (Curso c : cursos) {%>
-                <div class="col-4">
-                    <img class="h-50 w-100 card-img" src="images/image?codigo=<%=c.getId()%>">
-                    <h5 class="text-center"><%out.print(c.getNombre());%></h5>
-                    <div class=""card-body">
-                        <div class="text-dark"><%out.print(c.getTematica());%></div>
-                        <div class="text-dark">Precio:<%out.print(c.getPrecio());%></div>
-                        <%if(u!=null){%>
-                        <%if ( u.getRol() != 2||u.getRol() != 3) {%>
-                        <a class="btn btn-outline-danger" method="POST" href="GruposSistema?codigo=<%=c.getId()%>">Matricularse</a>
+                <div class="col-4 card">
+                    <img class="rounded m-2" height="175" width="400" src="images/image?codigo=<%=c.getId()%>">
+                    <h5 class="text-center"><b>Nombre: <%out.print(c.getNombre());%></b></h5>
+                    <div class="card-body">
+                        <div class="text-dark text-center">Tematica: <%out.print(c.getTematica());%></div>
+                        <div class="text-dark text-center">Precio de matricula: <%out.print(c.getPrecio());%> colones</div>
+                        <%if (u != null) {%>
+                        <%if (u.getRol() != 2 || u.getRol() != 3) {%>
+                        <div class="d-grid gap-2">
+                            <a class="btn btn-outline-primary" method="POST" href="GruposSistema?codigo=<%=c.getId()%>">Matricularse</a>
+                        </div>
                         <%}%>
-                      <%}else{%>
-                      <a class="btn btn-outline-danger" method="POST" href="GruposSistema?codigo=<%=c.getId()%>">Matricularse</a>
-                     <%}%>
+                        <%} else {%>
+                        <div class="d-grid gap-2">
+                            <a class="btn btn-outline-primary" method="POST" href="GruposSistema?codigo=<%=c.getId()%>">Matricularse</a>
+                        </div>
+                        <%}%>
                     </div>
                 </div>
                 <%}%>
