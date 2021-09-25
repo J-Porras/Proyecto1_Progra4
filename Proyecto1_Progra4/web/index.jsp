@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 16/04/2021, 01:15:53 PM
-    Author     : Usuario
+    Author     : Oscar Ortiz
 --%>
 <%@page session="true"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
